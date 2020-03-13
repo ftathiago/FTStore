@@ -1,0 +1,31 @@
+<div *ngIf="!_products"><progress max="1"></progress></div>
+<article>
+  <h1 class="h2 titulo">Showcase</h1>
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5" *ngIf="_products">
+    <div class="col mb-4" *ngFor="let product of _products">
+      <a (click)="openProduct(product)">
+        <section class="card h-100 mb-2">
+          <div
+            class="card-header h-50 bg-transparent d-flex align-items-center"
+          >
+            <img
+              src="../../../../../assets/images/produto/{{
+                product.imageFileName
+              }}"
+              class="card-img-top align-middle"
+              alt="{{ product.title }}"
+              title="{{ product.title }}"
+            />
+          </div>
+          <div class="card-body">
+            <h1 class="card-title h6">{{ product.title | truncate: 30 }}</h1>
+            <p class="card-text">{{ product.details | truncate: 50 }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-end">
+            <h5 class="h5 ">R$ {{ product.price | number: "1.2" }}</h5>
+          </div>
+        </section>
+      </a>
+    </div>
+  </div>
+</article>

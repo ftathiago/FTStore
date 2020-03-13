@@ -1,0 +1,79 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+  >
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']"
+        ><img src="../../../assets/img/logo-peq.png"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="_isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+        [ngClass]="{ show: _isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            *ngIf="isUserAdmin()"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/product-search']"
+              >Products</a
+            >
+          </li>
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            *ngIf="!isUserAuthenticated()"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/signin']">Login</a>
+          </li>
+          <li class="nav-item dropdown" *ngIf="isUserAuthenticated()">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="linkMenu"
+              data-toggle="dropdown"
+              >{{ user.name }}</a
+            >
+            <ul class="dropdown-menu" aria-labelledby="linkMenu">
+              <li class="dropdown-item" role="menu">
+                <a class="nav-link text-dark" [routerLink]="['/store-cart']"
+                  >Cart</a
+                >
+              </li>
+              <li class="dropdown-item" role="menu">
+                <a
+                  class="nav-link text-dark"
+                  [routerLink]="['']"
+                  (click)="logout()"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,21 @@
+<div class="media">
+  <img
+    src="../../../../../assets/images/produto/{{ _product.imageFileName }}"
+    class="align-self-center mr-5 col-1 col-md-3"
+    alt="..."
+  />
+  <div class="media-body">
+    <div class="row mb-4">
+      <div class="col">
+        <h5 class="mt-0">{{ _product.title }}</h5>
+        <div [innerHTML]="_product.details | nl2br"></div>
+        <h1 class="h4">R$ {{ _product.price | number: "1.2" }}</h1>
+      </div>
+    </div>
+    <div class="row mb-4 block">
+      <button class="btn btn-danger btn-lg" (click)="buy()">
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

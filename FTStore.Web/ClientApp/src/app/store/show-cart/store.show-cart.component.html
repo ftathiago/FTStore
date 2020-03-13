@@ -1,0 +1,66 @@
+<div class="containter">
+  <h1 class="h4 titulo mb-2">Cart</h1>
+  <div class="row">
+    <div class="col-12 col-md-9">
+      <div class="container mb-5 col-md-12 itemHover" id="orderItemsComprados">
+        <div
+          class="row mb-3 border-bottom p-3 "
+          *ngFor="let orderItem of _orderItems"
+        >
+          <div class="col-12 col-md-2">
+            <img
+              class="w-100"
+              src="../../../../../assets/images/produto/{{
+                orderItem.product.imageFileName
+              }}"
+            />
+          </div>
+          <div class="col-12 col-md-4 mb-3">
+            <h5>{{ orderItem.product.title }}</h5>
+            <p>{{ orderItem.product.details | truncate: 100 }}</p>
+          </div>
+          <div class="col-6 col-md-2">
+            R$ {{ orderItem.product.price | number: "1.2" }}
+          </div>
+          <div class="col-6 col-md-2">
+            <input
+              placeholder="1"
+              type="number"
+              class="form-control"
+              value="1"
+              (change)="updateOrderItemPrice(orderItem)"
+              [(ngModel)]="orderItem.quantity"
+            />
+          </div>
+          <div class="col-6 col-md-2">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              (click)="remove(orderItem)"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="card">
+        <div class="card-header text-center">
+          <h5 class="h5">Resume</h5>
+        </div>
+        <div class="card-body d-flex flex-row justify-content-between">
+          <label class="mb-2">Total:</label
+          ><label
+            ><strong>R${{ _total | number: "1.2" }}</strong></label
+          >
+        </div>
+        <div class="card-footer bg-transparent">
+          <div class="d-flex flex-row justify-content-center">
+            <button class="btn btn-danger d-sm-flex">Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

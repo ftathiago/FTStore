@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "FTStoreDB": "server=127.0.0.1;uid=root;pwd=1701;database=FTStore"
+  }
+}

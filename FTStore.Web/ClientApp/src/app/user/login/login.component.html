@@ -1,0 +1,73 @@
+<div class="text-center">
+  <form class="form-signin">
+    <h1 class="h4 mb-2  login">Login</h1>
+    <label for="inputEmail" class="sr-only">E-mail</label>
+    <input
+      type="email"
+      id="inputEmail"
+      name="email"
+      placeholder="Type your e-mail"
+      class="form-control mb-2"
+      [ngClass]="{
+        'is-invalid': email.invalid && (email.dirty || email.touched),
+        'is-valid': email.valid
+      }"
+      [(ngModel)]="_user.email"
+      #email="ngModel"
+      email
+      required
+    />
+    <div
+      class="invalid-feedback mb-2"
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+      <div *ngIf="email.errors.required">
+        E-mail is required
+      </div>
+      <div *ngIf="email.errors.email">
+        This is not a valid e-mail
+      </div>
+    </div>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input
+      type="password"
+      id="inputPassword"
+      name="senha"
+      placeholder="Type your password"
+      class="form-control mb-2"
+      [ngClass]="{
+        'is-valid': senha.valid,
+        'is-invalid': senha.invalid && (senha.dirty || senha.touched)
+      }"
+      [(ngModel)]="_user.password"
+      #senha="ngModel"
+      required
+    />
+    <div
+      class="invalid-feedback mb-2"
+      *ngIf="senha.invalid && (senha.dirty || senha.touched)"
+    >
+      <div *ngIf="senha.errors.required">
+        Password is required
+      </div>
+    </div>
+    <button
+      class="btn btn-primary btn-block mb-2"
+      type="submit"
+      (click)="entrar()"
+      [disabled]="_spinnerActive"
+    >
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        *ngIf="_spinnerActive"
+      ></span>
+      Sign in
+    </button>
+    <div>New here? <a [routerLink]="['/user-register']">Sign up!</a></div>
+    <div class="alert alert-danger mb-2" role="alert" *ngIf="_message">
+      {{ _message }}
+    </div>
+  </form>
+</div>

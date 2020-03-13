@@ -1,0 +1,141 @@
+<form class="form-signin">
+  <div class="container">
+    <header>
+      <h1 class="h4 titulo">Product registration</h1>
+    </header>
+    <div class="row ">
+      <div class="col col-md-9 col-lg-9">
+        <label for="inputNome" class="sr-only">Product title</label>
+        <input
+          type="text"
+          id="inputNome"
+          name="nomeProduto"
+          class="form-control mb-2"
+          placeholder="Product title"
+          [ngClass]="{
+            'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+            'is-valid': nome.valid
+          }"
+          [(ngModel)]="product.title"
+          #nome="ngModel"
+          required
+        />
+        <div
+          class="invalid-feedback mb-2"
+          *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+        >
+          <div *ngIf="nome.errors.required">
+            Product title is a required field
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <label for="inputPreco" class="sr-only">Price</label>
+        <input
+          type="number"
+          id="inputPreco"
+          name="precoProduto"
+          class="form-control mb-2"
+          placeholder="Price"
+          step="0.01"
+          ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"
+          [ngClass]="{
+            'is-invalid': preco.invalid && (preco.dirty || preco.touched),
+            'is-valid': preco.valid
+          }"
+          [(ngModel)]="product.price"
+          #preco="ngModel"
+          required
+        />
+        <div
+          class="invalid-feedback mb-2"
+          *ngIf="preco.invalid && (preco.dirty || preco.touched)"
+        >
+          <div *ngIf="preco.errors.required">
+            Price is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-md-12 col-lg-12">
+        <label for="inputDescricao" class="sr-only">Description</label>
+        <textarea
+          rows="5"
+          id="inputDescricao"
+          name="descricaoProduto"
+          class="form-control mb-2"
+          placeholder="Product detail"
+          [ngClass]="{
+            'is-invalid':
+              descricao.invalid && (descricao.dirty || descricao.touched),
+            'is-valid': descricao.valid
+          }"
+          [(ngModel)]="product.details"
+          #descricao="ngModel"
+          required
+          minlength="50"
+        ></textarea>
+        <div
+          class="invalid-feedback mb-2"
+          *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
+        >
+          <div *ngIf="descricao.errors.required">
+            Product details is required
+          </div>
+          <div *ngIf="descricao.errors.minlength">
+            Product details must have at least 50 characters
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-9">
+        <div class="custom-file input-group mb-2">
+          <input
+            type="file"
+            class="custom-file-input"
+            id="inputFile"
+            (change)="inputChange($event.target.files)"
+          />
+          <label for="inputFile" class="custom-file-label"
+            >Choose a product's picture</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="btn-group col-12 col-md-12" role="group">
+        <button
+          class="btn btn-primary btn-inline-block col-md-3"
+          type="submit"
+          (click)="save()"
+          [disabled]="spinnerActive"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            *ngIf="spinnerActive"
+          ></span>
+          Save
+        </button>
+        <button
+          class="btn btn-secondary btn-block  col-md-3"
+          [routerLink]="['/product-search']"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <div class="alert alert-danger mb-2 col-md-6" role="alert" *ngIf="message">
+      {{ message }}
+    </div>
+    <div
+      class="alert alert-success mb-2 col-md-6"
+      role="alert"
+      *ngIf="registeredProduct"
+    >
+      Product registered sucessfully!
+    </div>
+  </div>
+</form>
