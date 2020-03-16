@@ -38,20 +38,40 @@ export class ProductComponent implements OnInit {
   public save() {
     this.waitingActivate();
     this.registeredProduct = false;
-    this._productService.save(this.product, this.selectedFile)
+    this._productService.save(this.product)
       .subscribe(
         produtoJson => {
-          this.registeredProduct = true;
-          this.waitingDeactivate();
-          this.message = "";
-          this._router.navigate(['product-search']);
+          if (!this.selectedFile) {
+            this.successProductHandle();
+            return;
+          }
+          this._productService.addPicture(produtoJson, this.selectedFile)
+            .subscribe(
+              fileAdded => {
+                this.successProductHandle();
+              },
+              error => {
+                this.errorProductHandle(error);
+              }
+            );
         },
         err => {
-          this.message = err.error;
-          this.registeredProduct = false;
-          this.waitingDeactivate();
+          this.errorProductHandle(err);
         }
       );
+  }
+
+  private successProductHandle() {
+    this.registeredProduct = true;
+    this.waitingDeactivate();
+    this.message = "";
+    this._router.navigate(['product-search']);
+  }
+
+  private errorProductHandle(err: any) {
+    this.message = err.error;
+    this.registeredProduct = false;
+    this.waitingDeactivate();
   }
 
   public waitingActivate() {

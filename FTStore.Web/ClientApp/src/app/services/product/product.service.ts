@@ -38,32 +38,30 @@ export class ProdutoService implements OnInit {
     return this.http.get<Product>(this._baseUrl + "api/produto/" + productId);
   }
 
-  public save(product: Product, picture: File): Observable<Product> {
-    const formData: FormData = new FormData();
+  public save(product: Product): Observable<Product> {
+    return this.registerProduct(product);
+  }
 
-    this.AddPicture(formData, picture);
-
-    formData.append("produto", JSON.stringify(product));
-
+  private registerProduct(product: Product): Observable<Product> {
     var productAlreadyRegistered = product.id > 0;
-
     if (productAlreadyRegistered)
-      return this.sendProductToEdit(formData);
-    return this.sendProductToRegister(formData);
+      return this.sendProductToEdit(product);
+    return this.sendProductToRegister(product);
   }
 
-  private AddPicture(formData: FormData, arquivo: File): FormData {
-    if (!arquivo)
-      return formData;
-    formData.append("imagem-produto", arquivo, arquivo.name);
-    return formData;
+  public addPicture(product: Product, arquivo: File): Observable<boolean> {
+    let formData = new FormData();
+    formData.append("files", arquivo, arquivo.name);
+    return this.http.put<boolean>(this._baseUrl + "api/produto/" + product.id, formData);
   }
 
-  private sendProductToEdit(formData: FormData): Observable<Product> {
-    return this.http.put<Product>(this._baseUrl + "api/produto", formData);
+  private sendProductToEdit(product: Product): Observable<Product> {
+    let body = JSON.stringify(product)
+    return this.http.put<Product>(this._baseUrl + "api/produto", body, { headers: this.headers });
   }
 
-  private sendProductToRegister(formData: FormData): Observable<Product> {
-    return this.http.post<Product>(this._baseUrl + "api/produto/", formData);
+  private sendProductToRegister(product: Product): Observable<Product> {
+    let body = JSON.stringify(product);
+    return this.http.post<Product>(this._baseUrl + "api/produto/", body, { headers: this.headers });
   }
 }

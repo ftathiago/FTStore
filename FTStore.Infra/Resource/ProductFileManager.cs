@@ -14,13 +14,12 @@ namespace FTStore.Infra.Resource
         {
             _baseDir = baseDir;
         }
-        public bool Delete(string imageFileName)
+        public void Delete(string imageFileName)
         {
             var fullPath = _baseDir + PRODUCTS_IMAGE_DIR + imageFileName;
             if (!File.Exists(fullPath))
-                return true;
+                return;
             File.Delete(fullPath);
-            return true;
         }
 
         public string Save(Stream image, string imageFileName)

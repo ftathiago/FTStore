@@ -6,6 +6,7 @@ using System.IO;
 using FTStore.App.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace FTStore.App.Services.Impl
 {
@@ -25,7 +26,7 @@ namespace FTStore.App.Services.Impl
             _productFileManager = productFileManager;
         }
 
-        public bool Save(Product product, Stream imageFile, string fileName)
+        public Product Save(Product product)
         {
             ProductEntity productEntity = _productFactory.Convert(product);
 
@@ -33,12 +34,47 @@ namespace FTStore.App.Services.Impl
             if (!productEntity.EhValido)
             {
                 AddErrorMessage(productEntity.ObterMensagensValidacao());
-                return false;
+                return null;
             }
 
-            var storedFileName = _productFileManager.Save(imageFile, fileName);
-            productEntity.ImageFileName = storedFileName;
             _productRepository.Adicionar(productEntity);
+            return (Product)productEntity;
+        }
+        public bool AddProductImage(int productId, Stream imageFile, string fileName)
+        {
+            ProductEntity product = _productRepository.ObterPorId(productId);
+            if (product == null)
+            {
+                AddErrorMessage($"Product {productId} not found");
+                return false;
+            }
+            try
+            {
+                var storedFileName = _productFileManager.Save(imageFile, fileName);
+                DeletePreviouFileOf(product);
+                UpdateProductImageReference(product, storedFileName);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandler(exception);
+                return false;
+            }
+        }
+
+        private void DeletePreviouFileOf(ProductEntity product)
+        {
+            var shouldDeletePreviousFile = !string.IsNullOrEmpty(product.ImageFileName);
+            if (shouldDeletePreviousFile)
+                _productFileManager.Delete(product.ImageFileName);
+        }
+
+        private bool UpdateProductImageReference(ProductEntity product, string storedFileName)
+        {
+            if (string.IsNullOrEmpty(storedFileName))
+                return false;
+            product.ImageFileName = storedFileName;
+            _productRepository.Atualizar(product);
             return true;
         }
 
@@ -63,12 +99,13 @@ namespace FTStore.App.Services.Impl
                 AddErrorMessage("Product not found");
                 return false;
             }
-
+            var productImagemFileName = produto.ImageFileName;
             _productRepository.Remover(produto);
+            _productFileManager.Delete(productImagemFileName);
             return true;
         }
 
-        public Product Update(Product product, Stream imagemProduto, string nomeArquivo)
+        public Product Update(Product product)
         {
             ProductEntity produtoEntity = _productRepository.ObterPorId(product.Id);
             if (produtoEntity == null)
@@ -80,13 +117,6 @@ namespace FTStore.App.Services.Impl
             produtoEntity.Description = product.Details;
             produtoEntity.ImageFileName = product.imageFileName;
             produtoEntity.Price = product.Price;
-
-            if (imagemProduto != null)
-            {
-                _productFileManager.Delete(product.imageFileName);
-                var storedFileName = _productFileManager.Save(imagemProduto, nomeArquivo);
-                produtoEntity.ImageFileName = storedFileName;
-            }
 
             produtoEntity.Validate();
             if (!produtoEntity.EhValido)

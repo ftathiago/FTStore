@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FTStore.App.Models;
 using FTStore.App.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FTStore.Web.Controllers
 {
@@ -35,45 +37,46 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody]Product product)
         {
-            Product produto = PegarProdutoDaRequisição();
-            if (produto == null)
+            if (product == null)
                 return BadRequest("As informações do produto não foram enviadas.");
+            var productSaved = _produtoService.Save(product);
+            if (productSaved == null)
+                return BadRequest(_produtoService.GetErrorMessages());
+            return Created(".", productSaved);
+        }
 
-            var imagemProduto = _httpContextAccessor
-                .HttpContext.Request.Form.Files["imagem-produto"];
-            var nomeArquivo = imagemProduto?.FileName;
+        [HttpPut("{id}")]
+        public IActionResult UploadProductImagem(int id)
+        {
+            var file = Request.Form.Files[0];// formFiles.FirstOrDefault();
+            if (file == null)
+                return BadRequest("Non file sended");
 
-            using (MemoryStream imagemProdutoStream = PegarStreamImagem(imagemProduto))
+            var fileName = file.FileName;
+            using (MemoryStream productImage = new MemoryStream())
             {
-                var produtoSalvo = _produtoService.Save(produto, imagemProdutoStream, nomeArquivo);
-                if (!produtoSalvo)
+                file.CopyTo(productImage);
+                var fileUploaded = _produtoService.AddProductImage(id, productImage, fileName);
+                if (!fileUploaded)
                     return BadRequest(_produtoService.GetErrorMessages());
-
-                return Created(".", produto);
+                return Ok();
             }
         }
 
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put([FromBody] Product product)
         {
             try
             {
-                Product produto = PegarProdutoDaRequisição();
-                if (produto == null)
-                    return BadRequest("As informações do produto não foram enviadas.");
-                var imagemProduto = _httpContextAccessor
-                    .HttpContext.Request.Form.Files["imagem-produto"];
-                var nomeArquivo = imagemProduto?.FileName;
+                if (product == null)
+                    return BadRequest("There is no product information to handle");
 
-                using (MemoryStream imagemProdutoStream = PegarStreamImagem(imagemProduto))
-                {
-                    var produtoAlterado = _produtoService.Update(produto, imagemProdutoStream, nomeArquivo);
-                    if (produtoAlterado == null)
-                        return BadRequest(_produtoService.GetErrorMessages());
-                    return Ok(produtoAlterado);
-                }
+                var produtoAlterado = _produtoService.Update(product);
+                if (produtoAlterado == null)
+                    return BadRequest(_produtoService.GetErrorMessages());
+                return Ok(produtoAlterado);
             }
             catch (Exception ex)
             {
