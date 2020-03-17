@@ -93,39 +93,39 @@ namespace FTStore.App.Services.Impl
 
         public bool Delete(int id)
         {
-            var produto = _productRepository.ObterPorId(id);
-            if (produto == null)
+            var product = _productRepository.ObterPorId(id);
+            if (product == null)
             {
                 AddErrorMessage("Product not found");
                 return false;
             }
-            var productImagemFileName = produto.ImageFileName;
-            _productRepository.Remover(produto);
+            var productImagemFileName = product.ImageFileName;
+            _productRepository.Remover(product);
             _productFileManager.Delete(productImagemFileName);
             return true;
         }
 
         public Product Update(Product product)
         {
-            ProductEntity produtoEntity = _productRepository.ObterPorId(product.Id);
-            if (produtoEntity == null)
+            ProductEntity productEntity = _productRepository.ObterPorId(product.Id);
+            if (productEntity == null)
             {
                 AddErrorMessage($"The product {product.Id}-{product.Title} was not found");
                 return null;
             }
-            produtoEntity.Name = product.Title;
-            produtoEntity.Description = product.Details;
-            produtoEntity.ImageFileName = product.imageFileName;
-            produtoEntity.Price = product.Price;
+            productEntity.Name = product.Title;
+            productEntity.Description = product.Details;
+            productEntity.ImageFileName = product.imageFileName;
+            productEntity.Price = product.Price;
 
-            produtoEntity.Validate();
-            if (!produtoEntity.EhValido)
+            productEntity.Validate();
+            if (!productEntity.EhValido)
             {
-                AddErrorMessage(produtoEntity.ObterMensagensValidacao());
+                AddErrorMessage(productEntity.ObterMensagensValidacao());
                 return null;
             }
 
-            _productRepository.Atualizar(produtoEntity);
+            _productRepository.Atualizar(productEntity);
             return product;
         }
     }

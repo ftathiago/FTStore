@@ -13,44 +13,41 @@ namespace FTStore.Web.Controllers
     [Route("api/[Controller]")]
     public class ProdutoController : Controller
     {
-        private readonly IProductService _produtoService;
+        private readonly IProductService _productService;
         private IHttpContextAccessor _httpContextAccessor;
         public ProdutoController(
-            IProductService produtoService,
+            IProductService productService,
             IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-            _produtoService = produtoService;
+            _productService = productService;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            try
-            {
-                return Ok(_produtoService.ListAll());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var products = _productService.ListAll();
+            if (!products.Any())
+                return NoContent();
+
+            return Ok(products);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody]Product product)
         {
             if (product == null)
-                return BadRequest("As informações do produto não foram enviadas.");
-            var productSaved = _produtoService.Save(product);
+                return BadRequest("There is no product information to handle");
+            var productSaved = _productService.Save(product);
             if (productSaved == null)
-                return BadRequest(_produtoService.GetErrorMessages());
+                return BadRequest(_productService.GetErrorMessages());
             return Created(".", productSaved);
         }
 
         [HttpPut("{id}")]
         public IActionResult UploadProductImagem(int id)
         {
-            var file = Request.Form.Files[0];// formFiles.FirstOrDefault();
+            var file = Request.Form.Files[0];
             if (file == null)
                 return BadRequest("Non file sended");
 
@@ -58,9 +55,9 @@ namespace FTStore.Web.Controllers
             using (MemoryStream productImage = new MemoryStream())
             {
                 file.CopyTo(productImage);
-                var fileUploaded = _produtoService.AddProductImage(id, productImage, fileName);
+                var fileUploaded = _productService.AddProductImage(id, productImage, fileName);
                 if (!fileUploaded)
-                    return BadRequest(_produtoService.GetErrorMessages());
+                    return BadRequest(_productService.GetErrorMessages());
                 return Ok();
             }
         }
@@ -73,9 +70,9 @@ namespace FTStore.Web.Controllers
                 if (product == null)
                     return BadRequest("There is no product information to handle");
 
-                var produtoAlterado = _produtoService.Update(product);
+                var produtoAlterado = _productService.Update(product);
                 if (produtoAlterado == null)
-                    return BadRequest(_produtoService.GetErrorMessages());
+                    return BadRequest(_productService.GetErrorMessages());
                 return Ok(produtoAlterado);
             }
             catch (Exception ex)
@@ -84,36 +81,12 @@ namespace FTStore.Web.Controllers
             }
         }
 
-        private Product PegarProdutoDaRequisição()
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            _httpContextAccessor.HttpContext.Request.Form.TryGetValue("produto", out var produtoJSON);
-            if (string.IsNullOrEmpty(produtoJSON))
-                return null;
-            var produto = JsonSerializer.Deserialize<Product>(produtoJSON, options);
-            return produto;
-        }
-
-        private MemoryStream PegarStreamImagem(IFormFile formFile)
-        {
-            if (formFile == null)
-                return null;
-            MemoryStream memStream = new MemoryStream();
-            formFile.CopyTo(memStream);
-            memStream.Position = 0;
-            return memStream;
-        }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var apagou = _produtoService.Delete(id);
-            if (!apagou)
-                return BadRequest(_produtoService.GetErrorMessages());
+            var deleted = _productService.Delete(id);
+            if (!deleted)
+                return BadRequest(_productService.GetErrorMessages());
 
             return Ok();
         }

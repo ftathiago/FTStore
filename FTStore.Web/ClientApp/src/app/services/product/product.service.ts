@@ -43,7 +43,7 @@ export class ProdutoService implements OnInit {
   }
 
   private registerProduct(product: Product): Observable<Product> {
-    var productAlreadyRegistered = product.id > 0;
+    let productAlreadyRegistered = product.id > 0;
     if (productAlreadyRegistered)
       return this.sendProductToEdit(product);
     return this.sendProductToRegister(product);
