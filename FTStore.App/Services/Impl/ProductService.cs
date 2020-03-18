@@ -37,12 +37,12 @@ namespace FTStore.App.Services.Impl
                 return null;
             }
 
-            _productRepository.Adicionar(productEntity);
+            _productRepository.Register(productEntity);
             return (Product)productEntity;
         }
         public bool AddProductImage(int productId, Stream imageFile, string fileName)
         {
-            ProductEntity product = _productRepository.ObterPorId(productId);
+            ProductEntity product = _productRepository.GetById(productId);
             if (product == null)
             {
                 AddErrorMessage($"Product {productId} not found");
@@ -74,13 +74,13 @@ namespace FTStore.App.Services.Impl
             if (string.IsNullOrEmpty(storedFileName))
                 return false;
             product.ImageFileName = storedFileName;
-            _productRepository.Atualizar(product);
+            _productRepository.Update(product);
             return true;
         }
 
         public IEnumerable<Product> ListAll()
         {
-            return _productRepository.ObterTodos().Select(p =>
+            return _productRepository.GetAll().Select(p =>
                 new Product
                 {
                     Id = p.Id,
@@ -93,21 +93,21 @@ namespace FTStore.App.Services.Impl
 
         public bool Delete(int id)
         {
-            var product = _productRepository.ObterPorId(id);
+            var product = _productRepository.GetById(id);
             if (product == null)
             {
                 AddErrorMessage("Product not found");
                 return false;
             }
             var productImagemFileName = product.ImageFileName;
-            _productRepository.Remover(product);
+            _productRepository.Remove(product);
             _productFileManager.Delete(productImagemFileName);
             return true;
         }
 
         public Product Update(Product product)
         {
-            ProductEntity productEntity = _productRepository.ObterPorId(product.Id);
+            ProductEntity productEntity = _productRepository.GetById(product.Id);
             if (productEntity == null)
             {
                 AddErrorMessage($"The product {product.Id}-{product.Title} was not found");
@@ -125,7 +125,7 @@ namespace FTStore.App.Services.Impl
                 return null;
             }
 
-            _productRepository.Atualizar(productEntity);
+            _productRepository.Update(productEntity);
             return product;
         }
     }

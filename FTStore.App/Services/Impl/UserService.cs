@@ -35,7 +35,7 @@ namespace FTStore.App.Services.Impl
                     AddErrorMessage(userEntity.ObterMensagensValidacao());
                     return null;
                 }
-                _userRepository.Adicionar(userEntity);
+                _userRepository.Register(userEntity);
                 user.Id = userEntity.Id;
                 return user;
             }

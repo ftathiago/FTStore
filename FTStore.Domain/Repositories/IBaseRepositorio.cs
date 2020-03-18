@@ -6,10 +6,10 @@ namespace FTStore.Domain.Repository
     public interface IBaseRepository<TEntity> : IDisposable
         where TEntity : class
     {
-        void Adicionar(TEntity entity);
-        TEntity ObterPorId(int id);
-        IEnumerable<TEntity> ObterTodos();
-        void Atualizar(TEntity entity);
-        void Remover(TEntity entity);
+        void Register(TEntity entity);
+        TEntity GetById(int id);
+        IEnumerable<TEntity> GetAll();
+        void Update(TEntity entity);
+        void Remove(TEntity entity);
     }
 }

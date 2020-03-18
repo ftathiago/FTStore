@@ -1,48 +1,55 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.EntityFrameworkCore;
+
 using FTStore.Domain.Repository;
+
 using FTStore.Infra.Context;
+
 
 namespace FTStore.Infra.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class
     {
-        protected readonly FTStoreDbContext FTStoreDbContext;
+        protected readonly FTStoreDbContext Context;
+        protected readonly DbSet<TEntity> DbSet;
 
-        public BaseRepository(FTStoreDbContext FTStoreContexto)
+        public BaseRepository(FTStoreDbContext ftStoreContext)
         {
-            FTStoreDbContext = FTStoreContexto;
+            Context = ftStoreContext;
+            DbSet = Context.Set<TEntity>();
         }
 
-        public void Adicionar(TEntity entity)
+        public void Register(TEntity entity)
         {
-            FTStoreDbContext.Set<TEntity>().Add(entity);
-            FTStoreDbContext.SaveChanges();
+            DbSet.Add(entity);
+            Context.SaveChanges();
         }
 
-        public void Atualizar(TEntity entity)
+        public void Update(TEntity entity)
         {
             // FTStoreDbContext.Entry(entity).State = EntityState.Modified;
-            FTStoreDbContext.Set<TEntity>().Update(entity);
-            FTStoreDbContext.SaveChanges();
+            DbSet.Update(entity);
+            Context.SaveChanges();
         }
 
-        public TEntity ObterPorId(int id)
+        public TEntity GetById(int id)
         {
-            return FTStoreDbContext.Set<TEntity>().Find(id);
+            return DbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> ObterTodos()
+        public IEnumerable<TEntity> GetAll()
         {
-            return FTStoreDbContext.Set<TEntity>().ToList();
+            return DbSet.ToList();
         }
 
-        public void Remover(TEntity entity)
+        public void Remove(TEntity entity)
         {
-            FTStoreDbContext.Set<TEntity>().Remove(entity);
-            FTStoreDbContext.SaveChanges();
+            DbSet.Remove(entity);
+            Context.SaveChanges();
         }
 
         #region IDisposable Support
@@ -57,18 +64,18 @@ namespace FTStore.Infra.Repository
                     // TODO: dispose managed state (managed objects).
                 }
 
-                FTStoreDbContext.Dispose();
+                Context.Dispose();
 
                 disposedValue = true;
             }
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~BaseRepository()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
+        ~BaseRepository()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
 
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
@@ -76,7 +83,7 @@ namespace FTStore.Infra.Repository
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
 

@@ -8,20 +8,17 @@ namespace FTStore.Infra.Repository
 {
     public class UserRepository : BaseRepository<UserEntity>, IUserRepository
     {
-        public UserRepository(FTStoreDbContext FTStoreContexto) : base(FTStoreContexto)
-        {
-        }
+        public UserRepository(FTStoreDbContext ftStoreContext) : base(ftStoreContext)
+        { }
 
         public UserEntity GetByIdentity(string email, string senha)
         {
-            return FTStoreDbContext.Usuarios
-                .FirstOrDefault(u => u.Email == email && u.Password == senha);
+            return DbSet.FirstOrDefault(u => u.Email == email && u.Password == senha);
         }
 
         public UserEntity GetByEmail(string email)
         {
-            return FTStoreDbContext.Usuarios
-                .FirstOrDefault(u => u.Email == email);
+            return DbSet.FirstOrDefault(u => u.Email == email);
         }
     }
 }
