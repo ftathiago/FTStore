@@ -7,9 +7,16 @@ namespace FTStore.Domain.Common.Entities
 {
     public abstract class Entity
     {
-        protected ValidationResult _validationResult;
+        public ValidationResult ValidationResult { get => _validationResult; }
+        protected ValidationResult _validationResult = new ValidationResult();
+
 
         public int Id { get; protected set; }
+
+        public void DefineId(int id)
+        {
+            this.Id = id;
+        }
 
         public abstract bool IsValid();
 

@@ -30,10 +30,10 @@ namespace FTStore.App.Services.Impl
         {
             ProductEntity productEntity = _productFactory.Convert(product);
 
-            productEntity.Validate();
-            if (!productEntity.EhValido)
+            if (!productEntity.IsValid())
             {
-                AddErrorMessage(productEntity.ObterMensagensValidacao());
+                productEntity.ValidationResult.Errors.ToList().ForEach(error =>
+                    AddErrorMessage(error.ErrorMessage));
                 return null;
             }
 
@@ -73,7 +73,7 @@ namespace FTStore.App.Services.Impl
         {
             if (string.IsNullOrEmpty(storedFileName))
                 return false;
-            product.ImageFileName = storedFileName;
+            product.DefineImageFileName(storedFileName);
             _productRepository.Update(product);
             return true;
         }
@@ -84,8 +84,8 @@ namespace FTStore.App.Services.Impl
                 new Product
                 {
                     Id = p.Id,
-                    Title = p.Name,
-                    Details = p.Description,
+                    Title = p.Title,
+                    Details = p.Details,
                     imageFileName = p.ImageFileName,
                     Price = p.Price
                 });
@@ -113,15 +113,15 @@ namespace FTStore.App.Services.Impl
                 AddErrorMessage($"The product {product.Id}-{product.Title} was not found");
                 return null;
             }
-            productEntity.Name = product.Title;
-            productEntity.Description = product.Details;
-            productEntity.ImageFileName = product.imageFileName;
-            productEntity.Price = product.Price;
+            productEntity.ChangeTitle(product.Title);
+            productEntity.ChangeDetails(product.Details);
+            productEntity.DefineImageFileName(product.imageFileName);
+            productEntity.ChangePrice(product.Price);
 
-            productEntity.Validate();
-            if (!productEntity.EhValido)
+            if (!productEntity.IsValid())
             {
-                AddErrorMessage(productEntity.ObterMensagensValidacao());
+                productEntity.ValidationResult.Errors.ToList().ForEach(error =>
+                    AddErrorMessage(error.ErrorMessage));
                 return null;
             }
 

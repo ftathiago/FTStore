@@ -7,14 +7,13 @@ namespace FTStore.App.Factories.Impl
     {
         public ProductEntity Convert(Product product)
         {
-            ProductEntity productEntity = new ProductEntity
-            {
-                Description = product.Details,
-                Id = product.Id > 0 ? product.Id : 0,
-                Name = product.Title,
-                Price = product.Price,
-                ImageFileName = product.imageFileName
-            };
+            ProductEntity productEntity = new ProductEntity(
+                product.Title,
+                product.Details,
+                product.Price,
+                product.imageFileName
+            );
+            productEntity.DefineId(product.Id);
             return productEntity;
         }
     }

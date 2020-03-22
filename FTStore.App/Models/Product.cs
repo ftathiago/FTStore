@@ -18,8 +18,8 @@ namespace FTStore.App.Models
             return new Product
             {
                 Id = productEntity.Id,
-                Title = productEntity.Name,
-                Details = productEntity.Description,
+                Title = productEntity.Title,
+                Details = productEntity.Details,
                 Price = productEntity.Price,
                 imageFileName = productEntity.ImageFileName
             };
