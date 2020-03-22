@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FTStore.Domain.Entity
+namespace FTStore.Domain.Entities
 {
     public abstract class Entity
     {

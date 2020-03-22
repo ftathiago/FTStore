@@ -1,4 +1,4 @@
-namespace FTStore.Domain.Entity
+namespace FTStore.Domain.Entities
 {
     public class OrderItem : Entity
     {

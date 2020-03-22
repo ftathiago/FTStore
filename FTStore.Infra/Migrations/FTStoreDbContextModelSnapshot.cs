@@ -17,7 +17,7 @@ namespace FTStore.Infra.Migrations
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("FTStore.Domain.Entity.Order", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("FTStore.Domain.Entity.OrderItem", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,7 +90,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("OrderItem");
                 });
 
-            modelBuilder.Entity("FTStore.Domain.Entity.ProductEntity", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("FTStore.Domain.Entity.UserEntity", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace FTStore.Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FTStore.Domain.Entity.Order", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.Order", b =>
                 {
                     b.HasOne("FTStore.Domain.ValueObject.PaymentMethod", "FormaPagamento")
                         .WithMany()
@@ -212,16 +212,16 @@ namespace FTStore.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FTStore.Domain.Entity.UserEntity", "User")
+                    b.HasOne("FTStore.Domain.Entities.UserEntity", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FTStore.Domain.Entity.OrderItem", b =>
+            modelBuilder.Entity("FTStore.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("FTStore.Domain.Entity.Order", null)
+                    b.HasOne("FTStore.Domain.Entities.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId");
                 });

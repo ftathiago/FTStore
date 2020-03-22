@@ -1,4 +1,4 @@
-using FTStore.Domain.Entity;
+using FTStore.Domain.Entities;
 
 namespace FTStore.Domain.Repository
 {
