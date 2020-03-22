@@ -4,6 +4,7 @@ using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
 using FTStore.App.Factories;
 using System;
+using System.Linq;
 
 namespace FTStore.App.Services.Impl
 {
@@ -30,10 +31,10 @@ namespace FTStore.App.Services.Impl
                 }
 
                 UserEntity userEntity = _userFactory.Convert(user);
-                userEntity.Validate();
-                if (!userEntity.EhValido)
+                if (!userEntity.IsValid())
                 {
-                    AddErrorMessage(userEntity.ObterMensagensValidacao());
+                    userEntity.ValidationResult.Errors.ToList().ForEach(error =>
+                        AddErrorMessage(error.ErrorMessage));
                     return null;
                 }
                 _userRepository.Register(userEntity);

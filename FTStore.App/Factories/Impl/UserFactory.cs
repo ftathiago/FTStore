@@ -9,15 +9,17 @@ namespace FTStore.App.Factories.Impl
         {
             if (user == null)
                 return null;
-            return new UserEntity
+            var userEntity = new UserEntity
             {
-                Id = user.Id,
                 Email = user.Email,
                 IsAdmin = user.IsAdmin,
                 Name = user.Name,
                 Surname = user.Lastname,
                 Password = user.Password
             };
+            if (user.Id > 0)
+                userEntity.DefineId(user.Id);
+            return userEntity;
         }
     }
 }
