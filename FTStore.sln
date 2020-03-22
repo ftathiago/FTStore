@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Common", "FT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Tests", "FTStore.Infra.Tests\FTStore.Infra.Tests.csproj", "{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "FTStore.Domain.Tests\FTStore.Domain.Tests.csproj", "{76C21A10-1ABF-49C3-93FE-930F60AA2B04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +116,17 @@ Global
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Release|x64.Build.0 = Release|Any CPU
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Release|x86.ActiveCfg = Release|Any CPU
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Release|x86.Build.0 = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|x64.Build.0 = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Debug|x86.Build.0 = Debug|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x64.ActiveCfg = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x64.Build.0 = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x86.ActiveCfg = Release|Any CPU
+		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
