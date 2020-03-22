@@ -2,9 +2,8 @@ using System.Collections.Generic;
 
 namespace FTStore.Domain.Entities
 {
-    public class UserEntity : Entity
+    public class UserEntity : FTStore.Domain.Common.Entities.Entity
     {
-        public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
@@ -13,7 +12,7 @@ namespace FTStore.Domain.Entities
 
         public virtual ICollection<Order> Orders { get; set; }
 
-        public override void Validate()
+        public override bool IsValid()
         {
             throw new System.NotImplementedException();
         }
