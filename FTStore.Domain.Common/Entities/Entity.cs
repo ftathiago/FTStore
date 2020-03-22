@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using FluentValidation.Results;
 
-namespace FTStore.Domain.SharedKernel.Entities
+namespace FTStore.Domain.Common.Entities
 {
     public abstract class Entity
     {
@@ -24,7 +24,7 @@ namespace FTStore.Domain.SharedKernel.Entities
 
         public override int GetHashCode()
         {
-            return (GetType().GetHashCode() * 46) + Id.GetHashCode();
+            return (GetType().GetHashCode() * 42) + Id.GetHashCode();
         }
 
         public static bool operator ==(Entity left, Entity right)

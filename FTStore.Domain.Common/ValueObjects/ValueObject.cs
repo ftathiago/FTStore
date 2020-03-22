@@ -1,4 +1,4 @@
-namespace FTStore.Domain.SharedKernel.Entities
+namespace FTStore.Domain.Common.ValueObjects
 {
     public abstract class ValueObject<T> where T : ValueObject<T>
     {
