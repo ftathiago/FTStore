@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FTStore.Domain.Entities
+namespace FTStore.Domain.Entity
 {
     public class UserEntity : Entity
     {

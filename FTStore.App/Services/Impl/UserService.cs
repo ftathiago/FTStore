@@ -1,6 +1,6 @@
 using FTStore.Domain.Repository;
 using FTStore.App.Models;
-using FTStore.Domain.Entities;
+using FTStore.Domain.Entity;
 using FTStore.Domain.ValueObjects;
 using FTStore.App.Factories;
 using System;

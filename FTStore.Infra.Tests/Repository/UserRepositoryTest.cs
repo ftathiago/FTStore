@@ -1,4 +1,4 @@
-using FTStore.Domain.Entities;
+using FTStore.Domain.Entity;
 using FTStore.Infra.Repository;
 using FTStore.Infra.Tests.Fixture;
 using FluentAssertions;

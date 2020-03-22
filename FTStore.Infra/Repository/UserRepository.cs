@@ -1,5 +1,5 @@
 using FTStore.Domain.Repository;
-using FTStore.Domain.Entities;
+using FTStore.Domain.Entity;
 using FTStore.Infra.Context;
 using System.Linq;
 using FTStore.Domain.ValueObjects;

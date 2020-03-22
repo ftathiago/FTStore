@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FTStore.Domain.ValueObjects;
 
-namespace FTStore.Domain.Entities
+namespace FTStore.Domain.Entity
 {
     public class Order : Entity
     {

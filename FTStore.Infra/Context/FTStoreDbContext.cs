@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using FTStore.Domain.Entities;
+using FTStore.Domain.Entity;
 using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Mappings;
 

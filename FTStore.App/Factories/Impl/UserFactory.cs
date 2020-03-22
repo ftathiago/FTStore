@@ -1,5 +1,5 @@
 using FTStore.App.Models;
-using FTStore.Domain.Entities;
+using FTStore.Domain.Entity;
 
 namespace FTStore.App.Factories.Impl
 {
