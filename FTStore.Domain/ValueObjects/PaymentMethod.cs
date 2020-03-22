@@ -1,6 +1,6 @@
 using FTStore.Domain.Enum;
 
-namespace FTStore.Domain.ValueObject
+namespace FTStore.Domain.ValueObjects
 {
     public class PaymentMethod
     {

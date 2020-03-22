@@ -1,10 +1,11 @@
 using FTStore.Domain.Entity;
+using FTStore.Domain.ValueObjects;
 
 namespace FTStore.Domain.Repository
 {
     public interface IUserRepository : IBaseRepository<UserEntity>
     {
-        UserEntity GetByIdentity(string email, string senha);
         UserEntity GetByEmail(string email);
+        UserEntity GetByCredentials(Credentials credentials);
     }
 }

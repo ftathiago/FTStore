@@ -1,6 +1,7 @@
 using FTStore.Domain.Repository;
 using FTStore.App.Models;
 using FTStore.Domain.Entity;
+using FTStore.Domain.ValueObjects;
 using FTStore.App.Factories;
 using System;
 
@@ -48,7 +49,8 @@ namespace FTStore.App.Services.Impl
 
         public User Authenticate(string email, string password)
         {
-            var authenticatedUser = _userRepository.GetByIdentity(email, password);
+            var credentials = new Credentials(email, password);
+            var authenticatedUser = _userRepository.GetByCredentials(credentials);
             if (authenticatedUser == null)
             {
                 AddErrorMessage("Invalid credentials");

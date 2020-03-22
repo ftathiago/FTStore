@@ -11,7 +11,7 @@ using FTStore.Infra.Context;
 
 namespace FTStore.Infra.Repository
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class
     {
         protected readonly FTStoreDbContext Context;

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using FTStore.Domain.Entity;
-using FTStore.Domain.ValueObject;
+using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Mappings;
 
 namespace FTStore.Infra.Context
@@ -13,21 +15,37 @@ namespace FTStore.Infra.Context
         public DbSet<OrderItem> ItensPedido { get; set; }
         public DbSet<PaymentMethod> FormaPagamento { get; set; }
 
-        public FTStoreDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        private readonly IHostEnvironment _env;
 
         public FTStoreDbContext() : base()
         {
         }
 
+        public FTStoreDbContext(DbContextOptions options) : base(options)
+        { }
+
+        public FTStoreDbContext(DbContextOptions<FTStoreDbContext> opt, IHostEnvironment env)
+            : base(opt)
+        {
+            _env = env;
+        }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder.IsConfigured)
-                return;
-            optionsBuilder
-                .UseLazyLoadingProxies()
-                .UseMySql("server=127.0.0.1;uid=root;pwd=1701;database=FTStore");
+            if (_env.IsDevelopment())
+            {
+                optionsBuilder.UseLoggerFactory(DbLoggerFactory);
+            }
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                   .UseLazyLoadingProxies()
+                   .UseMySql("server=127.0.0.1;uid=root;pwd=1701;database=FTStore");
+            }
+
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,5 +58,13 @@ namespace FTStore.Infra.Context
 
             base.OnModelCreating(modelBuilder);
         }
+        private static readonly ILoggerFactory DbLoggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder
+                .AddFilter((category, level) =>
+                    category == DbLoggerCategory.Database.Command.Name
+                    && level == LogLevel.Information)
+                .AddConsole();
+        });
     }
 }
