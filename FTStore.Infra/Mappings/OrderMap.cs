@@ -4,9 +4,9 @@ using FTStore.Domain.Entities;
 
 namespace FTStore.Infra.Mappings
 {
-    public class OrderMap : IEntityTypeConfiguration<Order>
+    public class OrderMap : IEntityTypeConfiguration<OrderEntity>
     {
-        public void Configure(EntityTypeBuilder<Order> builder)
+        public void Configure(EntityTypeBuilder<OrderEntity> builder)
         {
             builder.ToTable("Order");
 

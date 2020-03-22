@@ -5,7 +5,7 @@ using FTStore.Infra.Context;
 
 namespace FTStore.Infra.Repository
 {
-    public class OrderRepository : BaseRepository<Order>, IOrderRepository
+    public class OrderRepository : BaseRepository<OrderEntity>, IOrderRepository
     {
         public OrderRepository(FTStoreDbContext FTStoreContexto) : base(FTStoreContexto)
         {

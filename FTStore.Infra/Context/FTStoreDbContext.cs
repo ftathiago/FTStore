@@ -11,7 +11,7 @@ namespace FTStore.Infra.Context
     {
         public DbSet<UserEntity> Usuarios { get; set; }
         public DbSet<ProductEntity> Produtos { get; set; }
-        public DbSet<Order> Pedidos { get; set; }
+        public DbSet<OrderEntity> Pedidos { get; set; }
         public DbSet<OrderItem> ItensPedido { get; set; }
         public DbSet<PaymentMethod> FormaPagamento { get; set; }
 

@@ -44,7 +44,6 @@ namespace FTStore.Infra.Mappings
                 .HasData(
                     new UserEntity
                     {
-                        Id = -1,
                         Name = "Administrator",
                         Surname = "Admin",
                         Email = "admin@admin.com",
