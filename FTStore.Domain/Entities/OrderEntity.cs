@@ -17,11 +17,11 @@ namespace FTStore.Domain.Entities
         public Address DeliveryAddress { get; protected set; }
         public int PaymentMethodId { get; protected set; }
         public virtual PaymentMethod PaymentMethod { get; protected set; }
-        public virtual ICollection<OrderItem> OrderItems { get; protected set; }
+        public virtual ICollection<OrderItemEntity> OrderItems { get; protected set; }
 
         protected OrderEntity() : base()
         {
-            OrderItems = new List<OrderItem>();
+            OrderItems = new List<OrderItemEntity>();
         }
         public OrderEntity(DateTime orderDate, UserEntity user, DateTime deliveryForecast,
             Address deliveryAddress, PaymentMethod paymentMethod)
@@ -55,7 +55,7 @@ namespace FTStore.Domain.Entities
             return _validationResult.IsValid;
         }
 
-        public void AddItem(OrderItem orderItem)
+        public void AddItem(OrderItemEntity orderItem)
         {
             OrderItems.Add(orderItem);
         }

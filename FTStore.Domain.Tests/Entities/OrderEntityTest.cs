@@ -157,7 +157,7 @@ namespace FTStore.Domain.Tests.Entities
         {
             var order = new OrderEntity(OrderDate, User, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
-            var orderItem = new OrderItem();
+            var orderItem = new OrderItemEntity();
 
             order.AddItem(orderItem);
 

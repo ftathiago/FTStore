@@ -1,6 +1,6 @@
 namespace FTStore.Domain.Entities
 {
-    public class OrderItem : Entity
+    public class OrderItemEntity : Entity
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
