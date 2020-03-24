@@ -73,7 +73,7 @@ namespace FTStore.Domain.Tests.Entities
         }
 
         [Fact]
-        public void ShouldBeInvalidWhenDoesNotHaveItems()
+        public void ShouldBeInvalidWhenDoesNotHaveOrderItems()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Order must have one item at least";
             var order = new OrderEntity(OrderDate, User, DeliveryForecast,
@@ -141,5 +141,28 @@ namespace FTStore.Domain.Tests.Entities
 
             errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
         }
+
+        [Fact]
+        public void ShouldBeSincronizeUserEntityAndUserId()
+        {
+            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+                DeliveryAddress, PaymentMethod);
+
+            order.UserId.Should().Be(User.Id);
+        }
+
+        #region OrderItem Control
+        [Fact]
+        public void ShouldCanAddOrderItem()
+        {
+            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+                DeliveryAddress, PaymentMethod);
+            var orderItem = new OrderItem();
+
+            order.AddItem(orderItem);
+
+            order.OrderItems.Should().HaveCount(1);
+        }
+        #endregion
     }
 }

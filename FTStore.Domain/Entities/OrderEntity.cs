@@ -54,5 +54,10 @@ namespace FTStore.Domain.Entities
             _validationResult = new OrderEntityValidations().Validate(this);
             return _validationResult.IsValid;
         }
+
+        public void AddItem(OrderItem orderItem)
+        {
+            OrderItems.Add(orderItem);
+        }
     }
 }
