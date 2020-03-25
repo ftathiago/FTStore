@@ -4,6 +4,7 @@ using FluentAssertions;
 
 using FTStore.Domain.Entities;
 using FTStore.Domain.Enum;
+using FTStore.Domain.Tests.Entities.Prototypes;
 using FTStore.Domain.ValueObjects;
 
 using Xunit;
@@ -14,7 +15,7 @@ namespace FTStore.Domain.Tests.Entities
     {
 
         private readonly DateTime OrderDate;
-        private readonly UserEntity User;
+        private readonly CustomerEntity Customer;
         private readonly DateTime DeliveryForecast;
         private readonly Address DeliveryAddress;
         private readonly PaymentMethod PaymentMethod;
@@ -27,8 +28,8 @@ namespace FTStore.Domain.Tests.Entities
             OrderDate = DateTime.Now;
             DeliveryForecast = OrderDate.AddDays(10);
 
-            User = new UserEntity();
-            User.DefineId(1);
+            Customer = new CustomerEntity();
+            Customer.DefineId(1);
 
             DeliveryAddress = new Address("street", addressNumber: 173, "neighborhood",
                 "city", "state");
@@ -40,7 +41,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCreateOrder()
         {
-            var order = new OrderEntity(OrderDate, User, DeliveryForecast, DeliveryAddress,
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast, DeliveryAddress,
                 PaymentMethod);
 
             order.Should().NotBeNull();
@@ -58,10 +59,11 @@ namespace FTStore.Domain.Tests.Entities
         #endregion
 
         #region Required Validations
+
         [Fact]
-        public void ShouldBeInvalidWhenOrderDoesNotHaveAUser()
+        public void ShouldBeInvalidWhenOrderDoesNotHaveACustomer()
         {
-            const string EXPECTED_ERROR_MESSAGE = "A user is required";
+            const string EXPECTED_ERROR_MESSAGE = "A customer is required";
             var order = OrderEntity.CreateWithForeignIds(OrderDate, USER_ID, DeliveryForecast,
                 DeliveryAddress, PaymentMethodEnum.CreditCard);
 
@@ -76,7 +78,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenDoesNotHaveOrderItems()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Order must have one item at least";
-            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -90,7 +92,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenOrderDoesNotHaveDeliveryAddress()
         {
             const string EXPECTED_ERROR_MESSAGE = "Delivery address is required";
-            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 deliveryAddress: null, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -120,7 +122,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenDeliveryForeCastBeforeOrderDate()
         {
             var invalidDeliveryForecast = OrderDate.AddDays(-1);
-            var order = new OrderEntity(OrderDate, User, invalidDeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -133,7 +135,7 @@ namespace FTStore.Domain.Tests.Entities
         {
             const string EXPECTED_ERROR_MESSAGE = "It is impossible to deliver before the ordering";
             var invalidDeliveryForecast = OrderDate.AddDays(-1);
-            var order = new OrderEntity(OrderDate, User, invalidDeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
                 DeliveryAddress, PaymentMethod);
             order.IsValid();
 
@@ -145,23 +147,36 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeSincronizeUserEntityAndUserId()
         {
-            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
-            order.UserId.Should().Be(User.Id);
+            order.CustomerId.Should().Be(Customer.Id);
         }
 
         #region OrderItem Control
         [Fact]
         public void ShouldCanAddOrderItem()
         {
-            var order = new OrderEntity(OrderDate, User, DeliveryForecast,
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
-            var orderItem = new OrderItemEntity();
+            var orderItem = OrderItemEntityPrototype.GetValidOrderItem();
 
             order.AddItem(orderItem);
 
             order.OrderItems.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void ShouldBeInvalidWhenOrderItemIsInvalid()
+        {
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+                    DeliveryAddress, PaymentMethod);
+            var orderItem = OrderItemEntityPrototype.GetInvalidOrderItem();
+            order.AddItem(orderItem);
+
+            var isValid = order.IsValid();
+
+            isValid.Should().BeFalse();
         }
         #endregion
     }

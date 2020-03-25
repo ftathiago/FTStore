@@ -10,8 +10,8 @@ namespace FTStore.Domain.Entities
     public class OrderEntity : FTStore.Domain.Common.Entities.Entity
     {
         public DateTime OrderDate { get; protected set; }
-        public int UserId { get; protected set; }
-        public virtual UserEntity User { get; protected set; }
+        public int CustomerId { get; protected set; }
+        public virtual CustomerEntity Customer { get; protected set; }
         public DateTime DeliveryForecast { get; protected set; }
 
         public Address DeliveryAddress { get; protected set; }
@@ -23,13 +23,13 @@ namespace FTStore.Domain.Entities
         {
             OrderItems = new List<OrderItemEntity>();
         }
-        public OrderEntity(DateTime orderDate, UserEntity user, DateTime deliveryForecast,
+        public OrderEntity(DateTime orderDate, CustomerEntity customer, DateTime deliveryForecast,
             Address deliveryAddress, PaymentMethod paymentMethod)
             : this()
         {
             OrderDate = orderDate;
-            User = user;
-            UserId = user != null ? user.Id : 0;
+            Customer = customer;
+            CustomerId = customer != null ? customer.Id : 0;
 
             DeliveryForecast = deliveryForecast;
             DeliveryAddress = deliveryAddress;
@@ -37,12 +37,12 @@ namespace FTStore.Domain.Entities
             PaymentMethod = paymentMethod;
         }
 
-        public static OrderEntity CreateWithForeignIds(DateTime orderDate, int userId, DateTime deliveryForecast,
+        public static OrderEntity CreateWithForeignIds(DateTime orderDate, int customerId, DateTime deliveryForecast,
             Address deliveryAddress, PaymentMethodEnum paymentMethod)
         {
             var orderEntity = new OrderEntity();
             orderEntity.OrderDate = orderDate;
-            orderEntity.UserId = userId;
+            orderEntity.CustomerId = customerId;
             orderEntity.DeliveryForecast = deliveryForecast;
             orderEntity.DeliveryAddress = deliveryAddress;
             orderEntity.PaymentMethodId = (int)paymentMethod;

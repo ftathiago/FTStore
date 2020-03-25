@@ -38,7 +38,7 @@ namespace FTStore.Infra.Mappings
 
             builder
                 .HasMany(u => u.Orders)
-                .WithOne(p => p.User);
+                .WithOne(p => p.Customer);
 
             builder
                 .HasData(

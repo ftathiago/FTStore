@@ -7,7 +7,7 @@ namespace FTStore.Domain.Validations
 {
     public class OrderEntityValidations : AbstractValidator<OrderEntity>
     {
-        private const string USER_REQUIRED = "A user is required";
+        private const string USER_REQUIRED = "A customer is required";
         public OrderEntityValidations()
         {
             RuleFor(order => order.DeliveryForecast)
@@ -18,7 +18,7 @@ namespace FTStore.Domain.Validations
                 .Must(orderItems => orderItems != null && orderItems.Any())
                 .WithMessage("A Order must have one item at least");
 
-            RuleFor(order => order.User)
+            RuleFor(order => order.Customer)
                 .NotNull()
                 .WithMessage(USER_REQUIRED);
 
@@ -29,6 +29,9 @@ namespace FTStore.Domain.Validations
             RuleFor(order => order.PaymentMethodId)
                 .NotEqual((int)PaymentMethodEnum.Unknow)
                 .WithMessage("A Payment method must be specified");
+            RuleForEach(order => order.OrderItems)
+                .SetValidator(new OrderItemEntityValidations());
+
         }
     }
 }
