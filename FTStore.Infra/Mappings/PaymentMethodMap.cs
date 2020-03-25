@@ -2,12 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using FTStore.Domain.Enum;
 using FTStore.Domain.ValueObjects;
+using FTStore.Infra.Model;
 
 namespace FTStore.Infra.Mappings
 {
-    public class PaymentMethodMap : IEntityTypeConfiguration<PaymentMethod>
+    public class PaymentMethodMap : IEntityTypeConfiguration<PaymentMethodModel>
     {
-        public void Configure(EntityTypeBuilder<PaymentMethod> builder)
+        public void Configure(EntityTypeBuilder<PaymentMethodModel> builder)
         {
             builder.ToTable("PaymentMehod");
 
@@ -21,19 +22,19 @@ namespace FTStore.Infra.Mappings
                 .IsRequired()
                 .HasMaxLength(100);
             builder.HasData(
-                new PaymentMethod()
+                new PaymentMethodModel()
                 {
                     Id = (int)PaymentMethodEnum.PaymentSlip,
                     Name = "Boleto",
                     Description = "Forma de pagamento Boleto"
                 },
-                new PaymentMethod()
+                new PaymentMethodModel()
                 {
                     Id = (int)PaymentMethodEnum.CreditCard,
                     Name = "Cartão de Crédito",
                     Description = "Forma de pagamento Cartão de Crédito"
                 },
-                new PaymentMethod()
+                new PaymentMethodModel()
                 {
                     Id = (int)PaymentMethodEnum.Deposit,
                     Name = "Depósito",

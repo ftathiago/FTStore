@@ -6,6 +6,7 @@ namespace FTStore.Infra.Mappings
 {
     public class ProductMap : IEntityTypeConfiguration<ProductEntity>
     {
+        public const int TITLE_SIZE = 200;
         public void Configure(EntityTypeBuilder<ProductEntity> builder)
         {
             builder.ToTable("Product");
@@ -15,7 +16,7 @@ namespace FTStore.Infra.Mappings
             builder
                 .Property(p => p.Title)
                 .IsRequired()
-                .HasMaxLength(200);
+                .HasMaxLength(TITLE_SIZE);
             builder
                 .Property(p => p.Details)
                 .IsRequired()

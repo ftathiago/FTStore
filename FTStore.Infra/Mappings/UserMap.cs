@@ -37,10 +37,6 @@ namespace FTStore.Infra.Mappings
                 .HasMaxLength(400);
 
             builder
-                .HasMany(u => u.Orders)
-                .WithOne(p => p.Customer);
-
-            builder
                 .HasData(
                     new UserEntity
                     {

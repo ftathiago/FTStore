@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using FTStore.Domain.Entities;
+using FTStore.Infra.Model;
 
 namespace FTStore.Infra.Mappings
 {
-    public class OrderMap : IEntityTypeConfiguration<OrderEntity>
+    public class OrderMap : IEntityTypeConfiguration<OrderModel>
     {
-        public void Configure(EntityTypeBuilder<OrderEntity> builder)
+        public void Configure(EntityTypeBuilder<OrderModel> builder)
         {
             builder.ToTable("Order");
 
@@ -17,24 +18,39 @@ namespace FTStore.Infra.Mappings
             builder
                 .Property(p => p.DeliveryForecast)
                 .IsRequired();
+
             builder
-                .Property(p => p.ZipCode)
+                .Property(p => p.Street)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(200);
+
+            builder
+                .Property(p => p.AddressNumber)
+                .IsRequired()
+                .HasMaxLength(4);
+
+            builder
+                .Property(p => p.Neighborhood)
+                .IsRequired()
+                .HasMaxLength(100);
+
             builder
                 .Property(p => p.City)
                 .IsRequired()
                 .HasMaxLength(100);
+
             builder
                 .Property(p => p.State)
                 .IsRequired()
                 .HasMaxLength(100);
+
             builder
-                .Property(p => p.FullAddress)
+                .Property(p => p.ZIPCode)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(10);
+
             builder
-                .Property(p => p.AddressNumber)
+                .Property(p => p.PaymentMethodId)
                 .IsRequired();
         }
     }

@@ -4,11 +4,12 @@ namespace FTStore.Domain.ValueObjects
 {
     public class Address : ValueObject<Address>
     {
-        public string Street { get; private set; }
-        public int AddressNumber { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
+        public string Street { get; protected set; }
+        public int AddressNumber { get; protected set; }
+        public string Neighborhood { get; protected set; }
+        public string City { get; protected set; }
+        public string State { get; protected set; }
+        public string ZIPCode { get; protected set; }
         public Address(string street, int addressNumber, string neighborhood, string city, string state)
         {
             Street = street;
