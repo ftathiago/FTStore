@@ -92,6 +92,20 @@ namespace FTStore.Domain.Tests.Entities
             errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
         }
 
+        [Fact]
+        public void ShouldBeInvalidWhenCustomerIsNull()
+        {
+            const string EXPECTED_ERROR_MESSAGE = "Customer is required";
+            var order = new OrderEntity(OrderDate, customer: null, DeliveryForecast,
+                DeliveryAddress, PaymentMethod);
+
+            var isValid = order.IsValid();
+            var errors = order.ValidationResult.Errors;
+
+            isValid.Should().BeFalse();
+            errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
+        }
+
         #endregion
 
         #region OrderItem Control

@@ -7,7 +7,7 @@ namespace FTStore.Domain.Entities
         public string Name { get; private set; }
         public override bool IsValid()
         {
-            throw new System.NotImplementedException();
+            return Id > 0;
         }
     }
 }

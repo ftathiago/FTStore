@@ -10,6 +10,10 @@ namespace FTStore.Domain.Validations
         private const string USER_REQUIRED = "A customer is required";
         public OrderEntityValidations()
         {
+            RuleFor(order => order.Customer)
+                .NotNull()
+                .WithMessage("Customer is required");
+
             RuleFor(order => order.DeliveryForecast)
                 .GreaterThanOrEqualTo(order => order.OrderDate)
                 .WithMessage("It is impossible to deliver before the ordering");
