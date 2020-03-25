@@ -11,7 +11,7 @@ namespace FTStore.Domain.Tests.Entities.Prototypes
         public const decimal INVALID_DISCOUNT = -1;
         public const decimal NO_DISCOUNT = 0M;
 
-        public static OrderItemEntity GetValidOrderItem()
+        public static OrderItemEntity GetValidOrderItem(int productId = 0)
         {
             var product = ProductEntityPrototype.GetValidProduct();
             var orderItem = new OrderItemEntity(
@@ -21,9 +21,9 @@ namespace FTStore.Domain.Tests.Entities.Prototypes
             return orderItem;
         }
 
-        public static OrderItemEntity GetInvalidOrderItem()
+        public static OrderItemEntity GetInvalidOrderItem(int productId = 0)
         {
-            var product = ProductEntityPrototype.GetInvalidProduct();
+            var product = ProductEntityPrototype.GetInvalidProduct(productId);
             var orderItem = new OrderItemEntity(
                 product,
                 INVALID_QUANTITY,

@@ -11,20 +11,22 @@ namespace FTStore.Domain.Tests.Entities.Prototypes
         public const decimal INVALID_PRICE = 0;
         public const string IMAGE_FILENAME = "C:\\FILENAME.jpg";
 
-        public static ProductEntity GetValidProduct()
+        public static ProductEntity GetValidProduct(int productId = 0)
         {
             var product = new ProductEntity(TITLE, DESCRIPTION, PRICE,
                 IMAGE_FILENAME);
+            product.DefineId(productId);
             return product;
         }
 
-        public static ProductEntity GetInvalidProduct()
+        public static ProductEntity GetInvalidProduct(int productId = 0)
         {
             var product = new ProductEntity(
                 TITLE,
                 INVALID_DESCRIPTION,
                 INVALID_PRICE,
                 IMAGE_FILENAME);
+            product.DefineId(productId);
             return product;
         }
     }

@@ -59,5 +59,10 @@ namespace FTStore.Domain.Entities
         {
             OrderItems.Add(orderItem);
         }
+
+        public decimal Total()
+        {
+            return OrderItems.Sum(orderItem => orderItem.Total);
+        }
     }
 }

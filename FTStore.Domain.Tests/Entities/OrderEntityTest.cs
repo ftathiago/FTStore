@@ -170,7 +170,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenOrderItemIsInvalid()
         {
             var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
-                    DeliveryAddress, PaymentMethod);
+                DeliveryAddress, PaymentMethod);
             var orderItem = OrderItemEntityPrototype.GetInvalidOrderItem();
             order.AddItem(orderItem);
 
@@ -178,6 +178,23 @@ namespace FTStore.Domain.Tests.Entities
 
             isValid.Should().BeFalse();
         }
+
+        [Fact]
+        public void ShouldCalculateTotalItems()
+        {
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+                DeliveryAddress, PaymentMethod);
+            var orderItem1 = OrderItemEntityPrototype.GetValidOrderItem(1);
+            var orderItem2 = OrderItemEntityPrototype.GetValidOrderItem(2);
+            var expectedTotal = orderItem1.Total + orderItem2.Total;
+            order.AddItem(orderItem1);
+            order.AddItem(orderItem2);
+
+            var total = order.Total();
+
+            total.Should().Be(expectedTotal);
+        }
+
         #endregion
     }
 }
