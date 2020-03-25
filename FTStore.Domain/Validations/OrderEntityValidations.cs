@@ -26,9 +26,11 @@ namespace FTStore.Domain.Validations
                 .NotNull()
                 .WithMessage("Delivery address is required");
 
-            RuleFor(order => order.PaymentMethodId)
-                .NotEqual((int)PaymentMethodEnum.Unknow)
+            RuleFor(order => order.PaymentMethod)
+                .NotNull()
+                .Must(paymentMethod => paymentMethod != null && !paymentMethod.IsUnknow)
                 .WithMessage("A Payment method must be specified");
+
             RuleForEach(order => order.OrderItems)
                 .SetValidator(new OrderItemEntityValidations());
 

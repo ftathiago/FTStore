@@ -19,9 +19,7 @@ namespace FTStore.Domain.Tests.Entities
         private readonly DateTime DeliveryForecast;
         private readonly Address DeliveryAddress;
         private readonly PaymentMethod PaymentMethod;
-
-        private const int USER_ID = 1;
-        private const int PAYMENTMETHOD_UNKNOW = 0;
+        private readonly PaymentMethod InvalidPaymentMethod;
 
         public OrderEntityTest()
         {
@@ -34,6 +32,7 @@ namespace FTStore.Domain.Tests.Entities
             DeliveryAddress = new Address("street", addressNumber: 173, "neighborhood",
                 "city", "state");
             PaymentMethod = new PaymentMethod(PaymentMethodEnum.CreditCard);
+            InvalidPaymentMethod = new PaymentMethod(PaymentMethodEnum.Unknow);
         }
 
         #region Creating Test
@@ -47,32 +46,9 @@ namespace FTStore.Domain.Tests.Entities
             order.Should().NotBeNull();
         }
 
-        [Fact]
-        public void CanCreateAOrderWithForeignKeys()
-        {
-            var order = OrderEntity.CreateWithForeignIds(OrderDate, USER_ID, DeliveryForecast,
-                DeliveryAddress, PaymentMethodEnum.CreditCard);
-
-            order.Should().NotBeNull();
-        }
-
         #endregion
 
         #region Required Validations
-
-        [Fact]
-        public void ShouldBeInvalidWhenOrderDoesNotHaveACustomer()
-        {
-            const string EXPECTED_ERROR_MESSAGE = "A customer is required";
-            var order = OrderEntity.CreateWithForeignIds(OrderDate, USER_ID, DeliveryForecast,
-                DeliveryAddress, PaymentMethodEnum.CreditCard);
-
-            var isValid = order.IsValid();
-            var errors = order.ValidationResult.Errors;
-
-            isValid.Should().BeFalse();
-            errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
-        }
 
         [Fact]
         public void ShouldBeInvalidWhenDoesNotHaveOrderItems()
@@ -103,11 +79,11 @@ namespace FTStore.Domain.Tests.Entities
         }
 
         [Fact]
-        public void ShouldBeInvalidWhenPaymentMethodIsUnknow()
+        public void ShouldBeInvalidWhenPaymentMethodIsNull()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Payment method must be specified";
-            var order = OrderEntity.CreateWithForeignIds(OrderDate, USER_ID,
-                DeliveryForecast, DeliveryAddress, PaymentMethodEnum.Unknow);
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+                DeliveryAddress, null);
 
             var isValid = order.IsValid();
             var errors = order.ValidationResult.Errors;
@@ -117,41 +93,6 @@ namespace FTStore.Domain.Tests.Entities
         }
 
         #endregion
-
-        [Fact]
-        public void ShouldBeInvalidWhenDeliveryForeCastBeforeOrderDate()
-        {
-            var invalidDeliveryForecast = OrderDate.AddDays(-1);
-            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
-                DeliveryAddress, PaymentMethod);
-
-            var isValid = order.IsValid();
-
-            isValid.Should().BeFalse();
-        }
-
-        [Fact]
-        public void ShouldHaveEspecificErrorMessageWhenDeliveryForecastIsInvalid()
-        {
-            const string EXPECTED_ERROR_MESSAGE = "It is impossible to deliver before the ordering";
-            var invalidDeliveryForecast = OrderDate.AddDays(-1);
-            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
-                DeliveryAddress, PaymentMethod);
-            order.IsValid();
-
-            var errors = order.ValidationResult.Errors;
-
-            errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
-        }
-
-        [Fact]
-        public void ShouldBeSincronizeUserEntityAndUserId()
-        {
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
-                DeliveryAddress, PaymentMethod);
-
-            order.CustomerId.Should().Be(Customer.Id);
-        }
 
         #region OrderItem Control
         [Fact]
@@ -196,5 +137,39 @@ namespace FTStore.Domain.Tests.Entities
         }
 
         #endregion
+
+        #region Guarantee invariants
+
+        [Fact]
+        public void ShouldBeInvalidWhenDeliveryForeCastBeforeOrderDate()
+        {
+            const string EXPECTED_ERROR_MESSAGE = "It is impossible to deliver before the ordering";
+            var invalidDeliveryForecast = OrderDate.AddDays(-1);
+            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
+                DeliveryAddress, PaymentMethod);
+
+            var isValid = order.IsValid();
+            var errors = order.ValidationResult.Errors;
+
+            isValid.Should().BeFalse();
+            errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
+        }
+
+        [Fact]
+        public void ShouldBeInvalidWhenPaymentMethodIsUnknow()
+        {
+            const string EXPECTED_ERROR_MESSAGE = "A Payment method must be specified";
+            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+                DeliveryAddress, InvalidPaymentMethod);
+
+            var isValid = order.IsValid();
+            var errors = order.ValidationResult.Errors;
+
+            isValid.Should().BeFalse();
+            errors.Should().Contain(error => error.ErrorMessage == EXPECTED_ERROR_MESSAGE);
+        }
+
+        #endregion
+
     }
 }
