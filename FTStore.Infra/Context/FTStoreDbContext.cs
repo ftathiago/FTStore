@@ -18,8 +18,7 @@ namespace FTStore.Infra.Context
         private readonly IHostEnvironment _env;
 
         public FTStoreDbContext() : base()
-        {
-        }
+        { }
 
         public FTStoreDbContext(DbContextOptions options) : base(options)
         { }
@@ -33,7 +32,7 @@ namespace FTStore.Infra.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_env.IsDevelopment())
+            if (_env != null && _env.IsDevelopment())
             {
                 optionsBuilder.UseLoggerFactory(DbLoggerFactory);
             }
