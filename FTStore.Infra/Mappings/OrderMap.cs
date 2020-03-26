@@ -10,10 +10,17 @@ namespace FTStore.Infra.Mappings
         {
             builder.ToTable("Order");
 
-            builder.HasKey(p => p.Id);
+            builder
+                .HasKey(p => p.Id);
+
             builder
                 .Property(p => p.OrderDate)
                 .IsRequired();
+
+            builder
+                .Property(p => p.CustomerId)
+                .IsRequired();
+
             builder
                 .Property(p => p.DeliveryForecast)
                 .IsRequired();

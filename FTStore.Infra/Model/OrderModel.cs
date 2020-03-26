@@ -7,6 +7,7 @@ namespace FTStore.Infra.Model
     {
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
+        public int CustomerId { get; set; }
         public virtual CustomerModel Customer { get; set; }
         public DateTime DeliveryForecast { get; set; }
 
