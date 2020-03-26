@@ -7,48 +7,59 @@ using Microsoft.EntityFrameworkCore;
 using FTStore.Domain.Repository;
 
 using FTStore.Infra.Context;
-
+using AutoMapper;
 
 namespace FTStore.Infra.Repository
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public abstract class BaseRepository<TEntity, TDTO> : IBaseRepository<TEntity>
         where TEntity : class
+        where TDTO : class
     {
         protected readonly FTStoreDbContext Context;
-        protected readonly DbSet<TEntity> DbSet;
+        protected readonly DbSet<TDTO> DbSet;
+        protected readonly IMapper _mapper;
 
-        public BaseRepository(FTStoreDbContext ftStoreContext)
+        public BaseRepository(FTStoreDbContext ftStoreContext, IMapper mapper)
         {
             Context = ftStoreContext;
-            DbSet = Context.Set<TEntity>();
+            DbSet = Context.Set<TDTO>();
+            _mapper = mapper;
         }
 
         public void Register(TEntity entity)
         {
-            DbSet.Add(entity);
+            var data = _mapper.Map<TDTO>(entity);
+            DbSet.Add(data);
             Context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
-            // FTStoreDbContext.Entry(entity).State = EntityState.Modified;
-            DbSet.Update(entity);
+            var data = _mapper.Map<TDTO>(entity);
+            Context.Entry(data).State = EntityState.Modified;
+            DbSet.Update(data);
             Context.SaveChanges();
         }
 
         public TEntity GetById(int id)
         {
-            return DbSet.Find(id);
+            var data = DbSet.Find(id);
+            if (data == null)
+                return null;
+            Context.Entry(data).State = EntityState.Detached;
+            var entity = _mapper.Map<TEntity>(data);
+            return entity;
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return DbSet.ToList();
+            return DbSet.Select(dto => _mapper.Map<TEntity>(dto)).ToList();
         }
 
         public void Remove(TEntity entity)
         {
-            DbSet.Remove(entity);
+            var data = _mapper.Map<TDTO>(entity);
+            DbSet.Remove(data);
             Context.SaveChanges();
         }
 

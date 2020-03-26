@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FTStore.Domain.Common.Entities;
 using FTStore.Domain.Enum;
 using FTStore.Domain.Validations;
 using FTStore.Domain.ValueObjects;
 
 namespace FTStore.Domain.Entities
 {
-    public class OrderEntity : FTStore.Domain.Common.Entities.Entity
+    public class OrderEntity : Entity
     {
         public DateTime OrderDate { get; protected set; }
         public virtual CustomerEntity Customer { get; protected set; }

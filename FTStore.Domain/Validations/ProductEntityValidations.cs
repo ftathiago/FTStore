@@ -8,7 +8,7 @@ namespace FTStore.Domain.Validations
 
         public ProductEntityValidations()
         {
-            RuleFor(product => product.Title)
+            RuleFor(product => product.Name)
                 .NotEmpty().WithMessage("The product's title is required");
 
             RuleFor(product => product.Details)

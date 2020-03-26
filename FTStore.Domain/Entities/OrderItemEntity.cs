@@ -29,7 +29,7 @@ namespace FTStore.Domain.Entities
             if (product == null)
                 return;
             ProductId = product.Id;
-            Title = product.Title;
+            Title = product.Name;
             Price = product.Price;
             Product = product;
         }

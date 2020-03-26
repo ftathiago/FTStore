@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Domain.Entities;
+using FTStore.Infra.Model;
 
 namespace FTStore.Infra.Mappings
 {
-    public class UserMap : IEntityTypeConfiguration<UserEntity>
+    public class UserMap : IEntityTypeConfiguration<UserModel>
     {
-        public void Configure(EntityTypeBuilder<UserEntity> builder)
+        public void Configure(EntityTypeBuilder<UserModel> builder)
         {
             builder.ToTable("User");
 
@@ -38,8 +38,9 @@ namespace FTStore.Infra.Mappings
 
             builder
                 .HasData(
-                    new UserEntity
+                    new UserModel
                     {
+                        Id = 1,
                         Name = "Administrator",
                         Surname = "Admin",
                         Email = "admin@admin.com",

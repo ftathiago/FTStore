@@ -1,20 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Domain.Entities;
+using FTStore.Infra.Model;
 
 namespace FTStore.Infra.Mappings
 {
-    public class ProductMap : IEntityTypeConfiguration<ProductEntity>
+    public class ProductMap : IEntityTypeConfiguration<ProductModel>
     {
         public const int TITLE_SIZE = 200;
-        public void Configure(EntityTypeBuilder<ProductEntity> builder)
+        public void Configure(EntityTypeBuilder<ProductModel> builder)
         {
             builder.ToTable("Product");
 
             builder
                 .HasKey(p => p.Id);
             builder
-                .Property(p => p.Title)
+                .Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(TITLE_SIZE);
             builder

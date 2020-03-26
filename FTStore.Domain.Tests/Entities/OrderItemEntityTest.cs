@@ -31,7 +31,7 @@ namespace FTStore.Domain.Tests.Entities
                 OrderItemEntityPrototype.DISCOUNT);
 
             orderItem.ProductId.Should().Be(product.Id);
-            orderItem.Title.Should().BeSameAs(product.Title);
+            orderItem.Title.Should().BeSameAs(product.Name);
             orderItem.Price.Should().Be(product.Price);
             orderItem.Product.Should().BeSameAs(product);
         }
@@ -102,7 +102,7 @@ namespace FTStore.Domain.Tests.Entities
                 product,
                 OrderItemEntityPrototype.INVALID_QUANTITY,
                 OrderItemEntityPrototype.DISCOUNT);
-            var expectedMessage = $"The quantity of {product.Title} must be greather than zero";
+            var expectedMessage = $"The quantity of {product.Name} must be greather than zero";
 
             var isValid = orderItem.IsValid();
             var errors = orderItem.ValidationResult.Errors;
@@ -119,7 +119,7 @@ namespace FTStore.Domain.Tests.Entities
                 product,
                 OrderItemEntityPrototype.QUANTITY,
                 OrderItemEntityPrototype.INVALID_DISCOUNT);
-            var expectedMessage = $"The discount to {product.Title} should not be negative";
+            var expectedMessage = $"The discount to {product.Name} should not be negative";
 
             var isValid = orderItem.IsValid();
             var errors = orderItem.ValidationResult.Errors;

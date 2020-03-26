@@ -31,9 +31,9 @@ namespace FTStore.Domain.Tests.Entities
                 ProductEntityPrototype.PRICE,
                 ProductEntityPrototype.IMAGE_FILENAME);
 
-            product.ChangeTitle(NEW_TITLE);
+            product.ChangeName(NEW_TITLE);
 
-            product.Title.Should().BeSameAs(NEW_TITLE);
+            product.Name.Should().BeSameAs(NEW_TITLE);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldValidateEmptyTitle()
         {
-            var product = new ProductEntity(title: string.Empty,
+            var product = new ProductEntity(name: string.Empty,
                 ProductEntityPrototype.DESCRIPTION,
                 ProductEntityPrototype.PRICE,
                 ProductEntityPrototype.IMAGE_FILENAME);
@@ -99,7 +99,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldValidateEmptyTitleWithMessage()
         {
             const string EXPECTED_ERROR_MESSAGE = "The product's title is required";
-            var product = new ProductEntity(title: string.Empty,
+            var product = new ProductEntity(name: string.Empty,
                 ProductEntityPrototype.DESCRIPTION,
                 ProductEntityPrototype.PRICE,
                 ProductEntityPrototype.IMAGE_FILENAME);

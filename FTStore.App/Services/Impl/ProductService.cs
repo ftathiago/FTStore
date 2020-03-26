@@ -84,7 +84,7 @@ namespace FTStore.App.Services.Impl
                 new Product
                 {
                     Id = p.Id,
-                    Title = p.Title,
+                    Title = p.Name,
                     Details = p.Details,
                     imageFileName = p.ImageFileName,
                     Price = p.Price
@@ -113,7 +113,7 @@ namespace FTStore.App.Services.Impl
                 AddErrorMessage($"The product {product.Id}-{product.Title} was not found");
                 return null;
             }
-            productEntity.ChangeTitle(product.Title);
+            productEntity.ChangeName(product.Title);
             productEntity.ChangeDetails(product.Details);
             productEntity.DefineImageFileName(product.imageFileName);
             productEntity.ChangePrice(product.Price);

@@ -5,14 +5,14 @@ namespace FTStore.Domain.Entities
 {
     public class ProductEntity : FTStore.Domain.Common.Entities.Entity
     {
-        public string Title { get; protected set; }
+        public string Name { get; protected set; }
         public string Details { get; protected set; }
         public decimal Price { get; protected set; }
         public string ImageFileName { get; protected set; }
 
-        public ProductEntity(string title, string details, decimal price, string imageFileName)
+        public ProductEntity(string name, string details, decimal price, string imageFileName)
         {
-            Title = title;
+            Name = name;
             Details = details;
             Price = price;
             ImageFileName = imageFileName;
@@ -24,9 +24,9 @@ namespace FTStore.Domain.Entities
             return _validationResult.IsValid;
         }
 
-        public void ChangeTitle(string newTitle)
+        public void ChangeName(string newName)
         {
-            this.Title = newTitle;
+            this.Name = newName;
         }
 
         public void ChangeDetails(string newDetails)

@@ -7,29 +7,32 @@ using FTStore.Domain.ValueObjects;
 
 namespace FTStore.Infra.Tests.Repository
 {
-    public class UserRepositoryTest : IClassFixture<ContextFixture>
+    public class UserRepositoryTest : IClassFixture<ContextFixture>, IClassFixture<AutoMapperFixture>
     {
-        private ContextFixture _fixture { get; }
+        private readonly ContextFixture _contextFixture;
+        private readonly AutoMapperFixture _automapperFixture;
         private const string EXISTING_EMAIL = "admin@admin.com";
         private const string NOT_EXISTING_EMAIL = "not@exist.com";
         private const string VALID_PASSWORD = "v4L1dP455w0rD";
 
         private const string INVALID_PASSWORD = "123";
 
-        public UserRepositoryTest(ContextFixture fixture)
+        public UserRepositoryTest(ContextFixture contextFixture, AutoMapperFixture automapperFixture)
         {
-            _fixture = fixture;
+            _contextFixture = contextFixture;
+            _automapperFixture = automapperFixture;
         }
 
         [Fact]
         public void ShouldFindUserByEMail()
         {
-            using var context = _fixture.Ctx;
-            using var repository = new UserRepository(context);
+            using var context = _contextFixture.Ctx;
+            using var repository = new UserRepository(context, _automapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL
             };
+            user.DefineId(1);
             repository.Register(user);
 
             var foundedUser = repository.GetByEmail(EXISTING_EMAIL);
@@ -40,8 +43,8 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldNotFindUserInexistentEmail()
         {
-            using var context = _fixture.Ctx;
-            using var repository = new UserRepository(context);
+            using var context = _contextFixture.Ctx;
+            using var repository = new UserRepository(context, _automapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL
@@ -56,26 +59,27 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldFoundUserByCredentials()
         {
-            using var context = _fixture.Ctx;
-            using var repository = new UserRepository(context);
+            using var context = _contextFixture.Ctx;
+            using var repository = new UserRepository(context, _automapperFixture.Mapper);
             Credentials credentials = new Credentials(EXISTING_EMAIL, VALID_PASSWORD);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL,
                 Password = VALID_PASSWORD
             };
+            user.DefineId(1);
             repository.Register(user);
 
             var registeredUser = repository.GetByCredentials(credentials);
 
-            registeredUser.Should().Be(user);
+            registeredUser.Should().BeEquivalentTo(user);
         }
 
         [Fact]
         public void ShouldNotFoundUserWithWrongEmail()
         {
-            using var context = _fixture.Ctx;
-            using var repository = new UserRepository(context);
+            using var context = _contextFixture.Ctx;
+            using var repository = new UserRepository(context, _automapperFixture.Mapper);
             Credentials credentials = new Credentials(NOT_EXISTING_EMAIL, VALID_PASSWORD);
             UserEntity user = new UserEntity()
             {
@@ -92,8 +96,8 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldNotFoundUserWithWrongPassword()
         {
-            using var context = _fixture.Ctx;
-            using var repository = new UserRepository(context);
+            using var context = _contextFixture.Ctx;
+            using var repository = new UserRepository(context, _automapperFixture.Mapper);
             Credentials credentials = new Credentials(EXISTING_EMAIL, INVALID_PASSWORD);
             UserEntity user = new UserEntity()
             {

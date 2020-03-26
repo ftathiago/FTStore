@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Mappings;
 using FTStore.Infra.Model;
@@ -10,11 +9,11 @@ namespace FTStore.Infra.Context
 {
     public class FTStoreDbContext : DbContext
     {
-        public DbSet<UserEntity> Usuarios { get; set; }
-        public DbSet<ProductEntity> Produtos { get; set; }
+
+        public DbSet<ProductModel> Produtos { get; set; }
         public DbSet<OrderModel> Pedidos { get; set; }
         public DbSet<OrderItemModel> ItensPedido { get; set; }
-        public DbSet<PaymentMethod> FormaPagamento { get; set; }
+        public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
 
         private readonly IHostEnvironment _env;
 
