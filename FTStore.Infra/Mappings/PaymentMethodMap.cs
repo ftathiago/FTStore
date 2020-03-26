@@ -11,15 +11,19 @@ namespace FTStore.Infra.Mappings
         {
             builder.ToTable("PaymentMehod");
 
-            builder.HasKey(f => f.Id);
             builder
-                .Property(f => f.Name)
+                .HasKey(p => p.Id);
+
+            builder
+                .Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
             builder
-                .Property(f => f.Description)
+                .Property(p => p.Description)
                 .IsRequired()
                 .HasMaxLength(100);
+
             builder.HasData(
                 new PaymentMethodModel()
                 {
