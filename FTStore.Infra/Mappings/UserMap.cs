@@ -8,7 +8,7 @@ namespace FTStore.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<UserModel> builder)
         {
-            builder.ToTable("User");
+            builder.ToTable("user");
 
             builder
                 .HasKey(u => u.Id);

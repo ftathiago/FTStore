@@ -9,7 +9,7 @@ namespace FTStore.Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<PaymentMethodModel> builder)
         {
-            builder.ToTable("PaymentMehod");
+            builder.ToTable("paymentmethod");
 
             builder
                 .HasKey(p => p.Id);

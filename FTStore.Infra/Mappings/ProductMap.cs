@@ -9,7 +9,7 @@ namespace FTStore.Infra.Mappings
         public const int TITLE_SIZE = 200;
         public void Configure(EntityTypeBuilder<ProductModel> builder)
         {
-            builder.ToTable("Product");
+            builder.ToTable("product");
 
             builder
                 .HasKey(p => p.Id);
