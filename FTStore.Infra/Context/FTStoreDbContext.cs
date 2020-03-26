@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Mappings;
 using FTStore.Infra.Model;
 
@@ -14,6 +13,8 @@ namespace FTStore.Infra.Context
         public DbSet<OrderModel> Pedidos { get; set; }
         public DbSet<OrderItemModel> ItensPedido { get; set; }
         public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
         private readonly IHostEnvironment _env;
 
@@ -54,6 +55,7 @@ namespace FTStore.Infra.Context
             modelBuilder.ApplyConfiguration(new OrderMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
             modelBuilder.ApplyConfiguration(new PaymentMethodMap());
+            modelBuilder.ApplyConfiguration(new CustomerMap());
 
             base.OnModelCreating(modelBuilder);
         }

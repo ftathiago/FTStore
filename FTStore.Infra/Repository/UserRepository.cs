@@ -23,11 +23,11 @@ namespace FTStore.Infra.Repository
 
         public UserEntity GetByCredentials(Credentials credentials)
         {
-            var data = DbSet.SingleOrDefault(user =>
-                user.Email == credentials.Email && user.Password == credentials.Password);
-            if (data == null)
-                return null;
-            return _mapper.Map<UserEntity>(data);
+            // var data = DbSet.SingleOrDefault(user =>
+            //     user.Email == credentials.Email && user.Password == credentials.Password);
+            // if (data == null)
+            return null;
+            // return _mapper.Map<UserEntity>(data);
         }
     }
 }
