@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FTStore.Infra.Migrations
 {
     [DbContext(typeof(FTStoreDbContext))]
-    [Migration("20200326223232_InitializeDatabase")]
+    [Migration("20200326235058_InitializeDatabase")]
     partial class InitializeDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

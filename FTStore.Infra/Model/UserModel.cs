@@ -8,6 +8,6 @@ namespace FTStore.Infra.Model
         public byte[] Salt { get; set; }
         public bool IsAdmin { get; set; }
         public int? CustomerId { get; set; }
-        public virtual CustomerModel? Customer { get; set; }
+        public virtual CustomerModel Customer { get; set; }
     }
 }
