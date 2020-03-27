@@ -1,3 +1,4 @@
+using System.Text;
 using FTStore.Domain.Common.ValueObjects;
 
 namespace FTStore.Domain.ValueObjects
@@ -11,6 +12,16 @@ namespace FTStore.Domain.ValueObjects
         {
             Email = email;
             Password = password;
+        }
+
+        public byte[] Hash()
+        {
+            return Encoding.UTF8.GetBytes(Email);
+        }
+
+        public byte[] Salt()
+        {
+            return Encoding.UTF8.GetBytes(Password);
         }
 
         protected override bool EqualsCore(Credentials other)

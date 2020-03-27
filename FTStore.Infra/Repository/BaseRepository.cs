@@ -53,7 +53,7 @@ namespace FTStore.Infra.Repository
 
         public IEnumerable<TEntity> GetAll()
         {
-            return DbSet.Select(dto => _mapper.Map<TEntity>(dto)).ToList();
+            return DbSet.AsNoTracking().Select(dto => _mapper.Map<TEntity>(dto)).ToList();
         }
 
         public void Remove(TEntity entity)
