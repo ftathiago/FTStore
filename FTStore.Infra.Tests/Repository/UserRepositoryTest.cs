@@ -12,10 +12,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FTStore.Infra.Tests.Repository
 {
-    public class UserRepositoryTest : IClassFixture<ContextFixture>, IClassFixture<AutoMapperFixture>
+    public class UserRepositoryTest : BaseRepositoryTest<UserModel>
     {
-        private readonly ContextFixture _contextFixture;
-        private readonly AutoMapperFixture _automapperFixture;
         private const int ID = 1;
         private const string EXISTING_EMAIL = "admin@admin.com";
         private const string NOT_EXISTING_EMAIL = "not@exist.com";
@@ -25,17 +23,15 @@ namespace FTStore.Infra.Tests.Repository
         private const string INVALID_SALT = "123";
         private const bool IS_ADMIN = true;
 
-        public UserRepositoryTest(ContextFixture contextFixture, AutoMapperFixture automapperFixture)
-        {
-            _contextFixture = contextFixture;
-            _automapperFixture = automapperFixture;
-        }
+        public UserRepositoryTest(ContextFixture contextFixture, AutoMapperFixture autoMapperFixture)
+            : base(contextFixture, autoMapperFixture)
+        { }
 
         [Fact]
-        public void ShouldAddUser()
+        public override void ShouldRegister()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL,
@@ -50,10 +46,10 @@ namespace FTStore.Infra.Tests.Repository
         }
 
         [Fact]
-        public void ShouldPreserveUserEntityData()
+        public override void ShouldConserveDataAfterRegister()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL,
@@ -70,11 +66,11 @@ namespace FTStore.Infra.Tests.Repository
         }
 
         [Fact]
-        public void ShouldEditWithEntity()
+        public override void ShouldUpdate()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
-            BeforeAddAUserInDatabase(context, ID);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            AddAtRepository(context, ID);
             UserEntity user = repository.GetById(ID);
             user.Email = NOT_EXISTING_EMAIL;
 
@@ -85,11 +81,26 @@ namespace FTStore.Infra.Tests.Repository
         }
 
         [Fact]
-        public void ShouldDeleteWithEntity()
+        public override void ShouldDeleteByEntityReference()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
-            BeforeAddAUserInDatabase(context, ID);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            AddAtRepository(context, ID);
+            UserEntity user = new UserEntity();
+            user.DefineId(ID);
+
+            repository.Remove(user);
+
+            var userDeleted = !context.Users.Any(user => user.Id == ID);
+            userDeleted.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldDeleteUserByEntityReference()
+        {
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            AddAtRepository(context, ID);
             var user = new UserEntity();
             user.DefineId(ID);
 
@@ -101,8 +112,8 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldFindUserByEMail()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL
@@ -118,8 +129,8 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldNotFindUserInexistentEmail()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
             UserEntity user = new UserEntity()
             {
                 Email = EXISTING_EMAIL
@@ -134,10 +145,10 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldFoundUserByCredentials()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
-            var user = BeforeAddAUserInDatabase(context);
-            var expectedUserEntity = _automapperFixture.Mapper.Map<UserEntity>(user);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            var user = AddAtRepository(context);
+            var expectedUserEntity = MapperFixture.Mapper.Map<UserEntity>(user);
             Credentials credentials = new Credentials(EXISTING_EMAIL, PASSWORD);
 
             var registeredUser = repository.GetByCredentials(credentials);
@@ -148,11 +159,11 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldNotFoundUserWithWrongEmail()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
-            var user = BeforeAddAUserInDatabase(context);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            var user = AddAtRepository(context);
             Credentials credentials = new Credentials(NOT_EXISTING_EMAIL, PASSWORD);
-            var expectedUserEntity = _automapperFixture.Mapper.Map<UserEntity>(user);
+            var expectedUserEntity = MapperFixture.Mapper.Map<UserEntity>(user);
 
             var registeredUser = repository.GetByCredentials(credentials);
 
@@ -162,9 +173,9 @@ namespace FTStore.Infra.Tests.Repository
         [Fact]
         public void ShouldNotFoundUserWithWrongPassword()
         {
-            using var context = _contextFixture.Ctx;
-            using var repository = new UserRepository(context, _automapperFixture.Mapper);
-            BeforeAddAUserInDatabase(context);
+            using var context = ContextFixture.Ctx;
+            using var repository = new UserRepository(context, MapperFixture.Mapper);
+            AddAtRepository(context);
             Credentials credentials = new Credentials(EXISTING_EMAIL, INVALID_PASSWORD);
 
             var registeredUser = repository.GetByCredentials(credentials);
@@ -172,8 +183,7 @@ namespace FTStore.Infra.Tests.Repository
             registeredUser.Should().Be(null);
         }
 
-        public UserModel BeforeAddAUserInDatabase(FTStoreDbContext context,
-            int id = 1)
+        protected override UserModel GetModelPrototype(int id = 0)
         {
             var credentials = new Credentials(EXISTING_EMAIL, PASSWORD);
             var user = new UserModel
@@ -184,10 +194,6 @@ namespace FTStore.Infra.Tests.Repository
                 Salt = credentials.Salt(),
                 IsAdmin = true
             };
-
-            context.Users.Add(user);
-            context.SaveChanges();
-            context.Entry(user).State = EntityState.Detached;
             return user;
         }
     }
