@@ -26,11 +26,16 @@ namespace FTStore.Domain.Tests.Entities
             OrderDate = DateTime.Now;
             DeliveryForecast = OrderDate.AddDays(10);
 
-            Customer = new CustomerEntity();
+            Customer = new CustomerEntity("Name", "Surname");
             Customer.DefineId(1);
 
-            DeliveryAddress = new Address("street", addressNumber: 173, "neighborhood",
-                "city", "state");
+            DeliveryAddress = new Address(
+                "street",
+                addressNumber: "173",
+                "neighborhood",
+                "city",
+                "state",
+                zipCode: "00000000");
             PaymentMethod = new PaymentMethod(PaymentMethodEnum.CreditCard);
             InvalidPaymentMethod = new PaymentMethod(PaymentMethodEnum.Unknow);
         }
