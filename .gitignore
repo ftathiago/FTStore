@@ -327,6 +327,8 @@ __pycache__/
 
 # OpenCover UI analysis results
 OpenCover/
+**/coverage.opencover.xml
+**/*.trx
 
 # Azure Stream Analytics local run output
 ASALocalRun/
@@ -359,7 +361,11 @@ MigrationBackup/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-FTStore.Web/wwwroot/arquivos/
+src/FTStore.Web/wwwroot/arquivos/
 !FTStore.Web/wwwroot/arquivos/.gitkeep
-FTStore.Web/wwwroot/assets/**
+src/FTStore.Web/wwwroot/assets/**
 !FTStore.Web/wwwroot/assets/**/.gitkeep
+src/FTStore.Web/wwwroot/assets/images/**
+
+#sonarqube
+.sonarqube/**

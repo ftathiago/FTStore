@@ -1,0 +1,52 @@
+<h1 class="h4 titulo mb-2">Product search</h1>
+<div class="">
+  <input
+    class="form-control productSearch mb-2"
+    type="text"
+    name="search"
+    id="search"
+    [(ngModel)]="_searchText"
+    autocomplete="off"
+    placeholder="Start searching for a product"
+  />
+</div>
+<p *ngIf="!_products">Loading products...</p>
+<button class="btn btn-primary mb-2" (click)="addProduct()">
+  Add product
+</button>
+<table class="table table-hover" *ngIf="_products">
+  <thead class="d-flex">
+    <th scope="col" class="col-sm-2">Title</th>
+    <th scope="col" class="col-sm-4">Details</th>
+    <th scope="col" class="col-sm-2">Price</th>
+    <th scope="col" class="col-sm-2">Picture</th>
+    <th scope="col" class="col-sm-1"></th>
+    <th scope="col" class="col-sm-1"></th>
+  </thead>
+  <tbody>
+    <tr class="d-flex" *ngFor="let product of _products | filter: _searchText">
+      <td class="col-sm-2">{{ product.title | truncate: 100 }}</td>
+      <td
+        class="col-sm-4"
+        [innerHTML]="product.details | nl2br: false | truncate: 200"
+      ></td>
+      <td class="col-sm-2">R$ {{ product.price | number: "1.2" }}</td>
+      <td class="col-sm-2">
+        <img
+          class="mw-100"
+          src="../../../../../assets/images/produto/{{ product.imageFileName }}"
+        />
+      </td>
+      <td class="col-sm-1">
+        <button class="btn btn-success btn-sm" (click)="edit(product)">
+          Modify
+        </button>
+      </td>
+      <td class="col-sm-1">
+        <button class="btn btn-danger btn-sm" (click)="delete(product)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

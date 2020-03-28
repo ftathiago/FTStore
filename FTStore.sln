@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web", "FTStore.Web\FTStore.Web.csproj", "{16F97B83-5CE8-4361-B342-B0A48F3A62CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web", "src\FTStore.Web\FTStore.Web.csproj", "{16F97B83-5CE8-4361-B342-B0A48F3A62CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain", "FTStore.Domain\FTStore.Domain.csproj", "{258202C9-A5BC-445C-8E1D-F3CC42E05E5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain", "src\FTStore.Domain\FTStore.Domain.csproj", "{258202C9-A5BC-445C-8E1D-F3CC42E05E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra", "FTStore.Infra\FTStore.Infra.csproj", "{43498B27-A49C-420E-8AE4-81A67B457F89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra", "src\FTStore.Infra\FTStore.Infra.csproj", "{43498B27-A49C-420E-8AE4-81A67B457F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App", "FTStore.App\FTStore.App.csproj", "{1B1FD50C-59CE-4069-872E-5B06290D93E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App", "src\FTStore.App\FTStore.App.csproj", "{1B1FD50C-59CE-4069-872E-5B06290D93E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Crosscutting", "FTStore.Crosscutting\FTStore.Crosscutting.csproj", "{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Crosscutting", "src\FTStore.Crosscutting\FTStore.Crosscutting.csproj", "{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Common", "FTStore.Domain.Common\FTStore.Domain.Common.csproj", "{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Common", "src\FTStore.Domain.Common\FTStore.Domain.Common.csproj", "{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Tests", "FTStore.Infra.Tests\FTStore.Infra.Tests.csproj", "{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Tests", "src\FTStore.Infra.Tests\FTStore.Infra.Tests.csproj", "{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "FTStore.Domain.Tests\FTStore.Domain.Tests.csproj", "{76C21A10-1ABF-49C3-93FE-930F60AA2B04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "src\FTStore.Domain.Tests\FTStore.Domain.Tests.csproj", "{76C21A10-1ABF-49C3-93FE-930F60AA2B04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App.Test", "src\FTStore.App.Test\FTStore.App.Test.csproj", "{F9025FF6-78DC-4095-8C5E-6D0B8404D372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,5 +130,17 @@ Global
 		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x64.Build.0 = Release|Any CPU
 		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x86.ActiveCfg = Release|Any CPU
 		{76C21A10-1ABF-49C3-93FE-930F60AA2B04}.Release|x86.Build.0 = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|x64.Build.0 = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x64.ActiveCfg = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x64.Build.0 = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
