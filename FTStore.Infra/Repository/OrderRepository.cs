@@ -4,6 +4,7 @@ using FTStore.Domain.Entities;
 using FTStore.Infra.Context;
 using FTStore.Infra.Model;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace FTStore.Infra.Repository
 {
@@ -11,7 +12,14 @@ namespace FTStore.Infra.Repository
     {
         public OrderRepository(FTStoreDbContext FTStoreContexto, IMapper mapper)
             : base(FTStoreContexto, mapper)
+        { }
+        protected override OrderModel BeforePost(OrderModel order, EntityState state)
         {
+            Unchange<CustomerModel>(order.Customer);
+            Unchange<PaymentMethodModel>(order.PaymentMethod);
+
+            return base.BeforePost(order, state);
         }
+
     }
 }

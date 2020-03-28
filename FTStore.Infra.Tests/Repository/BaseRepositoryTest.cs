@@ -19,7 +19,7 @@ namespace FTStore.Infra.Tests.Repository
 
         protected abstract TModel GetModelPrototype(int id = 0);
 
-        protected TModel AddAtRepository(FTStoreDbContext context, int id = 0)
+        protected virtual TModel AddAtRepository(FTStoreDbContext context, int id = 0)
         {
             var model = GetModelPrototype(id);
             context.Set<TModel>().Add(model);

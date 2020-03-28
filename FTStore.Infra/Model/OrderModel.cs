@@ -5,6 +5,10 @@ namespace FTStore.Infra.Model
 {
     public class OrderModel
     {
+        public OrderModel()
+        {
+            OrderItems = new List<OrderItemModel>();
+        }
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public int CustomerId { get; set; }

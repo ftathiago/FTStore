@@ -46,7 +46,7 @@ namespace FTStore.Infra.Tests.Repository
 
             repository.Register(product);
 
-            context.Produtos.Should().ContainSingle();
+            context.Products.Should().ContainSingle();
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace FTStore.Infra.Tests.Repository
             var product = new ProductEntity(PRODUCT_NAME, DETAILS, PRICE, IMAGE_FILENAME);
             repository.Register(product);
 
-            var productRecovered = context.Produtos.FirstOrDefault();
+            var productRecovered = context.Products.FirstOrDefault();
 
             productRecovered.Should().NotBeNull();
             productRecovered.Id.Should().BeGreaterThan(0);
@@ -79,7 +79,7 @@ namespace FTStore.Infra.Tests.Repository
             repository.Update(product);
             var productModified = repository.GetById(PRODUCT_ID);
 
-            context.Produtos.Should().ContainSingle();
+            context.Products.Should().ContainSingle();
             productModified.Name.Should().Be(NEW_NAME);
         }
 
@@ -95,7 +95,7 @@ namespace FTStore.Infra.Tests.Repository
 
             repository.Remove(product);
 
-            var productDeleted = !context.Produtos.Any(p => p.Id == PRODUCT_ID);
+            var productDeleted = !context.Products.Any(p => p.Id == PRODUCT_ID);
             productDeleted.Should().BeTrue();
         }
 

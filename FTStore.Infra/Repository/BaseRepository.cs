@@ -29,6 +29,7 @@ namespace FTStore.Infra.Repository
         public void Register(TEntity entity)
         {
             var data = _mapper.Map<TDTO>(entity);
+            data = BeforePost(data, EntityState.Added);
             DbSet.Add(data);
             Context.SaveChanges();
         }
@@ -37,8 +38,22 @@ namespace FTStore.Infra.Repository
         {
             var data = _mapper.Map<TDTO>(entity);
             Context.Entry(data).State = EntityState.Modified;
+            data = BeforePost(data, EntityState.Modified);
             DbSet.Update(data);
             Context.SaveChanges();
+            Context.Entry(data).State = EntityState.Detached;
+        }
+
+        public void Remove(TEntity entity)
+        {
+            var data = _mapper.Map<TDTO>(entity);
+            DbSet.Remove(data);
+            Context.SaveChanges();
+        }
+
+        protected virtual TDTO BeforePost(TDTO model, EntityState state)
+        {
+            return model;
         }
 
         public TEntity GetById(int id)
@@ -56,11 +71,11 @@ namespace FTStore.Infra.Repository
             return DbSet.AsNoTracking().Select(dto => _mapper.Map<TEntity>(dto)).ToList();
         }
 
-        public void Remove(TEntity entity)
+        protected void Unchange<T>(T model)
         {
-            var data = _mapper.Map<TDTO>(entity);
-            DbSet.Remove(data);
-            Context.SaveChanges();
+            if (model == null)
+                return;
+            Context.Entry(model).State = EntityState.Unchanged;
         }
 
         #region IDisposable Support

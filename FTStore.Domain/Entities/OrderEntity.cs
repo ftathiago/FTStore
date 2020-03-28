@@ -44,6 +44,11 @@ namespace FTStore.Domain.Entities
             OrderItems.Add(orderItem);
         }
 
+        public void DefineNewDeliveryForecast(DateTime newDeliveryForecast)
+        {
+            DeliveryForecast = newDeliveryForecast;
+        }
+
         public decimal Total()
         {
             return OrderItems.Sum(orderItem => orderItem.Total);

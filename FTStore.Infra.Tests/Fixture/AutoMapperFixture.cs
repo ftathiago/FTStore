@@ -13,6 +13,9 @@ namespace FTStore.Infra.Tests.Fixture
             {
                 cfg.AddProfile<UserMapProfile>();
                 cfg.AddProfile<ProductMapProfile>();
+                cfg.AddProfile<OrderMapProfile>();
+                cfg.AddProfile<CustomerMapProfile>();
+                cfg.AddProfile<PaymentMethodMapProfile>();
             });
             Mapper = _mapperConfig.CreateMapper();
         }

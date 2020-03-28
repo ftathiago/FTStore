@@ -16,6 +16,7 @@ namespace FTStore.Domain.Entities
             get => (Price * Quantity) - Discount;
         }
 
+        public OrderItemEntity() : base() { }
         public OrderItemEntity(ProductEntity product, decimal quantity,
             decimal discount) : base()
         {

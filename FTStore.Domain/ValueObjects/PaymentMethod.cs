@@ -8,6 +8,7 @@ namespace FTStore.Domain.ValueObjects
         public string Name { get; set; }
         public string Description { get; set; }
 
+        protected PaymentMethod() { }
         public PaymentMethod(PaymentMethodEnum paymentMethod)
         {
             this.Id = (int)paymentMethod;

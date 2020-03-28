@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using FTStore.Infra.Context;
+using FTStore.Infra.Tests.Prototype;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -19,6 +21,44 @@ namespace FTStore.Infra.Tests.Fixture
                 .Options;
 
             return new FTStoreDbContext(options, new HostEnvironmentFixture());
+        }
+
+        public void InitializeWithOneProduct(FTStoreDbContext context)
+        {
+            var product = new ProductPrototype().GetValid(ProductPrototype.ID);
+            context.Products.Add(product);
+            context.SaveChanges();
+            context.Entry(product).State = EntityState.Detached;
+        }
+
+        public void InitializeWithOneCustomer(FTStoreDbContext context)
+        {
+            var customer = new CustomerPrototype().GetValid(CustomerPrototype.ID);
+            context.Customers.Add(customer);
+            context.SaveChanges();
+            context.Entry(customer).State = EntityState.Detached;
+        }
+
+        public void InitializeWithOnePaymentMethod(FTStoreDbContext context)
+        {
+            var paymentMethod = PaymentMethodPrototype.GetValid();
+            context.PaymentMethod.Add(paymentMethod);
+            context.SaveChanges();
+            context.Entry(paymentMethod).State = EntityState.Detached;
+        }
+
+        public void InitializeWithOneOrder(FTStoreDbContext context)
+        {
+            var customer = context.Customers.First();
+            var product = context.Products.First();
+            var paymentMethod = context.PaymentMethod.First();
+            var order = new OrderPrototype().GetValid(customer, product, paymentMethod);
+            context.Orders.Add(order);
+            context.SaveChanges();
+            context.Entry(customer).State = EntityState.Detached;
+            context.Entry(product).State = EntityState.Detached;
+            context.Entry(paymentMethod).State = EntityState.Detached;
+            context.Entry(order).State = EntityState.Detached;
         }
 
         ~ContextFixture()

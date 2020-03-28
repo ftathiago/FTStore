@@ -9,9 +9,8 @@ namespace FTStore.Infra.Context
     public class FTStoreDbContext : DbContext
     {
 
-        public DbSet<ProductModel> Produtos { get; set; }
-        public DbSet<OrderModel> Pedidos { get; set; }
-        public DbSet<OrderItemModel> ItensPedido { get; set; }
+        public DbSet<ProductModel> Products { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
         public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
         public DbSet<CustomerModel> Customers { get; set; }
         public DbSet<UserModel> Users { get; set; }
