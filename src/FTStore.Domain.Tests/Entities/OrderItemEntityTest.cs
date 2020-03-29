@@ -1,6 +1,6 @@
 using FluentAssertions;
 using FTStore.Domain.Entities;
-using FTStore.Domain.Tests.Entities.Prototypes;
+using FTStore.Domain.Tests.Fixture;
 using Xunit;
 
 namespace FTStore.Domain.Tests.Entities

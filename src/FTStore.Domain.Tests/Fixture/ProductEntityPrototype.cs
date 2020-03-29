@@ -1,6 +1,6 @@
 using FTStore.Domain.Entities;
 
-namespace FTStore.Domain.Tests.Entities.Prototypes
+namespace FTStore.Domain.Tests.Fixture
 {
     internal static class ProductEntityPrototype
     {

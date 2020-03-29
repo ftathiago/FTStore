@@ -2,7 +2,7 @@ using FluentAssertions;
 using FTStore.Domain.Entities;
 using Xunit;
 using System.Linq;
-using FTStore.Domain.Tests.Entities.Prototypes;
+using FTStore.Domain.Tests.Fixture;
 
 namespace FTStore.Domain.Tests.Entities
 {

@@ -4,7 +4,7 @@ using FluentAssertions;
 
 using FTStore.Domain.Entities;
 using FTStore.Domain.Enum;
-using FTStore.Domain.Tests.Entities.Prototypes;
+using FTStore.Domain.Tests.Fixture;
 using FTStore.Domain.ValueObjects;
 
 using Xunit;
