@@ -40,7 +40,7 @@ namespace FTStore.App.Services.Impl
             if (!productEntity.IsValid())
             {
                 productEntity.ValidationResult.Errors.ToList().ForEach(error =>
-                    AddErrorMessage(error.ErrorMessage));
+                    AddErrorMessage(error));
                 return null;
             }
 
@@ -64,7 +64,7 @@ namespace FTStore.App.Services.Impl
             if (!productEntity.IsValid())
             {
                 productEntity.ValidationResult.Errors.ToList().ForEach(error =>
-                    AddErrorMessage(error.ErrorMessage));
+                    AddErrorMessage(error));
                 return null;
             }
 
@@ -119,7 +119,7 @@ namespace FTStore.App.Services.Impl
             try
             {
                 var storedFileName = _productFileManager.Save(imageFile, fileName);
-                DeletePreviouFileOf(product);
+                DeletePreviousFileOf(product);
                 UpdateProductImageReference(product, storedFileName);
                 return true;
             }
@@ -130,7 +130,7 @@ namespace FTStore.App.Services.Impl
             }
         }
 
-        private void DeletePreviouFileOf(ProductEntity product)
+        private void DeletePreviousFileOf(ProductEntity product)
         {
             var shouldDeletePreviousFile = !string.IsNullOrEmpty(product.ImageFileName);
             if (shouldDeletePreviousFile)

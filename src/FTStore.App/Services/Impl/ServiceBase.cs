@@ -24,11 +24,6 @@ namespace FTStore.App.Services.Impl
             }
         }
 
-        protected void ClearErrors()
-        {
-            ValidationResult.Errors.Clear();
-        }
-
         protected void AddErrorMessage(string errorMessage)
         {
             var validationFailure = new ValidationFailure(
