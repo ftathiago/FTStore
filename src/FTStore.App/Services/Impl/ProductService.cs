@@ -53,7 +53,7 @@ namespace FTStore.App.Services.Impl
             ProductEntity productEntity = _productRepository.GetById(product.Id);
             if (productEntity == null)
             {
-                AddErrorMessage($"The product {product.Id}-{product.Title} was not found");
+                AddErrorMessage($"The product [{product.Id} - {product.Title}] was not found");
                 return null;
             }
             productEntity.ChangeName(product.Title);
@@ -74,16 +74,25 @@ namespace FTStore.App.Services.Impl
 
         public bool Delete(int id)
         {
-            var product = _productRepository.GetById(id);
-            if (product == null)
+            var result = false;
+            try
             {
-                AddErrorMessage("Product not found");
-                return false;
+                var product = _productRepository.GetById(id);
+                if (product == null)
+                {
+                    AddErrorMessage("Product not found");
+                    return false;
+                }
+                var productImagemFileName = product.ImageFileName;
+                _productRepository.Remove(product);
+                _productFileManager.Delete(productImagemFileName);
+                result = true;
             }
-            var productImagemFileName = product.ImageFileName;
-            _productRepository.Remove(product);
-            _productFileManager.Delete(productImagemFileName);
-            return true;
+            catch (IOException e)
+            {
+                ExceptionHandler(e);
+            }
+            return result;
         }
 
         public IEnumerable<Product> ListAll()

@@ -1,18 +1,25 @@
 using FTStore.App.Models;
+using FTStore.Domain.Entities;
 
 namespace FTStore.App.Tests.Fixtures
 {
     public class ProductServiceFixture
     {
+        public const string NAME = "A product name";
+        public const string DETAILS = "A large description with more than fifity characters";
+        public const string DETAILS_INVALID = "A tinny details";
+        public const decimal PRICE = 10M;
+        public const decimal PRICE_INVALID = -0.01m;
+        public const string IMAGE_FILENAME = "\\teste\\teste";
         public Product GetValidProduct(int id = 0)
         {
             return new Product
             {
                 Id = id,
-                Title = "A product title",
-                Details = "A large description with more than fifty characters",
-                Price = 10,
-                imageFileName = "\\teste\\teste"
+                Title = NAME,
+                Details = DETAILS,
+                Price = PRICE,
+                imageFileName = IMAGE_FILENAME
             };
         }
 
@@ -21,11 +28,17 @@ namespace FTStore.App.Tests.Fixtures
             return new Product
             {
                 Id = id,
-                Title = "A product title",
-                Details = "A tinny description",
-                Price = -1,
-                imageFileName = "\\teste\\teste"
+                Title = NAME,
+                Details = DETAILS_INVALID,
+                Price = PRICE_INVALID,
+                imageFileName = IMAGE_FILENAME
             };
+        }
+
+        public ProductEntity GetValidProductEntity(int ID = 1)
+        {
+            return new ProductEntity(
+                NAME, DETAILS, PRICE, IMAGE_FILENAME);
         }
     }
 }
