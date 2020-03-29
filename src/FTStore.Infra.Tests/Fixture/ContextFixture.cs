@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using FTStore.Infra.Context;
-using FTStore.Infra.Tests.Prototype;
+using FTStore.App.Tests.Fixture.Repository;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -25,7 +25,7 @@ namespace FTStore.Infra.Tests.Fixture
 
         public void InitializeWithOneProduct(FTStoreDbContext context)
         {
-            var product = new ProductPrototype().GetValid(ProductPrototype.ID);
+            var product = new ProductFixture().GetValid(ProductFixture.ID);
             context.Products.Add(product);
             context.SaveChanges();
             context.Entry(product).State = EntityState.Detached;
@@ -33,7 +33,7 @@ namespace FTStore.Infra.Tests.Fixture
 
         public void InitializeWithOneCustomer(FTStoreDbContext context)
         {
-            var customer = new CustomerPrototype().GetValid(CustomerPrototype.ID);
+            var customer = new CustomerFixture().GetValid(CustomerFixture.ID);
             context.Customers.Add(customer);
             context.SaveChanges();
             context.Entry(customer).State = EntityState.Detached;
@@ -41,7 +41,7 @@ namespace FTStore.Infra.Tests.Fixture
 
         public void InitializeWithOnePaymentMethod(FTStoreDbContext context)
         {
-            var paymentMethod = PaymentMethodPrototype.GetValid();
+            var paymentMethod = PaymentMethodFixture.GetValid();
             context.PaymentMethod.Add(paymentMethod);
             context.SaveChanges();
             context.Entry(paymentMethod).State = EntityState.Detached;
@@ -52,7 +52,7 @@ namespace FTStore.Infra.Tests.Fixture
             var customer = context.Customers.First();
             var product = context.Products.First();
             var paymentMethod = context.PaymentMethod.First();
-            var order = new OrderPrototype().GetValid(customer, product, paymentMethod);
+            var order = new OrderFixture().GetValid(customer, product, paymentMethod);
             context.Orders.Add(order);
             context.SaveChanges();
             context.Entry(customer).State = EntityState.Detached;

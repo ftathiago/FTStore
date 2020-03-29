@@ -3,9 +3,9 @@ using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Model;
 
-namespace FTStore.Infra.Tests.Prototype
+namespace FTStore.App.Tests.Fixture.Repository
 {
-    public class OrderPrototype
+    public class OrderFixture
     {
         public const int ID = 1;
         public const decimal QUANTITY = 2M;
@@ -16,7 +16,7 @@ namespace FTStore.Infra.Tests.Prototype
         {
             get => new Address("street", "123", "neighborhood", "city", "state", "00000000");
         }
-        public OrderPrototype()
+        public OrderFixture()
         {
             OrderDate = DateTime.Now;
             DeliveryForecast = OrderDate.AddDays(10);
@@ -63,7 +63,7 @@ namespace FTStore.Infra.Tests.Prototype
                 customer,
                 DeliveryForecast,
                 Address,
-                PaymentMethodPrototype.GetValidVO());
+                PaymentMethodFixture.GetValidVO());
             order.DefineId(ID);
             order.AddItem(orderItem);
 

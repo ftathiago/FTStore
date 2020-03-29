@@ -1,9 +1,9 @@
 using FTStore.Domain.Entities;
 using FTStore.Infra.Model;
 
-namespace FTStore.Infra.Tests.Prototype
+namespace FTStore.App.Tests.Fixture.Repository
 {
-    public class ProductPrototype
+    public class ProductFixture
     {
         public const int ID = 1;
         public const string NAME = "A product name";
@@ -26,10 +26,10 @@ namespace FTStore.Infra.Tests.Prototype
         public ProductEntity GetValidEntity(int id = ID)
         {
             var product = new ProductEntity(
-                ProductPrototype.NAME,
-                ProductPrototype.DETAILS,
-                ProductPrototype.PRICE,
-                ProductPrototype.IMAGE_FILENAME
+                ProductFixture.NAME,
+                ProductFixture.DETAILS,
+                ProductFixture.PRICE,
+                ProductFixture.IMAGE_FILENAME
             );
             product.DefineId(id);
             return product;

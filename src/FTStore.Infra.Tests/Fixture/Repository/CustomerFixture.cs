@@ -1,9 +1,9 @@
 using FTStore.Domain.Entities;
 using FTStore.Infra.Model;
 
-namespace FTStore.Infra.Tests.Prototype
+namespace FTStore.App.Tests.Fixture.Repository
 {
-    public class CustomerPrototype
+    public class CustomerFixture
     {
         public const int ID = 1;
         public const string NAME = "Customer name";

@@ -8,26 +8,26 @@ using FTStore.Infra.Context;
 using FTStore.Infra.Model;
 using FTStore.Infra.Repository;
 using FTStore.Infra.Tests.Fixture;
-using FTStore.Infra.Tests.Prototype;
+using FTStore.App.Tests.Fixture.Repository;
 using Xunit;
 
 namespace FTStore.Infra.Tests.Repository
 {
     public class OrderRepositoryTest : BaseRepositoryTest<OrderModel>,
-        IClassFixture<ProductPrototype>, IClassFixture<CustomerPrototype>,
-        IClassFixture<OrderPrototype>
+        IClassFixture<ProductFixture>, IClassFixture<CustomerFixture>,
+        IClassFixture<OrderFixture>
     {
         private const int ID = 1;
-        private readonly ProductPrototype _productPrototype;
-        private readonly CustomerPrototype _customerPrototype;
-        private readonly OrderPrototype _orderPrototype;
+        private readonly ProductFixture _productPrototype;
+        private readonly CustomerFixture _customerPrototype;
+        private readonly OrderFixture _orderPrototype;
 
         public OrderRepositoryTest(
             ContextFixture contextFixture,
             AutoMapperFixture autoMapperFixture,
-            ProductPrototype productPrototype,
-            CustomerPrototype customerPrototype,
-            OrderPrototype orderPrototype)
+            ProductFixture productPrototype,
+            CustomerFixture customerPrototype,
+            OrderFixture orderPrototype)
             : base(contextFixture, autoMapperFixture)
         {
             _productPrototype = productPrototype;
@@ -61,7 +61,7 @@ namespace FTStore.Infra.Tests.Repository
             var repository = new OrderRepository(context, MapperFixture.Mapper);
             repository.Register(order);
 
-            var orderEntity = repository.GetById(OrderPrototype.ID);
+            var orderEntity = repository.GetById(OrderFixture.ID);
 
             orderEntity.OrderDate.Should().Be(order.OrderDate);
             orderEntity.Customer.Should().BeEquivalentTo(order.Customer);
@@ -114,10 +114,10 @@ namespace FTStore.Infra.Tests.Repository
 
         protected override OrderModel GetModelPrototype(int id = 0)
         {
-            var product = new ProductPrototype().GetValid();
-            var customer = new CustomerPrototype().GetValid();
-            var paymentMethod = PaymentMethodPrototype.GetValid();
-            return new OrderPrototype().GetValid(customer, product, paymentMethod);
+            var product = new ProductFixture().GetValid();
+            var customer = new CustomerFixture().GetValid();
+            var paymentMethod = PaymentMethodFixture.GetValid();
+            return new OrderFixture().GetValid(customer, product, paymentMethod);
         }
 
         private void InitializeDataBase(FTStoreDbContext context)
