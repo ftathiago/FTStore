@@ -12,7 +12,7 @@
         'is-invalid': nome.invalid && (nome.dirty || nome.touched),
         'is-valid': nome.valid
       }"
-      [(ngModel)]="user.nome"
+      [(ngModel)]="user.name"
       #nome="ngModel"
       required
     />
@@ -36,7 +36,7 @@
         'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
         'is-valid': lastName.valid
       }"
-      [(ngModel)]="user.sobrenome"
+      [(ngModel)]="user.lastname"
       #lastName="ngModel"
       required
     />
@@ -88,7 +88,7 @@
         'is-valid': password.valid,
         'is-invalid': password.invalid && (password.dirty || password.touched)
       }"
-      [(ngModel)]="user.senha"
+      [(ngModel)]="user.password"
       #password="ngModel"
       required
     />
@@ -123,5 +123,5 @@
       entrar no sistema com a sua conta.
     </div>
   </form>
-  <img src="../../../assets/img/quick-b-logo.jpg" />
+  <img alt="FTStore" src="../../../assets/img/quick-b-logo.jpg" />
 </div>

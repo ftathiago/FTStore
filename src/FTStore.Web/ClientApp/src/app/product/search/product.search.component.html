@@ -1,4 +1,4 @@
-<h1 class="h4 titulo mb-2">Product search</h1>
+<h1 id="productSearchTitle" class="h4 titulo mb-2">Product search</h1>
 <div class="">
   <input
     class="form-control productSearch mb-2"
@@ -14,7 +14,11 @@
 <button class="btn btn-primary mb-2" (click)="addProduct()">
   Add product
 </button>
-<table class="table table-hover" *ngIf="_products">
+<table
+  class="table table-hover"
+  aria-describedby="productSearchTitle"
+  *ngIf="_products"
+>
   <thead class="d-flex">
     <th scope="col" class="col-sm-2">Title</th>
     <th scope="col" class="col-sm-4">Details</th>
@@ -33,6 +37,7 @@
       <td class="col-sm-2">R$ {{ product.price | number: "1.2" }}</td>
       <td class="col-sm-2">
         <img
+          alt="{{ product.title }}"
           class="mw-100"
           src="../../../../../assets/images/produto/{{ product.imageFileName }}"
         />
