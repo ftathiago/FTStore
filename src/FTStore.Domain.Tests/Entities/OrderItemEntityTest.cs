@@ -10,12 +10,12 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCreateOrderItem()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
 
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.DISCOUNT);
 
             orderItem.Should().NotBeNull();
         }
@@ -23,12 +23,12 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCopyProductsProperty()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
 
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.DISCOUNT);
 
             orderItem.ProductId.Should().Be(product.Id);
             orderItem.Title.Should().BeSameAs(product.Name);
@@ -39,11 +39,11 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeValidWithoutDiscount()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.NO_DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.NO_DISCOUNT);
 
             var isValid = orderItem.IsValid();
 
@@ -53,15 +53,15 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCalcTotalItem()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
             var totalItemExpected =
-                (product.Price * OrderItemEntityPrototype.QUANTITY)
-                - OrderItemEntityPrototype.DISCOUNT;
+                (product.Price * OrderItemEntityFixture.QUANTITY)
+                - OrderItemEntityFixture.DISCOUNT;
 
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.DISCOUNT);
 
             orderItem.Total.Should().Be(totalItemExpected);
         }
@@ -69,11 +69,11 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeValidWhenTotalIsZero()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
-            var discountToZero = (product.Price * OrderItemEntityPrototype.QUANTITY);
+            var product = ProductEntityFixture.GetValidProduct();
+            var discountToZero = (product.Price * OrderItemEntityFixture.QUANTITY);
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY, discountToZero);
+                OrderItemEntityFixture.QUANTITY, discountToZero);
 
             var isValid = orderItem.IsValid();
 
@@ -83,11 +83,11 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeInvalidWhenProductIsInvalid()
         {
-            var invalidProduct = ProductEntityPrototype.GetInvalidProduct();
+            var invalidProduct = ProductEntityFixture.GetInvalidProduct();
             var orderItem = new OrderItemEntity(
                 invalidProduct,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.DISCOUNT);
 
             var isValid = orderItem.IsValid();
 
@@ -97,11 +97,11 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeInvalidWhenQuantityIsEqualOrLessThanZero()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.INVALID_QUANTITY,
-                OrderItemEntityPrototype.DISCOUNT);
+                OrderItemEntityFixture.INVALID_QUANTITY,
+                OrderItemEntityFixture.DISCOUNT);
             var expectedMessage = $"The quantity of {product.Name} must be greather than zero";
 
             var isValid = orderItem.IsValid();
@@ -114,11 +114,11 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeInvalidWhenDiscountIsNegative()
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
-                OrderItemEntityPrototype.INVALID_DISCOUNT);
+                OrderItemEntityFixture.QUANTITY,
+                OrderItemEntityFixture.INVALID_DISCOUNT);
             var expectedMessage = $"The discount to {product.Name} should not be negative";
 
             var isValid = orderItem.IsValid();
@@ -132,11 +132,11 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenTotalIsNegative()
         {
             var borderDiscount = 0.01M;
-            var product = ProductEntityPrototype.GetValidProduct();
-            var discountToNegative = (product.Price * OrderItemEntityPrototype.QUANTITY) + borderDiscount;
+            var product = ProductEntityFixture.GetValidProduct();
+            var discountToNegative = (product.Price * OrderItemEntityFixture.QUANTITY) + borderDiscount;
             var orderItem = new OrderItemEntity(
                 product,
-                OrderItemEntityPrototype.QUANTITY,
+                OrderItemEntityFixture.QUANTITY,
                 discountToNegative);
             var expectedMessage = $"The total of product \"{orderItem.Title}\" can not be negative";
 

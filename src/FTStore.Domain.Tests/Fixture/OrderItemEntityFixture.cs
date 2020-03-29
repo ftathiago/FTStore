@@ -2,7 +2,7 @@ using FTStore.Domain.Entities;
 
 namespace FTStore.Domain.Tests.Fixture
 {
-    internal static class OrderItemEntityPrototype
+    internal static class OrderItemEntityFixture
     {
         public const decimal QUANTITY = 10M;
         public const decimal INVALID_QUANTITY = 0M;
@@ -13,7 +13,7 @@ namespace FTStore.Domain.Tests.Fixture
 
         public static OrderItemEntity GetValidOrderItem(int productId = 0)
         {
-            var product = ProductEntityPrototype.GetValidProduct();
+            var product = ProductEntityFixture.GetValidProduct();
             var orderItem = new OrderItemEntity(
                 product,
                 QUANTITY,
@@ -23,7 +23,7 @@ namespace FTStore.Domain.Tests.Fixture
 
         public static OrderItemEntity GetInvalidOrderItem(int productId = 0)
         {
-            var product = ProductEntityPrototype.GetInvalidProduct(productId);
+            var product = ProductEntityFixture.GetInvalidProduct(productId);
             var orderItem = new OrderItemEntity(
                 product,
                 INVALID_QUANTITY,

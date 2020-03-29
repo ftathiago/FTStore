@@ -119,7 +119,7 @@ namespace FTStore.Domain.Tests.Entities
         {
             var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
-            var orderItem = OrderItemEntityPrototype.GetValidOrderItem();
+            var orderItem = OrderItemEntityFixture.GetValidOrderItem();
 
             order.AddItem(orderItem);
 
@@ -131,7 +131,7 @@ namespace FTStore.Domain.Tests.Entities
         {
             var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
-            var orderItem = OrderItemEntityPrototype.GetInvalidOrderItem();
+            var orderItem = OrderItemEntityFixture.GetInvalidOrderItem();
             order.AddItem(orderItem);
 
             var isValid = order.IsValid();
@@ -144,8 +144,8 @@ namespace FTStore.Domain.Tests.Entities
         {
             var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
-            var orderItem1 = OrderItemEntityPrototype.GetValidOrderItem(1);
-            var orderItem2 = OrderItemEntityPrototype.GetValidOrderItem(2);
+            var orderItem1 = OrderItemEntityFixture.GetValidOrderItem(1);
+            var orderItem2 = OrderItemEntityFixture.GetValidOrderItem(2);
             var expectedTotal = orderItem1.Total + orderItem2.Total;
             order.AddItem(orderItem1);
             order.AddItem(orderItem2);

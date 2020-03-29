@@ -2,7 +2,7 @@ using FTStore.Domain.Entities;
 
 namespace FTStore.Domain.Tests.Fixture
 {
-    internal static class ProductEntityPrototype
+    internal static class ProductEntityFixture
     {
         public const string TITLE = "A Product title";
         public const string DESCRIPTION = "A large description with more than fifity characters";
