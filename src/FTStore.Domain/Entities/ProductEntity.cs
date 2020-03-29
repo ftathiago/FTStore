@@ -1,8 +1,9 @@
+using FTStore.Domain.Common.Entities;
 using FTStore.Domain.Validations;
 
 namespace FTStore.Domain.Entities
 {
-    public class ProductEntity : FTStore.Domain.Common.Entities.Entity
+    public class ProductEntity : Entity
     {
         public string Name { get; protected set; }
         public string Details { get; protected set; }

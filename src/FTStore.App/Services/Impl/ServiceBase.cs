@@ -1,42 +1,45 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using FluentValidation.Results;
 
 namespace FTStore.App.Services.Impl
 {
     public abstract class ServiceBase
     {
-        private List<string> _errorMessages;
+        private ValidationResult _validationResult;
+        protected ValidationResult ValidationResult
+        {
+            get => _validationResult ?? (_validationResult = new ValidationResult());
+        }
 
         public string GetErrorMessages()
         {
-            return string.Join(". ", ErrorMessages);
+            return string.Join(". ", ValidationResult.Errors);
         }
 
         public bool IsValid
         {
             get
             {
-                return !ErrorMessages.Any();
+                return ValidationResult.IsValid;
             }
         }
-        private List<string> ErrorMessages
-        {
-            get
-            {
-                return _errorMessages ?? (_errorMessages = new List<string>());
-            }
-        }
-
 
         protected void ClearErrors()
         {
-            ErrorMessages.Clear();
+            ValidationResult.Errors.Clear();
         }
 
         protected void AddErrorMessage(string errorMessage)
         {
-            ErrorMessages.Add(errorMessage);
+            var validationFailure = new ValidationFailure(
+                propertyName: string.Empty,
+                errorMessage);
+            ValidationResult.Errors.Add(validationFailure);
+        }
+
+        protected void AddErrorMessage(ValidationFailure validationFailure)
+        {
+            ValidationResult.Errors.Add(validationFailure);
         }
 
         protected void ExceptionHandler(Exception exception)
