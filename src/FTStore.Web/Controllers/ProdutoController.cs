@@ -1,11 +1,8 @@
 using System;
 using System.IO;
-using System.Text.Json;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FTStore.App.Models;
 using FTStore.App.Services;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace FTStore.Web.Controllers
