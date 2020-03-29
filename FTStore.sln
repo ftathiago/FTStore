@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Tests", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "src\FTStore.Domain.Tests\FTStore.Domain.Tests.csproj", "{76C21A10-1ABF-49C3-93FE-930F60AA2B04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App.Test", "src\FTStore.App.Test\FTStore.App.Test.csproj", "{F9025FF6-78DC-4095-8C5E-6D0B8404D372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App.Tests", "src\FTStore.App.Tests\FTStore.App.Tests.csproj", "{F9025FF6-78DC-4095-8C5E-6D0B8404D372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
