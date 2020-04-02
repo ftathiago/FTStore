@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 using FluentAssertions;
 using FTStore.App.Factories;
 using FTStore.App.Factories.Impl;
@@ -244,6 +245,150 @@ namespace FTStore.App.Tests.Services
             productService.IsValid.Should().BeFalse();
             productService.GetErrorMessages().Should().Be("Error message");
             sucessfullyDeleted.Should().BeFalse();
+        }
+
+        [Fact]
+        public void ShouldNotReplateProductImageIfProductDoesNotExists()
+        {
+            _repositoryMock
+                .Setup(x => x.GetById(ID_NOTFOUND))
+                .Returns((ProductEntity)null)
+                .Verifiable();
+            IProductService productService = new ProductService(
+                _repositoryMock.Object,
+                _factory,
+                _fileManager.Object);
+
+            var productReplaced = productService.ReplaceProductImagem(ID_NOTFOUND, null, string.Empty);
+
+            productService.IsValid.Should().BeFalse();
+            productService.GetErrorMessages().Should().Be($"Product {ID_NOTFOUND} not found");
+            productReplaced.Should().BeFalse();
+        }
+
+        [Fact]
+        public void ShouldReplaceImageFile()
+        {
+            const string NEW_FILENAME = "NEW_FILENAME";
+            var productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            _repositoryMock
+                .Setup(x => x.GetById(ID))
+                .Returns(productEntity)
+                .Verifiable();
+            _repositoryMock
+                .Setup(x => x.Update(productEntity))
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME))
+                .Returns(NEW_FILENAME)
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Delete(productEntity.ImageFileName))
+                .Verifiable();
+            var productService = new ProductService(
+                _repositoryMock.Object,
+                _factory,
+                _fileManager.Object);
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes("TEST"));
+
+            var productReplaced = productService.ReplaceProductImagem(ID, stream, NEW_FILENAME);
+
+            productReplaced.Should().BeTrue();
+            productEntity.ImageFileName.Should().Be(NEW_FILENAME);
+            _repositoryMock.Verify();
+            _fileManager.Verify();
+        }
+
+        [Fact]
+        public void ShouldJustDeleteWhenStreamIsNull()
+        {
+            const string NEW_FILENAME = "NEW_FILENAME";
+            var productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            _repositoryMock
+                .Setup(x => x.GetById(ID))
+                .Returns(productEntity)
+                .Verifiable();
+            _repositoryMock
+                .Setup(x => x.Update(productEntity))
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME))
+                .Returns(NEW_FILENAME)
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Delete(productEntity.ImageFileName))
+                .Verifiable();
+            var productService = new ProductService(
+                _repositoryMock.Object,
+                _factory,
+                _fileManager.Object);
+            Stream stream = null;
+
+            var productReplaced = productService.ReplaceProductImagem(ID, stream, NEW_FILENAME);
+
+            productReplaced.Should().BeTrue();
+            productEntity.ImageFileName.Should().Be(string.Empty);
+            _repositoryMock.Verify();
+            _fileManager.Verify(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME), Times.Never);
+        }
+
+        [Fact]
+        public void ShouldJustDeleteWhenNewFileNameIsNullOrEmpty()
+        {
+            var NEW_FILENAME = string.Empty;
+            var productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            _repositoryMock
+                .Setup(x => x.GetById(ID))
+                .Returns(productEntity)
+                .Verifiable();
+            _repositoryMock
+                .Setup(x => x.Update(productEntity))
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME))
+                .Returns(NEW_FILENAME)
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Delete(productEntity.ImageFileName))
+                .Verifiable();
+            var productService = new ProductService(
+                _repositoryMock.Object,
+                _factory,
+                _fileManager.Object);
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes("Test"));
+
+            var productReplaced = productService.ReplaceProductImagem(ID, stream, NEW_FILENAME);
+
+            productReplaced.Should().BeTrue();
+            productEntity.ImageFileName.Should().Be(string.Empty);
+            _repositoryMock.Verify();
+            _fileManager.Verify(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME), Times.Never);
+        }
+
+        [Fact]
+        public void ShouldTurnServiceInvalidWhenThrowsException()
+        {
+            const string ERROR_MESSAGE = "Error Message";
+            var NEW_FILENAME = "NewFile";
+            var productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            _repositoryMock
+                .Setup(x => x.GetById(ID))
+                .Returns(productEntity)
+                .Verifiable();
+            _fileManager
+                .Setup(x => x.Save(It.IsAny<Stream>(), NEW_FILENAME))
+                .Throws(new IOException(ERROR_MESSAGE));
+            var productService = new ProductService(
+                _repositoryMock.Object,
+                _factory,
+                _fileManager.Object);
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes("Test"));
+
+            var productReplaced = productService.ReplaceProductImagem(ID, stream, NEW_FILENAME);
+
+            productReplaced.Should().BeFalse();
+            productService.IsValid.Should().BeFalse();
+            productService.GetErrorMessages().Should().Be(ERROR_MESSAGE);
         }
     }
 }

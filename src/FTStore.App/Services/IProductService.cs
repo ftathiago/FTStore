@@ -9,7 +9,7 @@ namespace FTStore.App.Services
     {
         Product Save(Product product);
         Product Update(Product product);
-        bool AddProductImage(int productId, Stream imageFile, string fileName);
+        bool ReplaceProductImagem(int productId, Stream imageFile, string fileName);
         bool Delete(int id);
         IEnumerable<Product> ListAll();
     }

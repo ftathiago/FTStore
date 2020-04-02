@@ -48,7 +48,7 @@ namespace FTStore.Web.Controllers
             using (MemoryStream productImage = new MemoryStream())
             {
                 file.CopyTo(productImage);
-                var fileUploaded = _productService.AddProductImage(id, productImage, fileName);
+                var fileUploaded = _productService.ReplaceProductImagem(id, productImage, fileName);
                 if (!fileUploaded)
                     return BadRequest(_productService.GetErrorMessages());
                 return Ok();

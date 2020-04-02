@@ -108,7 +108,7 @@ namespace FTStore.App.Services.Impl
                 });
         }
 
-        public bool AddProductImage(int productId, Stream imageFile, string fileName)
+        public bool ReplaceProductImagem(int productId, Stream imageFile, string fileName)
         {
             ProductEntity product = _productRepository.GetById(productId);
             if (product == null)
@@ -118,7 +118,7 @@ namespace FTStore.App.Services.Impl
             }
             try
             {
-                var storedFileName = _productFileManager.Save(imageFile, fileName);
+                var storedFileName = SaveFile(imageFile, fileName);
                 DeletePreviousFileOf(product);
                 UpdateProductImageReference(product, storedFileName);
                 return true;
@@ -130,6 +130,15 @@ namespace FTStore.App.Services.Impl
             }
         }
 
+        private string SaveFile(Stream file, string filename)
+        {
+            if (file == null || file.Length == 0)
+                return string.Empty;
+            if (string.IsNullOrEmpty(filename))
+                return string.Empty;
+            return _productFileManager.Save(file, filename);
+        }
+
         private void DeletePreviousFileOf(ProductEntity product)
         {
             var shouldDeletePreviousFile = !string.IsNullOrEmpty(product.ImageFileName);
@@ -139,8 +148,6 @@ namespace FTStore.App.Services.Impl
 
         private void UpdateProductImageReference(ProductEntity product, string storedFileName)
         {
-            if (string.IsNullOrEmpty(storedFileName))
-                return;
             product.DefineImageFileName(storedFileName);
             _productRepository.Update(product);
         }

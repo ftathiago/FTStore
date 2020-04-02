@@ -5,6 +5,7 @@ namespace FTStore.App.Tests.Fixtures
 {
     public class ProductServiceFixture
     {
+        public const int ID = 1;
         public const string NAME = "A product name";
         public const string DETAILS = "A large description with more than fifity characters";
         public const string DETAILS_INVALID = "A tinny details";
@@ -35,10 +36,12 @@ namespace FTStore.App.Tests.Fixtures
             };
         }
 
-        public ProductEntity GetValidProductEntity(int ID = 1)
+        public ProductEntity GetValidProductEntity(int id = ID)
         {
-            return new ProductEntity(
+            var product = new ProductEntity(
                 NAME, DETAILS, PRICE, IMAGE_FILENAME);
+            product.DefineId(ID);
+            return product;
         }
     }
 }
