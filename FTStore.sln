@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App.Tests", "src\FTStore.App.Tests\FTStore.App.Tests.csproj", "{F9025FF6-78DC-4095-8C5E-6D0B8404D372}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web.Tests", "src\FTStore.Web.Tests\FTStore.Web.Tests.csproj", "{1A80480F-32F0-4E70-9E2E-25FD39A0641B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,5 +146,20 @@ Global
 		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x64.Build.0 = Release|Any CPU
 		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9025FF6-78DC-4095-8C5E-6D0B8404D372}.Release|x86.Build.0 = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x64.Build.0 = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A80480F-32F0-4E70-9E2E-25FD39A0641B} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
 	EndGlobalSection
 EndGlobal
