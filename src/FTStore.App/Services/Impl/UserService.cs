@@ -30,7 +30,7 @@ namespace FTStore.App.Services.Impl
                     return null;
                 }
 
-                UserEntity userEntity = _userFactory.Convert(user);
+                User userEntity = _userFactory.Convert(user);
                 if (!userEntity.IsValid())
                 {
                     userEntity.ValidationResult.Errors.ToList().ForEach(error =>

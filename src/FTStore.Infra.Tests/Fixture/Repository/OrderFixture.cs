@@ -54,11 +54,11 @@ namespace FTStore.App.Tests.Fixture.Repository
             return order;
         }
 
-        public OrderEntity GetValidEntity(ProductEntity product, CustomerEntity customer, int orderId = ID)
+        public Order GetValidEntity(Product product, Customer customer, int orderId = ID)
         {
-            var orderItem = new OrderItemEntity(product, QUANTITY, DISCOUNT);
+            var orderItem = new OrderItem(product, QUANTITY, DISCOUNT);
             orderItem.DefineId(ID);
-            var order = new OrderEntity(
+            var order = new Order(
                 OrderDate,
                 customer,
                 DeliveryForecast,

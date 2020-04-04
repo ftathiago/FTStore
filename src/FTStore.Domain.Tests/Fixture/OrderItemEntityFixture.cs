@@ -11,20 +11,20 @@ namespace FTStore.Domain.Tests.Fixture
         public const decimal INVALID_DISCOUNT = -1;
         public const decimal NO_DISCOUNT = 0M;
 
-        public static OrderItemEntity GetValidOrderItem(int productId = 0)
+        public static OrderItem GetValidOrderItem(int productId = 0)
         {
             var product = ProductEntityFixture.GetValidProduct();
-            var orderItem = new OrderItemEntity(
+            var orderItem = new OrderItem(
                 product,
                 QUANTITY,
                 DISCOUNT);
             return orderItem;
         }
 
-        public static OrderItemEntity GetInvalidOrderItem(int productId = 0)
+        public static OrderItem GetInvalidOrderItem(int productId = 0)
         {
             var product = ProductEntityFixture.GetInvalidProduct(productId);
-            var orderItem = new OrderItemEntity(
+            var orderItem = new OrderItem(
                 product,
                 INVALID_QUANTITY,
                 INVALID_DISCOUNT);

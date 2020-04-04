@@ -3,7 +3,7 @@ using FTStore.Domain.Entities;
 
 namespace FTStore.Domain.Validations
 {
-    public class ProductEntityValidations : AbstractValidator<ProductEntity>
+    public class ProductEntityValidations : AbstractValidator<Product>
     {
 
         public ProductEntityValidations()

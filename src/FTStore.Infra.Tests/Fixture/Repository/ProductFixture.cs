@@ -23,9 +23,9 @@ namespace FTStore.App.Tests.Fixture.Repository
             return product;
         }
 
-        public ProductEntity GetValidEntity(int id = ID)
+        public Product GetValidEntity(int id = ID)
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductFixture.NAME,
                 ProductFixture.DETAILS,
                 ProductFixture.PRICE,

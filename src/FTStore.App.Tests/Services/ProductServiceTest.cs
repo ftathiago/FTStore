@@ -38,7 +38,7 @@ namespace FTStore.App.Tests.Services
         {
             ProductRequest product = _productServiceFixture.GetValidProduct();
             _repositoryMock
-                .Setup(x => x.Register(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Register(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -57,7 +57,7 @@ namespace FTStore.App.Tests.Services
         {
             ProductRequest product = _productServiceFixture.GetInvalidProduct();
             _repositoryMock
-                .Setup(x => x.Register(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Register(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -66,7 +66,7 @@ namespace FTStore.App.Tests.Services
 
             var productReturned = productService.Save(product);
 
-            _repositoryMock.Verify(repo => repo.Register(It.IsAny<ProductEntity>()), Times.Never);
+            _repositoryMock.Verify(repo => repo.Register(It.IsAny<Product>()), Times.Never);
             productService.IsValid.Should().BeFalse();
             productReturned.Should().BeNull();
         }
@@ -76,7 +76,7 @@ namespace FTStore.App.Tests.Services
         {
             ProductRequest product = _productServiceFixture.GetValidProduct(1);
             _repositoryMock
-                .Setup(x => x.Register(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Register(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -86,7 +86,7 @@ namespace FTStore.App.Tests.Services
             var productReturned = productService.Save(product);
 
             productReturned.Should().BeNull();
-            _repositoryMock.Verify(repo => repo.Register(It.IsAny<ProductEntity>()), Times.Never);
+            _repositoryMock.Verify(repo => repo.Register(It.IsAny<Product>()), Times.Never);
             productService.IsValid.Should().BeFalse();
             productService.GetErrorMessages().Should().Contain("The product's Id should not be defined");
         }
@@ -95,13 +95,13 @@ namespace FTStore.App.Tests.Services
         public void ShouldUpdateProduct()
         {
             ProductRequest product = _productServiceFixture.GetValidProduct(ID);
-            ProductEntity productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            Product productEntity = _productServiceFixture.GetValidProductEntity(ID);
             var newPrice = product.Price + 10;
             _repositoryMock
                 .Setup(x => x.GetById(ID)).Returns(productEntity)
                 .Verifiable();
             _repositoryMock
-                .Setup(x => x.Update(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Update(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -125,12 +125,12 @@ namespace FTStore.App.Tests.Services
         public void ShouldNotUpdateInvalidProduct()
         {
             ProductRequest product = _productServiceFixture.GetInvalidProduct(ID);
-            ProductEntity productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            Product productEntity = _productServiceFixture.GetValidProductEntity(ID);
             _repositoryMock
                 .Setup(x => x.GetById(ID)).Returns(productEntity)
                 .Verifiable();
             _repositoryMock
-                .Setup(x => x.Update(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Update(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -140,7 +140,7 @@ namespace FTStore.App.Tests.Services
             var productReturned = productService.Update(product);
 
             _repositoryMock
-                .Verify(x => x.Update(It.IsAny<ProductEntity>()), Times.Never);
+                .Verify(x => x.Update(It.IsAny<Product>()), Times.Never);
             productService.IsValid.Should().BeFalse();
             productReturned.Should().BeNull();
         }
@@ -151,10 +151,10 @@ namespace FTStore.App.Tests.Services
             ProductRequest product = _productServiceFixture.GetInvalidProduct(ID);
             _repositoryMock
                 .Setup(x => x.GetById(ID_NOTFOUND))
-                .Returns((ProductEntity)null)
+                .Returns((Product)null)
                 .Verifiable();
             _repositoryMock
-                .Setup(x => x.Update(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Update(It.IsAny<Product>()))
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,
@@ -163,7 +163,7 @@ namespace FTStore.App.Tests.Services
 
             var productReturned = productService.Update(product);
 
-            _repositoryMock.Verify(x => x.Update(It.IsAny<ProductEntity>()), Times.Never);
+            _repositoryMock.Verify(x => x.Update(It.IsAny<Product>()), Times.Never);
             productReturned.Should().BeNull();
             productService.IsValid.Should().BeFalse();
             productService.GetErrorMessages().Should().Be($"The product [{product.Id} - {product.Name}] was not found");
@@ -172,7 +172,7 @@ namespace FTStore.App.Tests.Services
         [Fact]
         public void ShouldDeleteAProduct()
         {
-            ProductEntity productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            Product productEntity = _productServiceFixture.GetValidProductEntity(ID);
             _repositoryMock
                 .Setup(x => x.GetById(ID)).Returns(productEntity)
                 .Verifiable();
@@ -200,10 +200,10 @@ namespace FTStore.App.Tests.Services
         public void ShouldBeInvalidIfProductDoesExists()
         {
             _repositoryMock
-                .Setup(x => x.GetById(ID_NOTFOUND)).Returns((ProductEntity)null)
+                .Setup(x => x.GetById(ID_NOTFOUND)).Returns((Product)null)
                 .Verifiable();
             _repositoryMock
-                .Setup(x => x.Remove(It.IsAny<ProductEntity>()))
+                .Setup(x => x.Remove(It.IsAny<Product>()))
                 .Verifiable();
             _fileManager
                 .Setup(fm => fm.Delete(It.IsAny<string>()))
@@ -215,7 +215,7 @@ namespace FTStore.App.Tests.Services
 
             var sucessfullyDeleted = productService.Delete(ID_NOTFOUND);
 
-            _repositoryMock.Verify(x => x.Remove(It.IsAny<ProductEntity>()), Times.Never);
+            _repositoryMock.Verify(x => x.Remove(It.IsAny<Product>()), Times.Never);
             _fileManager.Verify(x => x.Delete(It.IsAny<string>()), Times.Never);
             productService.IsValid.Should().BeFalse();
             productService.GetErrorMessages().Should().Contain("Product not found");
@@ -225,7 +225,7 @@ namespace FTStore.App.Tests.Services
         [Fact]
         public void ShouldBeInvalidIfThowsException()
         {
-            ProductEntity productEntity = _productServiceFixture.GetValidProductEntity(ID);
+            Product productEntity = _productServiceFixture.GetValidProductEntity(ID);
             _repositoryMock
                 .Setup(x => x.GetById(ID)).Returns(productEntity)
                 .Verifiable();
@@ -252,7 +252,7 @@ namespace FTStore.App.Tests.Services
         {
             _repositoryMock
                 .Setup(x => x.GetById(ID_NOTFOUND))
-                .Returns((ProductEntity)null)
+                .Returns((Product)null)
                 .Verifiable();
             IProductService productService = new ProductService(
                 _repositoryMock.Object,

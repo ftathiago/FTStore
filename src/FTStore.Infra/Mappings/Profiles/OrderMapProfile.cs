@@ -10,14 +10,14 @@ namespace FTStore.Infra.Mappings.Profiles
         public OrderMapProfile()
         {
             MapOrderEntityToModel();
-            CreateMap<OrderItemEntity, OrderItemTable>();
+            CreateMap<OrderItem, OrderItemTable>();
             MapOrderModelToEntity();
-            CreateMap<OrderItemTable, OrderItemEntity>();
+            CreateMap<OrderItemTable, OrderItem>();
         }
 
         public void MapOrderEntityToModel()
         {
-            CreateMap<OrderEntity, OrderTable>()
+            CreateMap<Order, OrderTable>()
                 .ForMember(
                     orderModel => orderModel.Street,
                     opt => opt.MapFrom(orderEntity =>
@@ -52,7 +52,7 @@ namespace FTStore.Infra.Mappings.Profiles
 
         public void MapOrderModelToEntity()
         {
-            CreateMap<OrderTable, OrderEntity>()
+            CreateMap<OrderTable, Order>()
                 .ForPath(
                     orderEntity => orderEntity.DeliveryAddress,
                     opt => opt.MapFrom(orderModel =>

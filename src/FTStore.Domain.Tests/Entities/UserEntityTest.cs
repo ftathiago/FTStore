@@ -9,7 +9,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCreateUserEntity()
         {
-            var user = new UserEntity();
+            var user = new User();
 
             user.Should().NotBeNull();
         }

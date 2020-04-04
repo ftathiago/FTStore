@@ -36,9 +36,9 @@ namespace FTStore.App.Tests.Fixtures
             };
         }
 
-        public ProductEntity GetValidProductEntity(int id = ID)
+        public Product GetValidProductEntity(int id = ID)
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 NAME, DETAILS, PRICE, IMAGE_FILENAME);
             product.DefineId(ID);
             return product;

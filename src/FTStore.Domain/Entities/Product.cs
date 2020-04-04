@@ -3,14 +3,14 @@ using FTStore.Domain.Validations;
 
 namespace FTStore.Domain.Entities
 {
-    public class ProductEntity : Entity
+    public class Product : Entity
     {
         public string Name { get; protected set; }
         public string Details { get; protected set; }
         public decimal Price { get; protected set; }
         public string ImageFileName { get; protected set; }
 
-        public ProductEntity(string name, string details, decimal price, string imageFileName)
+        public Product(string name, string details, decimal price, string imageFileName)
         {
             Name = name;
             Details = details;

@@ -103,7 +103,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             InitializeDataBase(context);
             ContextFixture.InitializeWithOneOrder(context);
-            OrderEntity orderEntity = new OrderEntity(DateTime.Now, null, DateTime.Now, null, null);
+            Order orderEntity = new Order(DateTime.Now, null, DateTime.Now, null, null);
             orderEntity.DefineId(ID);
             var repository = new OrderRepository(context, MapperFixture.Mapper);
 

@@ -8,8 +8,8 @@ namespace FTStore.Infra.Mappings.Profiles
     {
         public UserMapProfile()
         {
-            CreateMap<UserEntity, UserTable>();
-            CreateMap<UserTable, UserEntity>();
+            CreateMap<User, UserTable>();
+            CreateMap<UserTable, User>();
         }
     }
 }

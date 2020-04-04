@@ -3,9 +3,9 @@ using FTStore.Domain.ValueObjects;
 
 namespace FTStore.Domain.Repository
 {
-    public interface IUserRepository : IBaseRepository<UserEntity>
+    public interface IUserRepository : IBaseRepository<User>
     {
-        UserEntity GetByEmail(string email);
-        UserEntity GetByCredentials(Credentials credentials);
+        User GetByEmail(string email);
+        User GetByCredentials(Credentials credentials);
     }
 }

@@ -35,7 +35,7 @@ namespace FTStore.App.Services.Impl
                 return null;
             }
 
-            ProductEntity productEntity = _productFactory.Convert(product);
+            Product productEntity = _productFactory.Convert(product);
 
             if (!productEntity.IsValid())
             {
@@ -50,7 +50,7 @@ namespace FTStore.App.Services.Impl
 
         public ProductRequest Update(ProductRequest product)
         {
-            ProductEntity productEntity = _productRepository.GetById(product.Id);
+            Product productEntity = _productRepository.GetById(product.Id);
             if (productEntity == null)
             {
                 AddErrorMessage($"The product [{product.Id} - {product.Name}] was not found");
@@ -125,7 +125,7 @@ namespace FTStore.App.Services.Impl
 
         public bool ReplaceProductImagem(int productId, Stream imageFile, string fileName)
         {
-            ProductEntity product = _productRepository.GetById(productId);
+            Product product = _productRepository.GetById(productId);
             if (product == null)
             {
                 AddErrorMessage($"Product {productId} not found");
@@ -154,14 +154,14 @@ namespace FTStore.App.Services.Impl
             return _productFileManager.Save(file, filename);
         }
 
-        private void DeletePreviousFileOf(ProductEntity product)
+        private void DeletePreviousFileOf(Product product)
         {
             var shouldDeletePreviousFile = !string.IsNullOrEmpty(product.ImageFileName);
             if (shouldDeletePreviousFile)
                 _productFileManager.Delete(product.ImageFileName);
         }
 
-        private void UpdateProductImageReference(ProductEntity product, string storedFileName)
+        private void UpdateProductImageReference(Product product, string storedFileName)
         {
             product.DefineImageFileName(storedFileName);
             _productRepository.Update(product);

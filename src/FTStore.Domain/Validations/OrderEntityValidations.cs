@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FTStore.Domain.Validations
 {
-    public class OrderEntityValidations : AbstractValidator<OrderEntity>
+    public class OrderEntityValidations : AbstractValidator<Order>
     {
         private const string USER_REQUIRED = "A customer is required";
         public OrderEntityValidations()

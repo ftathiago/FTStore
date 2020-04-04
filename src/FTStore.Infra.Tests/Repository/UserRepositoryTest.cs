@@ -32,7 +32,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
-            UserEntity user = new UserEntity()
+            User user = new User()
             {
                 Email = EXISTING_EMAIL,
                 IsAdmin = IS_ADMIN
@@ -50,7 +50,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
-            UserEntity user = new UserEntity()
+            User user = new User()
             {
                 Email = EXISTING_EMAIL,
                 IsAdmin = IS_ADMIN
@@ -71,7 +71,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
             AddAtRepository(context, ID);
-            UserEntity user = repository.GetById(ID);
+            User user = repository.GetById(ID);
             user.Email = NOT_EXISTING_EMAIL;
 
             repository.Update(user);
@@ -86,7 +86,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
             AddAtRepository(context, ID);
-            UserEntity user = new UserEntity();
+            User user = new User();
             user.DefineId(ID);
 
             repository.Remove(user);
@@ -101,7 +101,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
             AddAtRepository(context, ID);
-            var user = new UserEntity();
+            var user = new User();
             user.DefineId(ID);
 
             repository.Remove(user);
@@ -114,7 +114,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
-            UserEntity user = new UserEntity()
+            User user = new User()
             {
                 Email = EXISTING_EMAIL
             };
@@ -131,7 +131,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
-            UserEntity user = new UserEntity()
+            User user = new User()
             {
                 Email = EXISTING_EMAIL
             };
@@ -148,7 +148,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             using var repository = new UserRepository(context, MapperFixture.Mapper);
             var user = AddAtRepository(context);
-            var expectedUserEntity = MapperFixture.Mapper.Map<UserEntity>(user);
+            var expectedUserEntity = MapperFixture.Mapper.Map<User>(user);
             Credentials credentials = new Credentials(EXISTING_EMAIL, PASSWORD);
 
             var registeredUser = repository.GetByCredentials(credentials);
@@ -163,7 +163,7 @@ namespace FTStore.Infra.Tests.Repository
             using var repository = new UserRepository(context, MapperFixture.Mapper);
             var user = AddAtRepository(context);
             Credentials credentials = new Credentials(NOT_EXISTING_EMAIL, PASSWORD);
-            var expectedUserEntity = MapperFixture.Mapper.Map<UserEntity>(user);
+            var expectedUserEntity = MapperFixture.Mapper.Map<User>(user);
 
             var registeredUser = repository.GetByCredentials(credentials);
 

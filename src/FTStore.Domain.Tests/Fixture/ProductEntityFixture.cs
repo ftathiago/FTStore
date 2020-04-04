@@ -11,17 +11,17 @@ namespace FTStore.Domain.Tests.Fixture
         public const decimal INVALID_PRICE = 0;
         public const string IMAGE_FILENAME = "C:\\FILENAME.jpg";
 
-        public static ProductEntity GetValidProduct(int productId = 0)
+        public static Product GetValidProduct(int productId = 0)
         {
-            var product = new ProductEntity(TITLE, DESCRIPTION, PRICE,
+            var product = new Product(TITLE, DESCRIPTION, PRICE,
                 IMAGE_FILENAME);
             product.DefineId(productId);
             return product;
         }
 
-        public static ProductEntity GetInvalidProduct(int productId = 0)
+        public static Product GetInvalidProduct(int productId = 0)
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 TITLE,
                 INVALID_DESCRIPTION,
                 INVALID_PRICE,

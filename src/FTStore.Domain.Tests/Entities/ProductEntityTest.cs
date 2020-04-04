@@ -12,7 +12,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCreateAProduct()
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -25,7 +25,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldChangeTitle()
         {
             const string NEW_TITLE = "A new title";
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -40,7 +40,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldChangeDetails()
         {
             const string NEW_DETAILS = "A new detail";
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -55,7 +55,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldChangePrice()
         {
             const decimal NEW_PRICE = 666.66M;
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -70,7 +70,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ImageFileNameShouldBeSetted()
         {
             const string NEW_FILENAME = "\\DEFINE\\ANEW\\PATH";
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -84,7 +84,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldValidateEmptyTitle()
         {
-            var product = new ProductEntity(name: string.Empty,
+            var product = new Product(name: string.Empty,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
                 ProductEntityFixture.IMAGE_FILENAME);
@@ -99,7 +99,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldValidateEmptyTitleWithMessage()
         {
             const string EXPECTED_ERROR_MESSAGE = "The product's title is required";
-            var product = new ProductEntity(name: string.Empty,
+            var product = new Product(name: string.Empty,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.PRICE,
                 ProductEntityFixture.IMAGE_FILENAME);
@@ -113,7 +113,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void DescriptionShouldHave50CharAtLeast()
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.INVALID_DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -128,7 +128,7 @@ namespace FTStore.Domain.Tests.Entities
         public void DescriptionWithLessThan50CharHasMessage()
         {
             const string EXPECTED_ERROR_MESSAGE = "The product's description must have 50 characters at least";
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.INVALID_DESCRIPTION,
                 ProductEntityFixture.PRICE,
@@ -143,7 +143,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ProductPriceMustBeGreaterThanZero()
         {
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.INVALID_PRICE,
@@ -158,7 +158,7 @@ namespace FTStore.Domain.Tests.Entities
         public void PriceMustBeGreaterThanZero()
         {
             const string EXPECTED_ERROR_MESSAGE = "The product's prices must be greater than zero";
-            var product = new ProductEntity(
+            var product = new Product(
                 ProductEntityFixture.TITLE,
                 ProductEntityFixture.DESCRIPTION,
                 ProductEntityFixture.INVALID_PRICE,

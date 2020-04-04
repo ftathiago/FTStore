@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace FTStore.Infra.Repository
 {
-    public class ProductRepository : BaseRepository<ProductEntity, ProductTable>, IProductRepository
+    public class ProductRepository : BaseRepository<Product, ProductTable>, IProductRepository
     {
         public ProductRepository(FTStoreDbContext FTStoreContexto, IMapper mapper)
             : base(FTStoreContexto, mapper) { }

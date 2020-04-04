@@ -8,20 +8,20 @@ using AutoMapper;
 
 namespace FTStore.Infra.Repository
 {
-    public class UserRepository : BaseRepository<UserEntity, UserTable>, IUserRepository
+    public class UserRepository : BaseRepository<User, UserTable>, IUserRepository
     {
         public UserRepository(FTStoreDbContext ftStoreContext, IMapper mapper)
             : base(ftStoreContext, mapper) { }
 
-        public UserEntity GetByEmail(string email)
+        public User GetByEmail(string email)
         {
             var data = DbSet.FirstOrDefault(u => u.Email == email);
             if (data == null)
                 return null;
-            return _mapper.Map<UserEntity>(data);
+            return _mapper.Map<User>(data);
         }
 
-        public UserEntity GetByCredentials(Credentials credentials)
+        public User GetByCredentials(Credentials credentials)
         {
             var hash = credentials.Hash();
             var salt = credentials.Salt();
@@ -33,7 +33,7 @@ namespace FTStore.Infra.Repository
             if (data == null)
                 return null;
 
-            return _mapper.Map<UserEntity>(data);
+            return _mapper.Map<User>(data);
         }
     }
 }

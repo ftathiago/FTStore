@@ -42,7 +42,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new ProductRepository(context, MapperFixture.Mapper);
-            var product = new ProductEntity(PRODUCT_NAME, DETAILS, PRICE, IMAGE_FILENAME);
+            var product = new Product(PRODUCT_NAME, DETAILS, PRICE, IMAGE_FILENAME);
 
             repository.Register(product);
 
@@ -54,7 +54,7 @@ namespace FTStore.Infra.Tests.Repository
         {
             using var context = ContextFixture.Ctx;
             using var repository = new ProductRepository(context, MapperFixture.Mapper);
-            var product = new ProductEntity(PRODUCT_NAME, DETAILS, PRICE, IMAGE_FILENAME);
+            var product = new Product(PRODUCT_NAME, DETAILS, PRICE, IMAGE_FILENAME);
             repository.Register(product);
 
             var productRecovered = context.Products.FirstOrDefault();
@@ -89,7 +89,7 @@ namespace FTStore.Infra.Tests.Repository
             using var context = ContextFixture.Ctx;
             using var repository = new ProductRepository(context, MapperFixture.Mapper);
             AddAtRepository(context, PRODUCT_ID);
-            ProductEntity product = new ProductEntity(PRODUCT_NAME, DETAILS,
+            Product product = new Product(PRODUCT_NAME, DETAILS,
                 PRICE, IMAGE_FILENAME);
             product.DefineId(PRODUCT_ID);
 

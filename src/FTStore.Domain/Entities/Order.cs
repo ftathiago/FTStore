@@ -7,21 +7,21 @@ using FTStore.Domain.ValueObjects;
 
 namespace FTStore.Domain.Entities
 {
-    public class OrderEntity : Entity
+    public class Order : Entity
     {
         public DateTime OrderDate { get; protected set; }
-        public virtual CustomerEntity Customer { get; protected set; }
+        public virtual Customer Customer { get; protected set; }
         public DateTime DeliveryForecast { get; protected set; }
 
         public Address DeliveryAddress { get; protected set; }
         public virtual PaymentMethod PaymentMethod { get; protected set; }
-        public virtual ICollection<OrderItemEntity> OrderItems { get; protected set; }
+        public virtual ICollection<OrderItem> OrderItems { get; protected set; }
 
-        protected OrderEntity() : base()
+        protected Order() : base()
         {
-            OrderItems = new List<OrderItemEntity>();
+            OrderItems = new List<OrderItem>();
         }
-        public OrderEntity(DateTime orderDate, CustomerEntity customer, DateTime deliveryForecast,
+        public Order(DateTime orderDate, Customer customer, DateTime deliveryForecast,
             Address deliveryAddress, PaymentMethod paymentMethod)
             : this()
         {
@@ -38,7 +38,7 @@ namespace FTStore.Domain.Entities
             return _validationResult.IsValid;
         }
 
-        public void AddItem(OrderItemEntity orderItem)
+        public void AddItem(OrderItem orderItem)
         {
             OrderItems.Add(orderItem);
         }

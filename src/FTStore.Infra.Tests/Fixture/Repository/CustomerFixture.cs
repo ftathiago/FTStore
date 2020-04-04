@@ -18,9 +18,9 @@ namespace FTStore.App.Tests.Fixture.Repository
             return customer;
         }
 
-        public CustomerEntity GetValidEntity(int id = ID)
+        public Customer GetValidEntity(int id = ID)
         {
-            var customer = new CustomerEntity(NAME, SURNAME);
+            var customer = new Customer(NAME, SURNAME);
             customer.DefineId(id);
             return customer;
         }

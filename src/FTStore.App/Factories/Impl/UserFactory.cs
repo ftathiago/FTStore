@@ -5,11 +5,11 @@ namespace FTStore.App.Factories.Impl
 {
     public class UserFactory : IUserFactory
     {
-        public UserEntity Convert(UserRequest user)
+        public User Convert(UserRequest user)
         {
             if (user == null)
                 return null;
-            var userEntity = new UserEntity
+            var userEntity = new User
             {
                 Email = user.Email,
                 IsAdmin = user.IsAdmin,

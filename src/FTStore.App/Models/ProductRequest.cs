@@ -10,7 +10,7 @@ namespace FTStore.App.Models
         public decimal Price { get; set; }
         public string imageFileName { get; set; }
 
-        public static explicit operator ProductRequest(ProductEntity productEntity)
+        public static explicit operator ProductRequest(Product productEntity)
         {
             if (productEntity == null)
                 return null;

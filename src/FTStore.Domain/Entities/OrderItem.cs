@@ -3,10 +3,10 @@ using FTStore.Domain.Validations;
 
 namespace FTStore.Domain.Entities
 {
-    public class OrderItemEntity : Entity
+    public class OrderItem : Entity
     {
         public int ProductId { get; protected set; }
-        public virtual ProductEntity Product { get; protected set; }
+        public virtual Product Product { get; protected set; }
         public string Title { get; private set; }
         public decimal Price { get; private set; }
         public decimal Quantity { get; protected set; }
@@ -16,8 +16,8 @@ namespace FTStore.Domain.Entities
             get => (Price * Quantity) - Discount;
         }
 
-        public OrderItemEntity() : base() { }
-        public OrderItemEntity(ProductEntity product, decimal quantity,
+        public OrderItem() : base() { }
+        public OrderItem(Product product, decimal quantity,
             decimal discount) : base()
         {
             CopyProductsData(product);
@@ -25,7 +25,7 @@ namespace FTStore.Domain.Entities
             Discount = discount;
         }
 
-        private void CopyProductsData(ProductEntity product)
+        private void CopyProductsData(Product product)
         {
             if (product == null)
                 return;

@@ -15,7 +15,7 @@ namespace FTStore.Domain.Tests.Entities
     {
 
         private readonly DateTime OrderDate;
-        private readonly CustomerEntity Customer;
+        private readonly Customer Customer;
         private readonly DateTime DeliveryForecast;
         private readonly Address DeliveryAddress;
         private readonly PaymentMethod PaymentMethod;
@@ -26,7 +26,7 @@ namespace FTStore.Domain.Tests.Entities
             OrderDate = DateTime.Now;
             DeliveryForecast = OrderDate.AddDays(10);
 
-            Customer = new CustomerEntity("Name", "Surname");
+            Customer = new Customer("Name", "Surname");
             Customer.DefineId(1);
 
             DeliveryAddress = new Address(
@@ -45,7 +45,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCreateOrder()
         {
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast, DeliveryAddress,
+            var order = new Order(OrderDate, Customer, DeliveryForecast, DeliveryAddress,
                 PaymentMethod);
 
             order.Should().NotBeNull();
@@ -59,7 +59,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenDoesNotHaveOrderItems()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Order must have one item at least";
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -73,7 +73,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenOrderDoesNotHaveDeliveryAddress()
         {
             const string EXPECTED_ERROR_MESSAGE = "Delivery address is required";
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 deliveryAddress: null, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -87,7 +87,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenPaymentMethodIsNull()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Payment method must be specified";
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, null);
 
             var isValid = order.IsValid();
@@ -101,7 +101,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenCustomerIsNull()
         {
             const string EXPECTED_ERROR_MESSAGE = "Customer is required";
-            var order = new OrderEntity(OrderDate, customer: null, DeliveryForecast,
+            var order = new Order(OrderDate, customer: null, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -117,7 +117,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCanAddOrderItem()
         {
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
             var orderItem = OrderItemEntityFixture.GetValidOrderItem();
 
@@ -129,7 +129,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldBeInvalidWhenOrderItemIsInvalid()
         {
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
             var orderItem = OrderItemEntityFixture.GetInvalidOrderItem();
             order.AddItem(orderItem);
@@ -142,7 +142,7 @@ namespace FTStore.Domain.Tests.Entities
         [Fact]
         public void ShouldCalculateTotalItems()
         {
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, PaymentMethod);
             var orderItem1 = OrderItemEntityFixture.GetValidOrderItem(1);
             var orderItem2 = OrderItemEntityFixture.GetValidOrderItem(2);
@@ -164,7 +164,7 @@ namespace FTStore.Domain.Tests.Entities
         {
             const string EXPECTED_ERROR_MESSAGE = "It is impossible to deliver before the ordering";
             var invalidDeliveryForecast = OrderDate.AddDays(-1);
-            var order = new OrderEntity(OrderDate, Customer, invalidDeliveryForecast,
+            var order = new Order(OrderDate, Customer, invalidDeliveryForecast,
                 DeliveryAddress, PaymentMethod);
 
             var isValid = order.IsValid();
@@ -178,7 +178,7 @@ namespace FTStore.Domain.Tests.Entities
         public void ShouldBeInvalidWhenPaymentMethodIsUnknow()
         {
             const string EXPECTED_ERROR_MESSAGE = "A Payment method must be specified";
-            var order = new OrderEntity(OrderDate, Customer, DeliveryForecast,
+            var order = new Order(OrderDate, Customer, DeliveryForecast,
                 DeliveryAddress, InvalidPaymentMethod);
 
             var isValid = order.IsValid();

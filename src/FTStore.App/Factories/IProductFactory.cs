@@ -5,6 +5,6 @@ namespace FTStore.App.Factories
 {
     public interface IProductFactory
     {
-        ProductEntity Convert(ProductRequest product);
+        Product Convert(ProductRequest product);
     }
 }

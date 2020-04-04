@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FTStore.Infra.Repository
 {
-    public class OrderRepository : BaseRepository<OrderEntity, OrderTable>, IOrderRepository
+    public class OrderRepository : BaseRepository<Order, OrderTable>, IOrderRepository
     {
         public OrderRepository(FTStoreDbContext FTStoreContexto, IMapper mapper)
             : base(FTStoreContexto, mapper)
