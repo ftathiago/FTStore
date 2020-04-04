@@ -34,7 +34,7 @@ namespace FTStore.Web
             var connectionString = Configuration.GetConnectionString("FTStoreDB");
 
             services
-                .AddDatabaseDependencies(connectionString)
+                .AddMySQLDB(connectionString)
                 .AddRepositories()
                 .AddFTStoreResources(_webHostEnvironment.WebRootPath)
                 .AddAppDependencies();

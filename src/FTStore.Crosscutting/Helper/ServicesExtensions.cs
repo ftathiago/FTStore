@@ -27,18 +27,6 @@ namespace FTStore.Crosscutting.Helper
             return services;
         }
 
-        public static IServiceCollection AddDatabaseDependencies(this IServiceCollection services, string connectionString)
-        {
-            services.AddDbContext<FTStoreDbContext>(options =>
-                options
-                    .UseLazyLoadingProxies()
-                    .UseMySql(connectionString, m =>
-                        m.MigrationsAssembly("FTStore.Infra")
-                )
-            );
-            return services;
-        }
-
         public static IServiceCollection AddAppDependencies(this IServiceCollection services)
         {
             services.AddScoped<IProductService, ProductService>();
