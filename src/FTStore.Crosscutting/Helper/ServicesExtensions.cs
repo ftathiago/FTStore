@@ -1,14 +1,19 @@
+using System;
+
 using Microsoft.Extensions.DependencyInjection;
-using FTStore.Domain.Repository;
-using FTStore.Infra.Repository;
-using FTStore.Infra.Resource;
-using FTStore.App.Repositories;
-using FTStore.Infra.Context;
-using Microsoft.EntityFrameworkCore;
-using FTStore.App.Services;
-using FTStore.App.Services.Impl;
+
+using AutoMapper;
+
 using FTStore.App.Factories;
 using FTStore.App.Factories.Impl;
+using FTStore.App.Repositories;
+using FTStore.App.Services;
+using FTStore.App.Services.Impl;
+using FTStore.Domain.Repository;
+using FTStore.Infra.Mappings.Profiles;
+using FTStore.Infra.Repository;
+using FTStore.Infra.Resource;
+
 
 namespace FTStore.Crosscutting.Helper
 {
@@ -33,6 +38,19 @@ namespace FTStore.Crosscutting.Helper
             services.AddTransient<IProductFactory, ProductFactory>();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IUserFactory, UserFactory>();
+            return services;
+        }
+
+        public static IServiceCollection AddMapper(this IServiceCollection services, Type type)
+        {
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<UserMapProfile>();
+                cfg.AddProfile<ProductMapProfile>();
+                cfg.AddProfile<OrderMapProfile>();
+                cfg.AddProfile<CustomerMapProfile>();
+                cfg.AddProfile<PaymentMethodMapProfile>();
+            }, type);
             return services;
         }
     }
