@@ -27,19 +27,19 @@ namespace FTStore.Infra.Mappings
             builder.HasData(
                 new PaymentMethodTable()
                 {
-                    Id = (int)PaymentMethodEnum.PaymentSlip,
+                    Id = (int)PaymentMethodsSupported.PaymentSlip,
                     Name = "Boleto",
                     Description = "Forma de pagamento Boleto"
                 },
                 new PaymentMethodTable()
                 {
-                    Id = (int)PaymentMethodEnum.CreditCard,
+                    Id = (int)PaymentMethodsSupported.CreditCard,
                     Name = "Cartão de Crédito",
                     Description = "Forma de pagamento Cartão de Crédito"
                 },
                 new PaymentMethodTable()
                 {
-                    Id = (int)PaymentMethodEnum.Deposit,
+                    Id = (int)PaymentMethodsSupported.Deposit,
                     Name = "Depósito",
                     Description = "Forma de pagamento Depósito"
                 }

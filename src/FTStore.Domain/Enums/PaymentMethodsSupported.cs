@@ -1,6 +1,6 @@
 namespace FTStore.Domain.Enum
 {
-    public enum PaymentMethodEnum
+    public enum PaymentMethodsSupported
     {
         Unknow = 0,
         PaymentSlip = 1,

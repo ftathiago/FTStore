@@ -9,29 +9,29 @@ namespace FTStore.Domain.ValueObjects
         public string Description { get; set; }
 
         protected PaymentMethod() { }
-        public PaymentMethod(PaymentMethodEnum paymentMethod)
+        public PaymentMethod(PaymentMethodsSupported paymentMethod)
         {
             this.Id = (int)paymentMethod;
         }
 
         public bool IsPaymentSlip
         {
-            get { return Id == (int)PaymentMethodEnum.PaymentSlip; }
+            get { return Id == (int)PaymentMethodsSupported.PaymentSlip; }
         }
 
         public bool IsCreditCard
         {
-            get { return Id == (int)PaymentMethodEnum.CreditCard; }
+            get { return Id == (int)PaymentMethodsSupported.CreditCard; }
         }
 
         public bool IsDeposit
         {
-            get { return Id == (int)PaymentMethodEnum.Deposit; }
+            get { return Id == (int)PaymentMethodsSupported.Deposit; }
         }
 
         public bool IsUnknow
         {
-            get { return Id == (int)PaymentMethodEnum.Unknow; }
+            get { return Id == (int)PaymentMethodsSupported.Unknow; }
         }
     }
 }

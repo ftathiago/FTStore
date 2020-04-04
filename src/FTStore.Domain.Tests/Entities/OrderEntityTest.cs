@@ -36,8 +36,8 @@ namespace FTStore.Domain.Tests.Entities
                 "city",
                 "state",
                 zipCode: "00000000");
-            PaymentMethod = new PaymentMethod(PaymentMethodEnum.CreditCard);
-            InvalidPaymentMethod = new PaymentMethod(PaymentMethodEnum.Unknow);
+            PaymentMethod = new PaymentMethod(PaymentMethodsSupported.CreditCard);
+            InvalidPaymentMethod = new PaymentMethod(PaymentMethodsSupported.Unknow);
         }
 
         #region Creating Test

@@ -18,7 +18,7 @@ namespace FTStore.App.Tests.Fixture.Repository
 
         public static PaymentMethod GetValidVO()
         {
-            return new PaymentMethod(PaymentMethodEnum.CreditCard);
+            return new PaymentMethod(PaymentMethodsSupported.CreditCard);
         }
     }
 }
