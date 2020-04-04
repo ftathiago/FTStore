@@ -120,14 +120,14 @@ namespace FTStore.Infra.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<decimal>(nullable: false),
                     Discount = table.Column<decimal>(nullable: false),
-                    OrderModelId = table.Column<int>(nullable: true)
+                    OrderTableId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_orderitem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_orderitem_order_OrderModelId",
-                        column: x => x.OrderModelId,
+                        name: "FK_orderitem_order_OrderTableId",
+                        column: x => x.OrderTableId,
                         principalTable: "order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -159,9 +159,9 @@ namespace FTStore.Infra.Migrations
                 column: "PaymentMethodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderitem_OrderModelId",
+                name: "IX_orderitem_OrderTableId",
                 table: "orderitem",
-                column: "OrderModelId");
+                column: "OrderTableId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_user_CustomerId",

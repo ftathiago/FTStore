@@ -1,6 +1,6 @@
 using AutoMapper;
 using FTStore.Domain.Entities;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Mappings.Profiles
 {
@@ -8,8 +8,8 @@ namespace FTStore.Infra.Mappings.Profiles
     {
         public CustomerMapProfile()
         {
-            CreateMap<CustomerEntity, CustomerModel>();
-            CreateMap<CustomerModel, CustomerEntity>();
+            CreateMap<CustomerEntity, CustomerTable>();
+            CreateMap<CustomerTable, CustomerEntity>();
         }
     }
 }

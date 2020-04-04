@@ -2,7 +2,7 @@ using System.Linq;
 using FluentAssertions;
 using FTStore.Domain.Entities;
 using FTStore.Infra.Context;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using FTStore.Infra.Repository;
 using FTStore.Infra.Tests.Fixture;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace FTStore.Infra.Tests.Repository
 {
-    public class ProductRepositoryTest : BaseRepositoryTest<ProductModel>
+    public class ProductRepositoryTest : BaseRepositoryTest<ProductTable>
     {
         private const int PRODUCT_ID = 1;
         private const string PRODUCT_NAME = "A product name";
@@ -24,9 +24,9 @@ namespace FTStore.Infra.Tests.Repository
 
         #region CRUD Operations
 
-        protected override ProductModel GetModelPrototype(int id = 0)
+        protected override ProductTable GetModelPrototype(int id = 0)
         {
-            var product = new ProductModel
+            var product = new ProductTable
             {
                 Id = id,
                 Name = PRODUCT_NAME,

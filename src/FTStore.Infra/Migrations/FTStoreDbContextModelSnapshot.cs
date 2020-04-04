@@ -17,7 +17,7 @@ namespace FTStore.Infra.Migrations
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("FTStore.Infra.Model.CustomerModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.CustomerTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("customer");
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.OrderItemModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.OrderItemTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace FTStore.Infra.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int?>("OrderModelId")
+                    b.Property<int?>("OrderTableId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -65,12 +65,12 @@ namespace FTStore.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderModelId");
+                    b.HasIndex("OrderTableId");
 
                     b.ToTable("orderitem");
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.OrderModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.OrderTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("order");
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.PaymentMethodModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.PaymentMethodTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,7 +168,7 @@ namespace FTStore.Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.ProductModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.ProductTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +195,7 @@ namespace FTStore.Infra.Migrations
                     b.ToTable("product");
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.UserModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.UserTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,31 +240,31 @@ namespace FTStore.Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.OrderItemModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.OrderItemTable", b =>
                 {
-                    b.HasOne("FTStore.Infra.Model.OrderModel", null)
+                    b.HasOne("FTStore.Infra.Table.OrderTable", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderModelId");
+                        .HasForeignKey("OrderTableId");
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.OrderModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.OrderTable", b =>
                 {
-                    b.HasOne("FTStore.Infra.Model.CustomerModel", "Customer")
+                    b.HasOne("FTStore.Infra.Table.CustomerTable", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FTStore.Infra.Model.PaymentMethodModel", "PaymentMethod")
+                    b.HasOne("FTStore.Infra.Table.PaymentMethodTable", "PaymentMethod")
                         .WithMany()
                         .HasForeignKey("PaymentMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FTStore.Infra.Model.UserModel", b =>
+            modelBuilder.Entity("FTStore.Infra.Table.UserTable", b =>
                 {
-                    b.HasOne("FTStore.Infra.Model.CustomerModel", "Customer")
+                    b.HasOne("FTStore.Infra.Table.CustomerTable", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
                 });

@@ -1,6 +1,6 @@
-namespace FTStore.Infra.Model
+namespace FTStore.Infra.Table
 {
-    public class OrderItemModel
+    public class OrderItemTable
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

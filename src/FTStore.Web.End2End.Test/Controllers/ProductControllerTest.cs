@@ -11,7 +11,7 @@ using FTStore.App.Models;
 using FTStore.App.Services;
 using FTStore.Web.End2End.Test.Fixtures;
 using FTStore.Infra.Context;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using FTStore.Web.Controllers;
 
 using Xunit;

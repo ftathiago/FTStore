@@ -1,6 +1,6 @@
 using AutoMapper;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Mappings.Profiles
 {
@@ -8,8 +8,8 @@ namespace FTStore.Infra.Mappings.Profiles
     {
         public PaymentMethodMapProfile()
         {
-            CreateMap<PaymentMethod, PaymentMethodModel>();
-            CreateMap<PaymentMethodModel, PaymentMethod>();
+            CreateMap<PaymentMethod, PaymentMethodTable>();
+            CreateMap<PaymentMethodTable, PaymentMethod>();
         }
     }
 }

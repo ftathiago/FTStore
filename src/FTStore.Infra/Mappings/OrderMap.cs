@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Mappings
 {
-    public class OrderMap : IEntityTypeConfiguration<OrderModel>
+    public class OrderMap : IEntityTypeConfiguration<OrderTable>
     {
-        public void Configure(EntityTypeBuilder<OrderModel> builder)
+        public void Configure(EntityTypeBuilder<OrderTable> builder)
         {
             builder.ToTable("order");
 

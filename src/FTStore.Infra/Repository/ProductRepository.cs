@@ -1,12 +1,12 @@
 using FTStore.Domain.Repository;
 using FTStore.Domain.Entities;
 using FTStore.Infra.Context;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using AutoMapper;
 
 namespace FTStore.Infra.Repository
 {
-    public class ProductRepository : BaseRepository<ProductEntity, ProductModel>, IProductRepository
+    public class ProductRepository : BaseRepository<ProductEntity, ProductTable>, IProductRepository
     {
         public ProductRepository(FTStoreDbContext FTStoreContexto, IMapper mapper)
             : base(FTStoreContexto, mapper) { }

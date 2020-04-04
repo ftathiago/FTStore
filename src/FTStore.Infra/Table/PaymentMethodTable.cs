@@ -1,6 +1,6 @@
-namespace FTStore.Infra.Model
+namespace FTStore.Infra.Table
 {
-    public class PaymentMethodModel
+    public class PaymentMethodTable
     {
         public int Id { get; set; }
         public string Name { get; set; }

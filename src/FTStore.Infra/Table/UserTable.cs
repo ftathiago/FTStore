@@ -1,6 +1,6 @@
-namespace FTStore.Infra.Model
+namespace FTStore.Infra.Table
 {
-    public class UserModel
+    public class UserTable
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -8,6 +8,6 @@ namespace FTStore.Infra.Model
         public byte[] Salt { get; set; }
         public bool IsAdmin { get; set; }
         public int? CustomerId { get; set; }
-        public virtual CustomerModel Customer { get; set; }
+        public virtual CustomerTable Customer { get; set; }
     }
 }

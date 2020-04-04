@@ -1,5 +1,5 @@
 using FTStore.Domain.Entities;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.App.Tests.Fixture.Repository
 {
@@ -8,9 +8,9 @@ namespace FTStore.App.Tests.Fixture.Repository
         public const int ID = 1;
         public const string NAME = "Customer name";
         public const string SURNAME = "Surname";
-        public CustomerModel GetValid(int id = ID)
+        public CustomerTable GetValid(int id = ID)
         {
-            var customer = new CustomerModel();
+            var customer = new CustomerTable();
             customer.Id = id;
             customer.Name = NAME;
             customer.Surname = SURNAME;

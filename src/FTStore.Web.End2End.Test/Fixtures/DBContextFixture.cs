@@ -1,19 +1,19 @@
 using FTStore.Infra.Context;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Web.End2End.Test.Fixtures
 {
     public class DBContextFixture
     {
-        public void InsertAProduct(FTStoreDbContext context, ProductModel product)
+        public void InsertAProduct(FTStoreDbContext context, ProductTable product)
         {
             context.Products.Add(product);
             context.SaveChanges();
         }
 
-        public ProductModel GetValidProduct(int id = 0)
+        public ProductTable GetValidProduct(int id = 0)
         {
-            var product = new ProductModel
+            var product = new ProductTable
             {
                 Name = "A product title",
                 Details = "A large and valid details with more than fifty characters",
@@ -27,9 +27,9 @@ namespace FTStore.Web.End2End.Test.Fixtures
             return product;
         }
 
-        public ProductModel GetInvalidProduct(int id = 0)
+        public ProductTable GetInvalidProduct(int id = 0)
         {
-            var product = new ProductModel
+            var product = new ProductTable
             {
                 Name = "A product title",
                 Details = "tinny details",

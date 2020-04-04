@@ -1,7 +1,7 @@
 using System;
 using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.App.Tests.Fixture.Repository
 {
@@ -22,10 +22,10 @@ namespace FTStore.App.Tests.Fixture.Repository
             DeliveryForecast = OrderDate.AddDays(10);
         }
 
-        public OrderModel GetValid(CustomerModel customer, ProductModel product, PaymentMethodModel paymentMethod)
+        public OrderTable GetValid(CustomerTable customer, ProductTable product, PaymentMethodTable paymentMethod)
         {
             var address = Address;
-            var order = new OrderModel
+            var order = new OrderTable
             {
                 Id = ID,
                 OrderDate = this.OrderDate,
@@ -42,7 +42,7 @@ namespace FTStore.App.Tests.Fixture.Repository
                 PaymentMethod = paymentMethod,
             };
             order.OrderItems.Add(
-                new OrderItemModel
+                new OrderItemTable
                 {
                     Id = ID,
                     ProductId = product.Id,

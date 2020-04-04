@@ -3,12 +3,12 @@ using FTStore.Domain.Entities;
 using FTStore.Infra.Context;
 using System.Linq;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using AutoMapper;
 
 namespace FTStore.Infra.Repository
 {
-    public class UserRepository : BaseRepository<UserEntity, UserModel>, IUserRepository
+    public class UserRepository : BaseRepository<UserEntity, UserTable>, IUserRepository
     {
         public UserRepository(FTStoreDbContext ftStoreContext, IMapper mapper)
             : base(ftStoreContext, mapper) { }

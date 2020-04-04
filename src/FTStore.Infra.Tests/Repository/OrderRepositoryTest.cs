@@ -5,7 +5,7 @@ using FTStore.Domain.Entities;
 using FTStore.Domain.Enum;
 using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Context;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using FTStore.Infra.Repository;
 using FTStore.Infra.Tests.Fixture;
 using FTStore.App.Tests.Fixture.Repository;
@@ -13,7 +13,7 @@ using Xunit;
 
 namespace FTStore.Infra.Tests.Repository
 {
-    public class OrderRepositoryTest : BaseRepositoryTest<OrderModel>,
+    public class OrderRepositoryTest : BaseRepositoryTest<OrderTable>,
         IClassFixture<ProductFixture>, IClassFixture<CustomerFixture>,
         IClassFixture<OrderFixture>
     {
@@ -112,7 +112,7 @@ namespace FTStore.Infra.Tests.Repository
             context.Orders.Should().BeEmpty();
         }
 
-        protected override OrderModel GetModelPrototype(int id = 0)
+        protected override OrderTable GetModelPrototype(int id = 0)
         {
             var product = new ProductFixture().GetValid();
             var customer = new CustomerFixture().GetValid();

@@ -1,12 +1,12 @@
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FTStore.Infra.Mappings
 {
-    public class CustomerMap : IEntityTypeConfiguration<CustomerModel>
+    public class CustomerMap : IEntityTypeConfiguration<CustomerTable>
     {
-        public void Configure(EntityTypeBuilder<CustomerModel> builder)
+        public void Configure(EntityTypeBuilder<CustomerTable> builder)
         {
             builder
                 .ToTable("customer");

@@ -1,5 +1,5 @@
 using FTStore.Domain.Entities;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.App.Tests.Fixture.Repository
 {
@@ -10,9 +10,9 @@ namespace FTStore.App.Tests.Fixture.Repository
         public const string DETAILS = "A large product details with more than 50 characters";
         public const string IMAGE_FILENAME = "\\\\THE\\PATH";
         public const decimal PRICE = 10;
-        public ProductModel GetValid(int id = ID)
+        public ProductTable GetValid(int id = ID)
         {
-            var product = new ProductModel
+            var product = new ProductTable
             {
                 Id = id,
                 Name = NAME,

@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace FTStore.Infra.Model
+namespace FTStore.Infra.Table
 {
-    public class OrderModel
+    public class OrderTable
     {
-        public OrderModel()
+        public OrderTable()
         {
-            OrderItems = new List<OrderItemModel>();
+            OrderItems = new List<OrderItemTable>();
         }
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public int CustomerId { get; set; }
-        public virtual CustomerModel Customer { get; set; }
+        public virtual CustomerTable Customer { get; set; }
         public DateTime DeliveryForecast { get; set; }
 
         public string Street { get; set; }
@@ -22,7 +22,7 @@ namespace FTStore.Infra.Model
         public string State { get; set; }
         public string ZIPCode { get; set; }
         public int PaymentMethodId { get; set; }
-        public virtual PaymentMethodModel PaymentMethod { get; set; }
-        public virtual ICollection<OrderItemModel> OrderItems { get; protected set; }
+        public virtual PaymentMethodTable PaymentMethod { get; set; }
+        public virtual ICollection<OrderItemTable> OrderItems { get; protected set; }
     }
 }

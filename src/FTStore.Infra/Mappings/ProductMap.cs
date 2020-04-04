@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Mappings
 {
-    public class ProductMap : IEntityTypeConfiguration<ProductModel>
+    public class ProductMap : IEntityTypeConfiguration<ProductTable>
     {
         public const int TITLE_SIZE = 200;
-        public void Configure(EntityTypeBuilder<ProductModel> builder)
+        public void Configure(EntityTypeBuilder<ProductTable> builder)
         {
             builder.ToTable("product");
 

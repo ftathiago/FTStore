@@ -4,7 +4,7 @@ using FTStore.Infra.Tests.Fixture;
 using FluentAssertions;
 using Xunit;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 using System.Text;
 using FTStore.Infra.Context;
 using System.Linq;
@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FTStore.Infra.Tests.Repository
 {
-    public class UserRepositoryTest : BaseRepositoryTest<UserModel>
+    public class UserRepositoryTest : BaseRepositoryTest<UserTable>
     {
         private const int ID = 1;
         private const string EXISTING_EMAIL = "admin@admin.com";
@@ -183,10 +183,10 @@ namespace FTStore.Infra.Tests.Repository
             registeredUser.Should().Be(null);
         }
 
-        protected override UserModel GetModelPrototype(int id = 0)
+        protected override UserTable GetModelPrototype(int id = 0)
         {
             var credentials = new Credentials(EXISTING_EMAIL, PASSWORD);
-            var user = new UserModel
+            var user = new UserTable
             {
                 Id = id,
                 Email = EXISTING_EMAIL,

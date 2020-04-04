@@ -1,7 +1,7 @@
 using AutoMapper;
 using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Mappings.Profiles
 {
@@ -10,14 +10,14 @@ namespace FTStore.Infra.Mappings.Profiles
         public OrderMapProfile()
         {
             MapOrderEntityToModel();
-            CreateMap<OrderItemEntity, OrderItemModel>();
+            CreateMap<OrderItemEntity, OrderItemTable>();
             MapOrderModelToEntity();
-            CreateMap<OrderItemModel, OrderItemEntity>();
+            CreateMap<OrderItemTable, OrderItemEntity>();
         }
 
         public void MapOrderEntityToModel()
         {
-            CreateMap<OrderEntity, OrderModel>()
+            CreateMap<OrderEntity, OrderTable>()
                 .ForMember(
                     orderModel => orderModel.Street,
                     opt => opt.MapFrom(orderEntity =>
@@ -52,7 +52,7 @@ namespace FTStore.Infra.Mappings.Profiles
 
         public void MapOrderModelToEntity()
         {
-            CreateMap<OrderModel, OrderEntity>()
+            CreateMap<OrderTable, OrderEntity>()
                 .ForPath(
                     orderEntity => orderEntity.DeliveryAddress,
                     opt => opt.MapFrom(orderModel =>

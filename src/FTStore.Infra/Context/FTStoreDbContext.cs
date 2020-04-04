@@ -2,18 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using FTStore.Infra.Mappings;
-using FTStore.Infra.Model;
+using FTStore.Infra.Table;
 
 namespace FTStore.Infra.Context
 {
     public class FTStoreDbContext : DbContext
     {
 
-        public DbSet<ProductModel> Products { get; set; }
-        public DbSet<OrderModel> Orders { get; set; }
-        public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
-        public DbSet<CustomerModel> Customers { get; set; }
-        public DbSet<UserModel> Users { get; set; }
+        public DbSet<ProductTable> Products { get; set; }
+        public DbSet<OrderTable> Orders { get; set; }
+        public DbSet<PaymentMethodTable> PaymentMethod { get; set; }
+        public DbSet<CustomerTable> Customers { get; set; }
+        public DbSet<UserTable> Users { get; set; }
 
         private readonly IHostEnvironment _env;
 
