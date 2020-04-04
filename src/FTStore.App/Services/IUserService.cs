@@ -4,7 +4,7 @@ namespace FTStore.App.Services
 {
     public interface IUserService : IServiceBase
     {
-        User Save(User user);
-        User Authenticate(string email, string password);
+        UserRequest Save(UserRequest user);
+        UserRequest Authenticate(string email, string password);
     }
 }

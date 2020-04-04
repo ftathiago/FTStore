@@ -5,7 +5,7 @@ namespace FTStore.App.Factories.Impl
 {
     public class UserFactory : IUserFactory
     {
-        public UserEntity Convert(User user)
+        public UserEntity Convert(UserRequest user)
         {
             if (user == null)
                 return null;

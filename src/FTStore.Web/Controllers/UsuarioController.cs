@@ -16,7 +16,7 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody]User usuario)
+        public ActionResult Post([FromBody]UserRequest usuario)
         {
             var novoUsuario = _usuarioService.Save(usuario);
             if (novoUsuario == null)
@@ -38,7 +38,7 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpPost("VerificarUsuario")]
-        public ActionResult VerificarUsuario([FromBody]User usuario)
+        public ActionResult VerificarUsuario([FromBody]UserRequest usuario)
         {
             var usuarioAutenticado = _usuarioService.Authenticate(usuario.Email, usuario.Password);
             if (usuarioAutenticado == null)

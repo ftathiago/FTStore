@@ -20,7 +20,7 @@ namespace FTStore.App.Services.Impl
             _userFactory = userFactory;
         }
 
-        public User Save(User user)
+        public UserRequest Save(UserRequest user)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace FTStore.App.Services.Impl
             }
         }
 
-        public User Authenticate(string email, string password)
+        public UserRequest Authenticate(string email, string password)
         {
             var credentials = new Credentials(email, password);
             var authenticatedUser = _userRepository.GetByCredentials(credentials);
@@ -57,7 +57,7 @@ namespace FTStore.App.Services.Impl
                 AddErrorMessage("Invalid credentials");
                 return null;
             }
-            return new User
+            return new UserRequest
             {
                 Id = authenticatedUser.Id,
                 Name = authenticatedUser.Name,
@@ -67,7 +67,7 @@ namespace FTStore.App.Services.Impl
             };
         }
 
-        private bool IsUserAlreadyRegistered(User user)
+        private bool IsUserAlreadyRegistered(UserRequest user)
         {
             var registeredUser = _userRepository.GetByEmail(user.Email);
             return registeredUser != null;

@@ -5,6 +5,6 @@ namespace FTStore.App.Factories
 {
     public interface IUserFactory
     {
-        UserEntity Convert(User user);
+        UserEntity Convert(UserRequest user);
     }
 }

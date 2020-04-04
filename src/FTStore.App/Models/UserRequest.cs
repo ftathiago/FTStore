@@ -1,6 +1,6 @@
 namespace FTStore.App.Models
 {
-    public class User
+    public class UserRequest
     {
         public int Id { get; set; }
         public string Email { get; set; }
