@@ -108,6 +108,21 @@ namespace FTStore.App.Services.Impl
                 });
         }
 
+        public Product GetById(int id)
+        {
+            var product = _productRepository.GetById(id);
+            if (product == null)
+                return null;
+            return new Product
+            {
+                Id = product.Id,
+                Title = product.Name,
+                Details = product.Details,
+                imageFileName = product.ImageFileName,
+                Price = product.Price
+            };
+        }
+
         public bool ReplaceProductImagem(int productId, Stream imageFile, string fileName)
         {
             ProductEntity product = _productRepository.GetById(productId);

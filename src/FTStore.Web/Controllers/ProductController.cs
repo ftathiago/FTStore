@@ -27,6 +27,15 @@ namespace FTStore.Web.Controllers
             return Ok(products);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var product = _productService.GetById(id);
+            if (product == null)
+                return NoContent();
+            return Ok(product);
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]Product product)
         {

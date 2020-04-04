@@ -12,5 +12,7 @@ namespace FTStore.App.Services
         bool ReplaceProductImagem(int productId, Stream imageFile, string fileName);
         bool Delete(int id);
         IEnumerable<Product> ListAll();
+
+        Product GetById(int id);
     }
 }
