@@ -12,24 +12,24 @@ namespace FTStore.App.Tests.Fixtures
         public const decimal PRICE = 10M;
         public const decimal PRICE_INVALID = -0.01m;
         public const string IMAGE_FILENAME = "\\teste\\teste";
-        public Product GetValidProduct(int id = 0)
+        public ProductRequest GetValidProduct(int id = 0)
         {
-            return new Product
+            return new ProductRequest
             {
                 Id = id,
-                Title = NAME,
+                Name = NAME,
                 Details = DETAILS,
                 Price = PRICE,
                 imageFileName = IMAGE_FILENAME
             };
         }
 
-        public Product GetInvalidProduct(int id = 0)
+        public ProductRequest GetInvalidProduct(int id = 0)
         {
-            return new Product
+            return new ProductRequest
             {
                 Id = id,
-                Title = NAME,
+                Name = NAME,
                 Details = DETAILS_INVALID,
                 Price = PRICE_INVALID,
                 imageFileName = IMAGE_FILENAME

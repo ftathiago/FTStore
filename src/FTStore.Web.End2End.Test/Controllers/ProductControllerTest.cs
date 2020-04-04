@@ -60,7 +60,7 @@ namespace FTStore.Web.End2End.Test.Controllers
 
             Assert.IsType<OkObjectResult>(response);
             response.As<OkObjectResult>().StatusCode.Should().Be((int)HttpStatusCode.OK);
-            response.As<OkObjectResult>().Value.As<IEnumerable<Product>>().Should().ContainSingle();
+            response.As<OkObjectResult>().Value.As<IEnumerable<ProductRequest>>().Should().ContainSingle();
         }
 
         [Fact]
@@ -98,10 +98,10 @@ namespace FTStore.Web.End2End.Test.Controllers
             const int ID = 1;
             using var context = _serviceProvider.GetService<FTStoreDbContext>();
             var product = _context.GetValidProduct(ID);
-            var productExpected = new Product
+            var productExpected = new ProductRequest
             {
                 Id = product.Id,
-                Title = product.Name,
+                Name = product.Name,
                 Details = product.Details,
                 Price = product.Price,
                 imageFileName = product.ImageFileName

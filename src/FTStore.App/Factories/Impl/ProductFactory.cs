@@ -5,10 +5,10 @@ namespace FTStore.App.Factories.Impl
 {
     public class ProductFactory : IProductFactory
     {
-        public ProductEntity Convert(Product product)
+        public ProductEntity Convert(ProductRequest product)
         {
             ProductEntity productEntity = new ProductEntity(
-                product.Title,
+                product.Name,
                 product.Details,
                 product.Price,
                 product.imageFileName

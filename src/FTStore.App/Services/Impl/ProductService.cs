@@ -27,7 +27,7 @@ namespace FTStore.App.Services.Impl
             _productFileManager = productFileManager;
         }
 
-        public Product Save(Product product)
+        public ProductRequest Save(ProductRequest product)
         {
             if (product.Id != 0)
             {
@@ -45,18 +45,18 @@ namespace FTStore.App.Services.Impl
             }
 
             _productRepository.Register(productEntity);
-            return (Product)productEntity;
+            return (ProductRequest)productEntity;
         }
 
-        public Product Update(Product product)
+        public ProductRequest Update(ProductRequest product)
         {
             ProductEntity productEntity = _productRepository.GetById(product.Id);
             if (productEntity == null)
             {
-                AddErrorMessage($"The product [{product.Id} - {product.Title}] was not found");
+                AddErrorMessage($"The product [{product.Id} - {product.Name}] was not found");
                 return null;
             }
-            productEntity.ChangeName(product.Title);
+            productEntity.ChangeName(product.Name);
             productEntity.ChangeDetails(product.Details);
             productEntity.DefineImageFileName(product.imageFileName);
             productEntity.ChangePrice(product.Price);
@@ -95,28 +95,28 @@ namespace FTStore.App.Services.Impl
             return result;
         }
 
-        public IEnumerable<Product> ListAll()
+        public IEnumerable<ProductRequest> ListAll()
         {
             return _productRepository.GetAll().Select(p =>
-                new Product
+                new ProductRequest
                 {
                     Id = p.Id,
-                    Title = p.Name,
+                    Name = p.Name,
                     Details = p.Details,
                     imageFileName = p.ImageFileName,
                     Price = p.Price
                 });
         }
 
-        public Product GetById(int id)
+        public ProductRequest GetById(int id)
         {
             var product = _productRepository.GetById(id);
             if (product == null)
                 return null;
-            return new Product
+            return new ProductRequest
             {
                 Id = product.Id,
-                Title = product.Name,
+                Name = product.Name,
                 Details = product.Details,
                 imageFileName = product.ImageFileName,
                 Price = product.Price

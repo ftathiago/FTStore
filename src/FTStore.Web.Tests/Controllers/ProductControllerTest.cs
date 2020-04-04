@@ -39,10 +39,10 @@ namespace FTStore.Web.Tests.Controllers
         [Fact]
         public void ShouldAddProduct()
         {
-            var product = new Product
+            var product = new ProductRequest
             {
                 Id = 0,
-                Title = "Title",
+                Name = "Title",
                 Details = "Details",
                 imageFileName = "imageFileName",
                 Price = 10M
@@ -65,10 +65,10 @@ namespace FTStore.Web.Tests.Controllers
         public void ShouldReturnBadRequestWhenCanNotSaveProduct()
         {
             const string ERROR_WHILE_SAVING = "ERROR WHILE SAVING";
-            var product = new Product
+            var product = new ProductRequest
             {
                 Id = 0,
-                Title = "Title",
+                Name = "Title",
                 Details = "Details",
                 imageFileName = "imageFileName",
                 Price = 10M
@@ -76,7 +76,7 @@ namespace FTStore.Web.Tests.Controllers
             var productService = new Mock<IProductService>(MockBehavior.Strict);
             productService
                 .Setup(x => x.Save(product))
-                .Returns((Product)null);
+                .Returns((ProductRequest)null);
             productService
                 .Setup(x => x.GetErrorMessages())
                 .Returns(ERROR_WHILE_SAVING);
@@ -181,7 +181,7 @@ namespace FTStore.Web.Tests.Controllers
         public void ShouldModifyProduct()
         {
             var statusCodeExpected = (int)HttpStatusCode.OK;
-            var product = new Product();
+            var product = new ProductRequest();
             var productService = new Mock<IProductService>(MockBehavior.Strict);
             productService
                 .Setup(ps => ps.Update(product))
@@ -215,11 +215,11 @@ namespace FTStore.Web.Tests.Controllers
         {
             const string ERROR_MESSAGE = "Error message";
             var statusCodeExpected = (int)HttpStatusCode.BadRequest;
-            var product = new Product();
+            var product = new ProductRequest();
             var productService = new Mock<IProductService>(MockBehavior.Strict);
             productService
                 .Setup(ps => ps.Update(product))
-                .Returns((Product)null)
+                .Returns((ProductRequest)null)
                 .Verifiable();
             productService
                 .Setup(ps => ps.GetErrorMessages())
@@ -238,10 +238,10 @@ namespace FTStore.Web.Tests.Controllers
         {
             const string EXCEPTION_MESSAGE = "Exception Message";
             var statusCodeExpected = (int)HttpStatusCode.InternalServerError;
-            var product = new Product();
+            var product = new ProductRequest();
             var productService = new Mock<IProductService>(MockBehavior.Strict);
             productService
-                .Setup(ps => ps.Update(It.IsAny<Product>()))
+                .Setup(ps => ps.Update(It.IsAny<ProductRequest>()))
                 .Throws(new Exception(EXCEPTION_MESSAGE));
             var productController = new ProductController(productService.Object);
 
@@ -254,17 +254,17 @@ namespace FTStore.Web.Tests.Controllers
         [Fact]
         public void ShouldReturnAListOfProducts()
         {
-            var productList = new List<Product>
+            var productList = new List<ProductRequest>
             {
-                new Product
+                new ProductRequest
                 {
                     Id  = 1,
-                    Title = "Title"
+                    Name = "Title"
                 },
-                new Product
+                new ProductRequest
                 {
                     Id = 2,
-                    Title = "Title 2"
+                    Name = "Title 2"
                 }
             };
             var statusCodeExpected = (int)HttpStatusCode.OK;
@@ -285,7 +285,7 @@ namespace FTStore.Web.Tests.Controllers
         [Fact]
         public void ShouldReturnNoContentWhenThereIsNoProductToList()
         {
-            var productList = new List<Product>();
+            var productList = new List<ProductRequest>();
             var statusCodeExpected = (int)HttpStatusCode.NoContent;
             var productService = new Mock<IProductService>(MockBehavior.Strict);
             productService

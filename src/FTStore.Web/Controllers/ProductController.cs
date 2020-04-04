@@ -37,7 +37,7 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Product product)
+        public IActionResult Post([FromBody]ProductRequest product)
         {
             if (product == null)
                 return BadRequest("There is no product information to handle");
@@ -74,7 +74,7 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Product product)
+        public IActionResult Put([FromBody] ProductRequest product)
         {
             try
             {

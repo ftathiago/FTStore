@@ -4,11 +4,11 @@ namespace FTStore.Web.End2End.Test.Fixtures
 {
     public class RequestFixture
     {
-        public Product GetValidProductRequest(int id = 0)
+        public ProductRequest GetValidProductRequest(int id = 0)
         {
-            var product = new Product
+            var product = new ProductRequest
             {
-                Title = "A product name",
+                Name = "A product name",
                 Details = "A large and valid detail with more than fifity characters",
                 Price = 0.01M,
                 imageFileName = "\\\\the\\path"
@@ -18,11 +18,11 @@ namespace FTStore.Web.End2End.Test.Fixtures
             return product;
         }
 
-        public Product GetInvalidProductRequest(int id = 0)
+        public ProductRequest GetInvalidProductRequest(int id = 0)
         {
-            var product = new Product
+            var product = new ProductRequest
             {
-                Title = "A product name",
+                Name = "A product name",
                 Details = "Tiny details",
                 Price = -0.01M,
                 imageFileName = "\\\\the\\path"

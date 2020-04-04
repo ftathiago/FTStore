@@ -7,12 +7,12 @@ namespace FTStore.App.Services
 {
     public interface IProductService : IServiceBase
     {
-        Product Save(Product product);
-        Product Update(Product product);
+        ProductRequest Save(ProductRequest product);
+        ProductRequest Update(ProductRequest product);
         bool ReplaceProductImagem(int productId, Stream imageFile, string fileName);
         bool Delete(int id);
-        IEnumerable<Product> ListAll();
+        IEnumerable<ProductRequest> ListAll();
 
-        Product GetById(int id);
+        ProductRequest GetById(int id);
     }
 }
