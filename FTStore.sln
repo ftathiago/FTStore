@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6BE6F5E5-CAB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web.Tests", "src\FTStore.Web.Tests\FTStore.Web.Tests.csproj", "{1A80480F-32F0-4E70-9E2E-25FD39A0641B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web.End2End.Test", "src\FTStore.Web.End2End.Test\FTStore.Web.End2End.Test.csproj", "{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,8 +160,21 @@ Global
 		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x64.Build.0 = Release|Any CPU
 		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x86.ActiveCfg = Release|Any CPU
 		{1A80480F-32F0-4E70-9E2E-25FD39A0641B}.Release|x86.Build.0 = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|x64.Build.0 = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Debug|x86.Build.0 = Debug|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|x64.ActiveCfg = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|x64.Build.0 = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|x86.ActiveCfg = Release|Any CPU
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A80480F-32F0-4E70-9E2E-25FD39A0641B} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
+		{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
 	EndGlobalSection
 EndGlobal
