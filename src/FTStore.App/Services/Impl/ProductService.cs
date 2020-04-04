@@ -27,49 +27,49 @@ namespace FTStore.App.Services.Impl
             _productFileManager = productFileManager;
         }
 
-        public ProductRequest Save(ProductRequest product)
+        public ProductRequest Save(ProductRequest productRequest)
         {
-            if (product.Id != 0)
+            if (productRequest.Id != 0)
             {
                 AddErrorMessage("The product's Id should not be defined");
                 return null;
             }
 
-            Product productEntity = _productFactory.Convert(product);
+            Product product = _productFactory.Convert(productRequest);
 
-            if (!productEntity.IsValid())
+            if (!product.IsValid())
             {
-                productEntity.ValidationResult.Errors.ToList().ForEach(error =>
+                product.ValidationResult.Errors.ToList().ForEach(error =>
                     AddErrorMessage(error));
                 return null;
             }
 
-            _productRepository.Register(productEntity);
-            return (ProductRequest)productEntity;
+            _productRepository.Register(product);
+            return (ProductRequest)product;
         }
 
-        public ProductRequest Update(ProductRequest product)
+        public ProductRequest Update(ProductRequest productRequest)
         {
-            Product productEntity = _productRepository.GetById(product.Id);
-            if (productEntity == null)
+            Product product = _productRepository.GetById(productRequest.Id);
+            if (product == null)
             {
-                AddErrorMessage($"The product [{product.Id} - {product.Name}] was not found");
+                AddErrorMessage($"The product [{productRequest.Id} - {productRequest.Name}] was not found");
                 return null;
             }
-            productEntity.ChangeName(product.Name);
-            productEntity.ChangeDetails(product.Details);
-            productEntity.DefineImageFileName(product.imageFileName);
-            productEntity.ChangePrice(product.Price);
+            product.ChangeName(productRequest.Name);
+            product.ChangeDetails(productRequest.Details);
+            product.DefineImageFileName(productRequest.imageFileName);
+            product.ChangePrice(productRequest.Price);
 
-            if (!productEntity.IsValid())
+            if (!product.IsValid())
             {
-                productEntity.ValidationResult.Errors.ToList().ForEach(error =>
+                product.ValidationResult.Errors.ToList().ForEach(error =>
                     AddErrorMessage(error));
                 return null;
             }
 
-            _productRepository.Update(productEntity);
-            return product;
+            _productRepository.Update(product);
+            return productRequest;
         }
 
         public bool Delete(int id)
