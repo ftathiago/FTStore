@@ -5,6 +5,7 @@ using System.Linq;
 using FTStore.Domain.ValueObjects;
 using FTStore.Infra.Table;
 using AutoMapper;
+using FTStore.Infra.Common.Repository;
 
 namespace FTStore.Infra.Repository
 {

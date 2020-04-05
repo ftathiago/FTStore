@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FTStore.Domain\FTStore.Domain.csproj" />
     <ProjectReference Include="..\FTStore.App\FTStore.App.csproj" />
+    <ProjectReference Include="..\FTStore.Infra.Common\FTStore.Infra.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

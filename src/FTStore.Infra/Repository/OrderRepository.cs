@@ -2,6 +2,7 @@ using FTStore.Domain.Repository;
 using FTStore.Domain.Entities;
 using FTStore.Infra.Context;
 using FTStore.Infra.Table;
+using FTStore.Infra.Common.Repository;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 

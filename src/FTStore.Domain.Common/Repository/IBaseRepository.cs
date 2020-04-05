@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FTStore.Domain.Repository
+namespace FTStore.Domain.Common.Repository
 {
     public interface IBaseRepository<TEntity> : IDisposable
         where TEntity : class

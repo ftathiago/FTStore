@@ -4,25 +4,24 @@ using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
-using FTStore.Domain.Repository;
+using FTStore.Domain.Common.Repository;
 
-using FTStore.Infra.Context;
 using AutoMapper;
 
-namespace FTStore.Infra.Repository
+namespace FTStore.Infra.Common.Repository
 {
     public abstract class BaseRepository<TEntity, TDTO> : IBaseRepository<TEntity>
         where TEntity : class
         where TDTO : class
     {
-        protected readonly FTStoreDbContext Context;
+        protected readonly DbContext _context;
         protected readonly DbSet<TDTO> DbSet;
         protected readonly IMapper _mapper;
 
-        protected BaseRepository(FTStoreDbContext ftStoreContext, IMapper mapper)
+        protected BaseRepository(DbContext ftStoreContext, IMapper mapper)
         {
-            Context = ftStoreContext;
-            DbSet = Context.Set<TDTO>();
+            _context = ftStoreContext;
+            DbSet = _context.Set<TDTO>();
             _mapper = mapper;
         }
 
@@ -31,24 +30,24 @@ namespace FTStore.Infra.Repository
             var data = _mapper.Map<TDTO>(entity);
             data = BeforePost(data, EntityState.Added);
             DbSet.Add(data);
-            Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             var data = _mapper.Map<TDTO>(entity);
-            Context.Entry(data).State = EntityState.Modified;
+            _context.Entry(data).State = EntityState.Modified;
             data = BeforePost(data, EntityState.Modified);
             DbSet.Update(data);
-            Context.SaveChanges();
-            Context.Entry(data).State = EntityState.Detached;
+            _context.SaveChanges();
+            _context.Entry(data).State = EntityState.Detached;
         }
 
         public void Remove(TEntity entity)
         {
             var data = _mapper.Map<TDTO>(entity);
             DbSet.Remove(data);
-            Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         protected virtual TDTO BeforePost(TDTO model, EntityState state)
@@ -61,7 +60,7 @@ namespace FTStore.Infra.Repository
             var data = DbSet.Find(id);
             if (data == null)
                 return null;
-            Context.Entry(data).State = EntityState.Detached;
+            _context.Entry(data).State = EntityState.Detached;
             var entity = _mapper.Map<TEntity>(data);
             return entity;
         }
@@ -75,7 +74,7 @@ namespace FTStore.Infra.Repository
         {
             if (model == null)
                 return;
-            Context.Entry(model).State = EntityState.Unchanged;
+            _context.Entry(model).State = EntityState.Unchanged;
         }
 
         #region IDisposable Support
@@ -90,7 +89,7 @@ namespace FTStore.Infra.Repository
                     // dispose managed state (managed objects).
                 }
 
-                Context.Dispose();
+                _context.Dispose();
 
                 disposedValue = true;
             }
