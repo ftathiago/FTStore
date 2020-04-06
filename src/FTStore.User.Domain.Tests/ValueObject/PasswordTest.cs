@@ -42,6 +42,33 @@ namespace FTStore.User.Domain.Tests.ValueObject
         }
 
         [Fact]
+        public void ShouldBeDifferentWhenHashIsDifferent()
+        {
+            byte[] hash = { 255, 255, 255, 255 };
+            byte[] diffHash = { 255, 255, 255, 254 };
+            byte[] salt = { 255, 255, 255, 255 };
+            var password = new Password(hash, salt);
+            var password2 = new Password(diffHash, salt);
+
+            var equals = password.Equals(password2);
+
+            equals.Should().BeFalse();
+        }
+        [Fact]
+        public void ShouldBeDifferentWhenSaltIsDifferent()
+        {
+            byte[] hash = { 255, 255, 255, 255 };
+            byte[] salt = { 255, 255, 255, 254 };
+            byte[] diffSalt = { 255, 255, 255, 255 };
+            var password = new Password(hash, salt);
+            var password2 = new Password(hash, diffSalt);
+
+            var equals = password.Equals(password2);
+
+            equals.Should().BeFalse();
+        }
+
+        [Fact]
         public void ShouldBeDifferentWithOnlySameSecretPhrase()
         {
             var password = new Password(SECRET_PHRASE);

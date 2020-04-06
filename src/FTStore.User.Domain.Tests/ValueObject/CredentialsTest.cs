@@ -29,5 +29,19 @@ namespace FTStore.User.Domain.Tests.ValueObject
             credentials.Email.Should().Be(EMAIL);
             credentials.Password.Should().Be(password);
         }
+
+        [Fact]
+        public void ShouldCredentialsBeEquals()
+        {
+            var credentials = new Credentials(EMAIL, SECRET_PHRASE);
+            var hash = credentials.Password.Hash;
+            var salt = credentials.Password.Salt;
+            var password = new Password(hash, salt);
+            var credentials2 = new Credentials(EMAIL, password);
+
+            var credentialsEquals = credentials.Equals(credentials2);
+
+            credentialsEquals.Should().BeTrue();
+        }
     }
 }
