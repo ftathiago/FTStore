@@ -5,6 +5,7 @@ namespace FTStore.User.Domain.Repository
 {
     public interface IUserRepository
     {
-        UserAuthenticateResponse AuthenticateBy(Credentials credentials);
+        Credentials GetCredentialsBy(string email);
+        User GetByEmail(string email);
     }
 }
