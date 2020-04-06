@@ -60,7 +60,7 @@ namespace FTStore.Infra.Context
         }
         private static readonly ILoggerFactory DbLoggerFactory = LoggerFactory.Create(builder =>
         {
-            builder
+            builder //NOSONAR
                 .AddFilter((category, level) =>
                     category == DbLoggerCategory.Database.Command.Name
                     && level == LogLevel.Information)

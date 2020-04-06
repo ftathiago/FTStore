@@ -7,8 +7,8 @@ namespace FTStore.App.Services
 {
     public interface IProductService : IServiceBase
     {
-        ProductRequest Save(ProductRequest product);
-        ProductRequest Update(ProductRequest product);
+        ProductRequest Save(ProductRequest productRequest);
+        ProductRequest Update(ProductRequest productRequest);
         bool ReplaceProductImagem(int productId, Stream imageFile, string fileName);
         bool Delete(int id);
         IEnumerable<ProductRequest> ListAll();

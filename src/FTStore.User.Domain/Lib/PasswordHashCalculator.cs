@@ -24,7 +24,7 @@ namespace FTStore.User.Domain.Lib
 
         private void CalcHash(string password, byte[] key = null)
         {
-            using var hmac = new HMACSHA512();
+            using var hmac = new HMACSHA512(); //NOSONAR
             if (key != null)
                 hmac.Key = key;
             var encodedString = Encoding.UTF8.GetBytes(password);

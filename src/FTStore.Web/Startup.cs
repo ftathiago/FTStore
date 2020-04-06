@@ -52,7 +52,7 @@ namespace FTStore.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); //NOSONAR
             }
             else
             {

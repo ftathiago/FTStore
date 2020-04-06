@@ -1,4 +1,3 @@
-using System.Text;
 using FTStore.Domain.Common.ValueObjects;
 
 namespace FTStore.User.Domain.ValueObjects
