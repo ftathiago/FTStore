@@ -1,8 +1,11 @@
-using Microsoft.Extensions.DependencyInjection;
-using FTStore.Crosscutting.Helper;
-using FTStore.App.Repositories;
-using Moq;
 using System;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using FTStore.App.Repositories;
+using FTStore.Crosscutting.Helpers;
+
+using Moq;
 
 namespace FTStore.Web.End2End.Test.Fixtures
 {

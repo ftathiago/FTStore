@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
-using FTStore.Crosscutting.Helper;
+using FTStore.Crosscutting.Helpers;
 
 
 namespace FTStore.Web

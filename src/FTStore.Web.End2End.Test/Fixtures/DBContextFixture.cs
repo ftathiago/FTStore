@@ -1,5 +1,5 @@
 using FTStore.Infra.Context;
-using FTStore.Infra.Table;
+using FTStore.Infra.Tables;
 
 namespace FTStore.Web.End2End.Test.Fixtures
 {

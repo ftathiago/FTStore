@@ -3,8 +3,8 @@ using System;
 using FluentAssertions;
 
 using FTStore.Domain.Entities;
-using FTStore.Domain.Enum;
-using FTStore.Domain.Tests.Fixture;
+using FTStore.Domain.Enums;
+using FTStore.Domain.Tests.Fixtures;
 using FTStore.Domain.ValueObjects;
 
 using Xunit;

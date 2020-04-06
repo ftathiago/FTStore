@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using FTStore.Infra.Mappings;
-using FTStore.Infra.Table;
+using FTStore.Infra.Tables;
 
 namespace FTStore.Infra.Context
 {

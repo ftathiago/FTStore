@@ -1,4 +1,4 @@
-namespace FTStore.Domain.Enum
+namespace FTStore.Domain.Enums
 {
     public enum PaymentMethodsSupported
     {

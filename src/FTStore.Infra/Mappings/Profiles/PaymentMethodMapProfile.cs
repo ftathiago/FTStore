@@ -1,6 +1,6 @@
 using AutoMapper;
 using FTStore.Domain.ValueObjects;
-using FTStore.Infra.Table;
+using FTStore.Infra.Tables;
 
 namespace FTStore.Infra.Mappings.Profiles
 {

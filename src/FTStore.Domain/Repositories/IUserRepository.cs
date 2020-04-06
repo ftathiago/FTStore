@@ -1,8 +1,8 @@
 using FTStore.Domain.Entities;
 using FTStore.Domain.ValueObjects;
-using FTStore.Domain.Common.Repository;
+using FTStore.Domain.Common.Repositories;
 
-namespace FTStore.Domain.Repository
+namespace FTStore.Domain.Repositories
 {
     public interface IUserRepository : IBaseRepository<User>
     {

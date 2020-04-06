@@ -1,7 +1,8 @@
-using System;
 using System.IO;
 using System.Text;
+
 using FluentAssertions;
+
 using FTStore.App.Factories;
 using FTStore.App.Factories.Impl;
 using FTStore.App.Models;
@@ -10,8 +11,10 @@ using FTStore.App.Services;
 using FTStore.App.Services.Impl;
 using FTStore.App.Tests.Fixtures;
 using FTStore.Domain.Entities;
-using FTStore.Domain.Repository;
+using FTStore.Domain.Repositories;
+
 using Moq;
+
 using Xunit;
 
 namespace FTStore.App.Tests.Services

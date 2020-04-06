@@ -1,4 +1,4 @@
-using FTStore.Infra.Table;
+using FTStore.Infra.Tables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

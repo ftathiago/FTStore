@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Infra.Table;
+using FTStore.Infra.Tables;
 
 namespace FTStore.Infra.Mappings
 {

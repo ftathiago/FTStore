@@ -1,10 +1,12 @@
-using FTStore.Domain.Repository;
+using System;
+
+using System.Linq;
+
+using FTStore.App.Factories;
 using FTStore.App.Models;
 using FTStore.Domain.Entities;
+using FTStore.Domain.Repositories;
 using FTStore.Domain.ValueObjects;
-using FTStore.App.Factories;
-using System;
-using System.Linq;
 
 namespace FTStore.App.Services.Impl
 {

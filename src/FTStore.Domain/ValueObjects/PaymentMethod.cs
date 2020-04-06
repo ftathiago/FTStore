@@ -1,4 +1,4 @@
-using FTStore.Domain.Enum;
+using FTStore.Domain.Enums;
 
 namespace FTStore.Domain.ValueObjects
 {

@@ -1,5 +1,5 @@
 using FTStore.Domain.Common.ValueObjects;
-using FTStore.User.Domain.Lib;
+using FTStore.User.Domain.Libs;
 using System.Linq;
 
 namespace FTStore.User.Domain.ValueObjects

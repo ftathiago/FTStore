@@ -1,5 +1,5 @@
-using FTStore.User.Domain.Model;
-using FTStore.User.Domain.Repository;
+using FTStore.User.Domain.Models;
+using FTStore.User.Domain.Repositories;
 using FTStore.User.Domain.ValueObjects;
 
 namespace FTStore.User.Domain.Services.Impl

@@ -1,8 +1,9 @@
 using FluentAssertions;
+
 using FTStore.Domain.Entities;
+using FTStore.Domain.Tests.Fixtures;
+
 using Xunit;
-using System.Linq;
-using FTStore.Domain.Tests.Fixture;
 
 namespace FTStore.Domain.Tests.Entities
 {

@@ -1,11 +1,14 @@
 
 using FluentAssertions;
-using FTStore.User.Domain.Model;
-using FTStore.User.Domain.Repository;
+
+using FTStore.User.Domain.Models;
+using FTStore.User.Domain.Repositories;
 using FTStore.User.Domain.Services;
 using FTStore.User.Domain.Services.Impl;
 using FTStore.User.Domain.ValueObjects;
+
 using Moq;
+
 using Xunit;
 
 namespace FTStore.User.Domain.Tests.Services

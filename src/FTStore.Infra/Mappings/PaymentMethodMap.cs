@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Domain.Enum;
-using FTStore.Infra.Table;
+using FTStore.Domain.Enums;
+using FTStore.Infra.Tables;
 
 namespace FTStore.Infra.Mappings
 {
