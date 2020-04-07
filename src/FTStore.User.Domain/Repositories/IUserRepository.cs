@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FTStore.User.Domain.Models;
 using FTStore.User.Domain.ValueObjects;
 
@@ -7,5 +8,7 @@ namespace FTStore.User.Domain.Repositories
     {
         Credentials GetCredentialsBy(string email);
         User GetByEmail(string email);
+
+        IEnumerable<string> GetUserClaims(int id);
     }
 }

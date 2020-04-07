@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FTStore.User.Domain.Models;
 using FTStore.User.Domain.Repositories;
 using FTStore.User.Domain.ValueObjects;
@@ -12,6 +13,7 @@ namespace FTStore.User.Domain.Services.Impl
         {
             _userRepository = userRepository;
         }
+
         public UserAuthenticateResponse AuthenticateBy(Credentials credentials)
         {
             var userCredentials = _userRepository.GetCredentialsBy(credentials.Email);
@@ -34,6 +36,11 @@ namespace FTStore.User.Domain.Services.Impl
 
 
             return userAuthenticateResponse;
+        }
+
+        public IEnumerable<string> GetUserClaims(int id)
+        {
+            return _userRepository.GetUserClaims(id);
         }
     }
 }
