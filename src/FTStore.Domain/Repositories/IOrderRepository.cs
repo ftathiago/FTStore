@@ -1,5 +1,5 @@
 using FTStore.Domain.Entities;
-using FTStore.Domain.Common.Repositories;
+using FTStore.Lib.Common.Repositories;
 
 namespace FTStore.Domain.Repositories
 {

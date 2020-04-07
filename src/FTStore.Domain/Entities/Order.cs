@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FTStore.Domain.Common.Entities;
+
 using FTStore.Domain.Validations;
 using FTStore.Domain.ValueObjects;
+using FTStore.Lib.Common.Entities;
+
 
 namespace FTStore.Domain.Entities
 {

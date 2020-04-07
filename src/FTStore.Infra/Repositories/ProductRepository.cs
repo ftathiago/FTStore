@@ -3,7 +3,7 @@ using AutoMapper;
 using FTStore.Domain.Entities;
 using FTStore.Domain.Repositories;
 
-using FTStore.Infra.Common.Repositories;
+using FTStore.Lib.Common.Repositories;
 using FTStore.Infra.Context;
 using FTStore.Infra.Tables;
 

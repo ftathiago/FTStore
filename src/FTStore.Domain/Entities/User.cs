@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 
+using FTStore.Lib.Common.Entities;
+
 namespace FTStore.Domain.Entities
 {
-    public class User : FTStore.Domain.Common.Entities.Entity
+    public class User : Entity
     {
         public string Email { get; set; }
         public string Password { get; set; }

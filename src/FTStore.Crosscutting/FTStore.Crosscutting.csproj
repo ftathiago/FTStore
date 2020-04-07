@@ -4,6 +4,7 @@
     <ProjectReference Include="..\FTStore.Infra\FTStore.Infra.csproj" />
     <ProjectReference Include="..\FTStore.App\FTStore.App.csproj" />
     <ProjectReference Include="..\FTStore.Domain\FTStore.Domain.csproj" />
+    <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
   </ItemGroup>
 
 

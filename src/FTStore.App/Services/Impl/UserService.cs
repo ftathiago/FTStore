@@ -7,6 +7,7 @@ using FTStore.App.Models;
 using FTStore.Domain.Entities;
 using FTStore.Domain.Repositories;
 using FTStore.Domain.ValueObjects;
+using FTStore.Lib.Common.Services;
 
 namespace FTStore.App.Services.Impl
 {

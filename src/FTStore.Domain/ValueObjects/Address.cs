@@ -1,4 +1,4 @@
-using FTStore.Domain.Common.ValueObjects;
+using FTStore.Lib.Common.ValueObjects;
 
 namespace FTStore.Domain.ValueObjects
 {

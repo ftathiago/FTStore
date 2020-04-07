@@ -1,11 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.6.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FTStore.Domain.Common\FTStore.Domain.Common.csproj" />
+    <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

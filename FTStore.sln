@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.App", "src\FTStore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Crosscutting", "src\FTStore.Crosscutting\FTStore.Crosscutting.csproj", "{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Common", "src\FTStore.Domain.Common\FTStore.Domain.Common.csproj", "{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Tests", "src\FTStore.Infra.Tests\FTStore.Infra.Tests.csproj", "{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Domain.Tests", "src\FTStore.Domain.Tests\FTStore.Domain.Tests.csproj", "{76C21A10-1ABF-49C3-93FE-930F60AA2B04}"
@@ -27,13 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web.Tests", "src\FT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Web.End2End.Test", "src\FTStore.Web.End2End.Test\FTStore.Web.End2End.Test.csproj", "{6AAE3FE0-CF6C-474D-BF57-B647AB4E3C54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.User.Domain.Tests", "src\FTStore.User.Domain.Tests\FTStore.User.Domain.Tests.csproj", "{66FC354B-383C-4F2E-8991-1F9E6DB86539}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.UserDomain.Tests", "src\FTStore.UserDomain.Tests\FTStore.UserDomain.Tests.csproj", "{66FC354B-383C-4F2E-8991-1F9E6DB86539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.User.Domain", "src\FTStore.User.Domain\FTStore.User.Domain.csproj", "{29C6BBCF-D29E-41F6-9506-89DBDB51DA03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.UserDomain", "src\FTStore.UserDomain\FTStore.UserDomain.csproj", "{29C6BBCF-D29E-41F6-9506-89DBDB51DA03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.User.Infra", "src\FTStore.User.Infra\FTStore.User.Infra.csproj", "{05081836-C3C3-4B62-837A-7463DC2D1F03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Infra.Common", "src\FTStore.Infra.Common\FTStore.Infra.Common.csproj", "{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.UserInfra", "src\FTStore.UserInfra\FTStore.UserInfra.csproj", "{05081836-C3C3-4B62-837A-7463DC2D1F03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,18 +104,6 @@ Global
 		{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}.Release|x64.Build.0 = Release|Any CPU
 		{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{15AEDD5B-5DC9-44F0-81B1-46C2212FF1FA}.Release|x86.Build.0 = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|x64.Build.0 = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Debug|x86.Build.0 = Debug|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|x64.ActiveCfg = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|x64.Build.0 = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|x86.ActiveCfg = Release|Any CPU
-		{55AAC5FC-F06A-4F5A-B5A6-D72AB3B07100}.Release|x86.Build.0 = Release|Any CPU
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCA6CF22-8FB3-4796-9565-06F3DD6F81BD}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -216,18 +200,6 @@ Global
 		{05081836-C3C3-4B62-837A-7463DC2D1F03}.Release|x64.Build.0 = Release|Any CPU
 		{05081836-C3C3-4B62-837A-7463DC2D1F03}.Release|x86.ActiveCfg = Release|Any CPU
 		{05081836-C3C3-4B62-837A-7463DC2D1F03}.Release|x86.Build.0 = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|x64.Build.0 = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Debug|x86.Build.0 = Debug|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|x64.ActiveCfg = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|x64.Build.0 = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|x86.ActiveCfg = Release|Any CPU
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A80480F-32F0-4E70-9E2E-25FD39A0641B} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
@@ -235,6 +207,5 @@ Global
 		{66FC354B-383C-4F2E-8991-1F9E6DB86539} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
 		{29C6BBCF-D29E-41F6-9506-89DBDB51DA03} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
 		{05081836-C3C3-4B62-837A-7463DC2D1F03} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
-		{788DCFE8-3F5E-4C4E-AF60-4C6B5A6ABB5C} = {6BE6F5E5-CAB7-4EF9-BF8E-3FB69B4C33B3}
 	EndGlobalSection
 EndGlobal

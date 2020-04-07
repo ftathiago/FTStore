@@ -1,4 +1,4 @@
-using FTStore.Domain.Common.Entities;
+using FTStore.Lib.Common.Entities;
 using FTStore.Domain.Validations;
 
 namespace FTStore.Domain.Entities
