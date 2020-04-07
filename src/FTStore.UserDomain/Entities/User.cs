@@ -14,7 +14,7 @@ namespace FTStore.UserDomain.Entities
         {
             Name = name;
             Surname = surname;
-            email = EMail;
+            EMail = email;
             Password = new Password(password.Hash, password.Salt);
         }
 
