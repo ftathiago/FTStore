@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using FluentAssertions;
 
 using FTStore.UserDomain.Entities;
@@ -19,6 +20,8 @@ namespace FTStore.UserDomain.Tests.Services
         private const string EMAIL = "admin@admin.com";
         private const string SECRET_PHRASE = "swordfish";
         private const int ID = 1;
+        private const string CREDENTIALS_ERROR = "User or password is invalid";
+
         [Fact]
         public void ShouldCreateAuthenticationService()
         {
@@ -50,12 +53,55 @@ namespace FTStore.UserDomain.Tests.Services
                 .Setup(ur => ur.GetByEmail(credentials.Email))
                 .Returns(user)
                 .Verifiable();
+            userRepository
+                .Setup(x => x.GetUserClaims(ID))
+                .Returns(new List<string> { "ADMIN" })
+                .Verifiable();
             IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
 
             var userAuthenticated = authentication.AuthenticateBy(credentials);
 
             userAuthenticated.Should().NotBeNull();
             userAuthenticated.Should().BeEquivalentTo(expectedUserAuthenticated);
+            userRepository.Verify();
+        }
+
+        [Fact]
+        public void ShoulAuthenticationBeInvalidWhenNoCredentials()
+        {
+            Credentials credentials = new Credentials(EMAIL, SECRET_PHRASE);
+            var userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepository
+                .Setup(ur => ur.GetCredentialsBy(credentials.Email))
+                .Returns((Credentials)null)
+                .Verifiable();
+            IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
+
+            var userAuthenticated = authentication.AuthenticateBy(credentials);
+
+            userAuthenticated.Should().BeNull();
+            authentication.IsValid.Should().BeFalse();
+            authentication.GetErrorMessages().Should().Be(CREDENTIALS_ERROR);
+            userRepository.Verify();
+        }
+
+        [Fact]
+        public void ShoulAuthenticationBeInvalidWhenCredentialsIsWrong()
+        {
+            Credentials credentials = new Credentials(EMAIL, SECRET_PHRASE);
+            Credentials invalidCredentials = new Credentials(EMAIL, "wrong");
+            var userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
+            userRepository
+                .Setup(ur => ur.GetCredentialsBy(invalidCredentials.Email))
+                .Returns((Credentials)invalidCredentials)
+                .Verifiable();
+            IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
+
+            var userAuthenticated = authentication.AuthenticateBy(credentials);
+
+            userAuthenticated.Should().BeNull();
+            authentication.IsValid.Should().BeFalse();
+            authentication.GetErrorMessages().Should().Be(CREDENTIALS_ERROR);
             userRepository.Verify();
         }
     }
