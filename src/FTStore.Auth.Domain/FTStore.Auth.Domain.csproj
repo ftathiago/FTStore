@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>017CB167-23E5-4647-9C7F-13F3047C8B19</ProjectGuid>
   </PropertyGroup>
-
 </Project>

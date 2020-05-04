@@ -1,13 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="..\FTStore.Infra\FTStore.Infra.csproj" />
     <ProjectReference Include="..\FTStore.App\FTStore.App.csproj" />
     <ProjectReference Include="..\FTStore.Domain\FTStore.Domain.csproj" />
     <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
   </ItemGroup>
-
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -16,9 +13,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>092245D8-026E-438B-A3DB-549BAEDBE367</ProjectGuid>
   </PropertyGroup>
-
 </Project>

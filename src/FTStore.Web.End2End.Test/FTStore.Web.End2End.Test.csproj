@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <ProjectGuid>1EF68464-30CF-4200-8854-EB4D8A50F370</ProjectGuid>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Moq" Version="4.13.1" />
@@ -18,11 +16,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\FTStore.Crosscutting\FTStore.Crosscutting.csproj" />
     <ProjectReference Include="..\FTStore.Domain\FTStore.Domain.csproj" />
     <ProjectReference Include="..\FTStore.Web\FTStore.Web.csproj" />
   </ItemGroup>
-
 </Project>

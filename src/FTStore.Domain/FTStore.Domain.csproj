@@ -2,9 +2,8 @@
   <ItemGroup>
     <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>D92625EB-4192-4D45-BBA6-C58617AC5481</ProjectGuid>
   </PropertyGroup>
-
 </Project>
