@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FTStore.Lib.Common.Entities;
 using FTStore.UserDomain.ValueObjects;
 
@@ -10,7 +11,13 @@ namespace FTStore.UserDomain.Entities
         public string EMail { get; protected set; }
         public Password Password { get; protected set; }
 
-        public User(string name, string surname, string email, Password password)
+        public ICollection<string> Claims { get; protected set; }
+
+        public User()
+        {
+            Claims = new List<string>();
+        }
+        public User(string name, string surname, string email, Password password) : this()
         {
             Name = name;
             Surname = surname;
@@ -21,6 +28,12 @@ namespace FTStore.UserDomain.Entities
         public override bool IsValid()
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool IsValidCredentials(Credentials credentials)
+        {
+            var userCredentials = new Credentials(this.EMail, this.Password);
+            return userCredentials.Equals(credentials);
         }
     }
 }
