@@ -19,21 +19,19 @@ namespace FTStore.UserDomain.Services.Impl
         public UserAuthenticateResponse AuthenticateBy(Credentials credentials)
         {
             const string CREDENTIALS_ERRORS = "User or password is invalid";
-            var userCredentials = _userRepository.GetCredentialsBy(credentials.Email);
-
-            if (userCredentials == null)
-            {
-                AddErrorMessage(CREDENTIALS_ERRORS);
-                return null;
-            }
-
-            if (!credentials.Equals(userCredentials))
-            {
-                AddErrorMessage(CREDENTIALS_ERRORS);
-                return null;
-            }
-
             var user = _userRepository.GetByEmail(credentials.Email);
+
+            if (user == null)
+            {
+                AddErrorMessage(CREDENTIALS_ERRORS);
+                return null;
+            }
+
+            if (!user.IsValidCredentials(credentials))
+            {
+                AddErrorMessage(CREDENTIALS_ERRORS);
+                return null;
+            }
 
             var userAuthenticateResponse = new UserAuthenticateResponse
             {
@@ -41,17 +39,9 @@ namespace FTStore.UserDomain.Services.Impl
                 Name = user.Name,
                 EMail = user.EMail
             };
-            GetUserClaims(userAuthenticateResponse.Id).ToList().ForEach(claim =>
-                userAuthenticateResponse.Claims.Add(claim)
-            );
-
+            userAuthenticateResponse.Claims.AddRange(user.Claims);
 
             return userAuthenticateResponse;
-        }
-
-        public IEnumerable<string> GetUserClaims(int id)
-        {
-            return _userRepository.GetUserClaims(id);
         }
     }
 }
