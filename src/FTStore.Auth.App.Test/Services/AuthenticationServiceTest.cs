@@ -1,12 +1,11 @@
-
 using System.Collections.Generic;
 using FluentAssertions;
 
 using FTStore.Auth.Domain.Entities;
 using FTStore.Auth.Domain.Models;
 using FTStore.Auth.Domain.Repositories;
-using FTStore.Auth.Domain.Services;
-using FTStore.Auth.Domain.Services.Impl;
+using FTStore.Auth.App.Services;
+using FTStore.Auth.App.Services.Impl;
 using FTStore.Auth.Domain.ValueObjects;
 
 using Moq;
