@@ -8,6 +8,5 @@ namespace FTStore.UserDomain.Services
     public interface IAuthenticationService : IServiceBase
     {
         UserAuthenticateResponse AuthenticateBy(Credentials credentials);
-        IEnumerable<string> GetUserClaims(int id);
     }
 }
