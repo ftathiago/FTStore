@@ -18,6 +18,7 @@ namespace FTStore.UserDomain.Tests.Services
     public class AuthenticationServiceTest
     {
         private const string EMAIL = "admin@admin.com";
+        private const string EMAIL_INVALID = "foo@bar.com";
         private const string SECRET_PHRASE = "swordfish";
         private const int ID = 1;
         private const string CREDENTIALS_ERROR = "User or password is invalid";
@@ -32,11 +33,13 @@ namespace FTStore.UserDomain.Tests.Services
         }
 
         [Fact]
-        public void ShouldAuthenticateWithCredentials()
+        public void ShouldAuthenticateWithValidCredentials()
         {
             Credentials credentials = new Credentials(EMAIL, SECRET_PHRASE);
+            var userClaims = "ADMIN";
             var userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
             var user = new User("Name", "Surname", EMAIL, credentials.Password);
+            user.Claims.Add(userClaims);
             user.DefineId(ID);
             var expectedUserAuthenticated = new UserAuthenticateResponse
             {
@@ -46,16 +49,8 @@ namespace FTStore.UserDomain.Tests.Services
             };
             expectedUserAuthenticated.Claims.Add("ADMIN");
             userRepository
-                .Setup(ur => ur.GetCredentialsBy(credentials.Email))
-                .Returns(credentials)
-                .Verifiable();
-            userRepository
                 .Setup(ur => ur.GetByEmail(credentials.Email))
                 .Returns(user)
-                .Verifiable();
-            userRepository
-                .Setup(x => x.GetUserClaims(ID))
-                .Returns(new List<string> { "ADMIN" })
                 .Verifiable();
             IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
 
@@ -67,13 +62,13 @@ namespace FTStore.UserDomain.Tests.Services
         }
 
         [Fact]
-        public void ShoulAuthenticationBeInvalidWhenNoCredentials()
+        public void ShoulNoAuthenticateWhenEmailIsInvalid()
         {
-            Credentials credentials = new Credentials(EMAIL, SECRET_PHRASE);
+            Credentials credentials = new Credentials(EMAIL_INVALID, SECRET_PHRASE);
             var userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepository
-                .Setup(ur => ur.GetCredentialsBy(credentials.Email))
-                .Returns((Credentials)null)
+                .Setup(ur => ur.GetByEmail(credentials.Email))
+                .Returns((User)null)
                 .Verifiable();
             IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
 
@@ -86,18 +81,21 @@ namespace FTStore.UserDomain.Tests.Services
         }
 
         [Fact]
-        public void ShoulAuthenticationBeInvalidWhenCredentialsIsWrong()
+        public void ShoulAuthenticationBeInvalidWhenPasswordIsWrong()
         {
             Credentials credentials = new Credentials(EMAIL, SECRET_PHRASE);
             Credentials invalidCredentials = new Credentials(EMAIL, "wrong");
+            var user = new User("Name", "Surname", EMAIL, credentials.Password);
+            user.Claims.Add("ADMIN");
+            user.DefineId(ID);
             var userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
             userRepository
-                .Setup(ur => ur.GetCredentialsBy(invalidCredentials.Email))
-                .Returns((Credentials)invalidCredentials)
+                .Setup(ur => ur.GetByEmail(credentials.Email))
+                .Returns(user)
                 .Verifiable();
             IAuthenticationService authentication = new AuthenticationService(userRepository.Object);
 
-            var userAuthenticated = authentication.AuthenticateBy(credentials);
+            var userAuthenticated = authentication.AuthenticateBy(invalidCredentials);
 
             userAuthenticated.Should().BeNull();
             authentication.IsValid.Should().BeFalse();
