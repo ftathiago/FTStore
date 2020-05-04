@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Auth.Domain.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Auth.Domain", "src\FTStore.Auth.Domain\FTStore.Auth.Domain.csproj", "{29C6BBCF-D29E-41F6-9506-89DBDB51DA03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.UserInfra", "src\FTStore.UserInfra\FTStore.UserInfra.csproj", "{05081836-C3C3-4B62-837A-7463DC2D1F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Auth.Infra", "src\FTStore.Auth.Infra\FTStore.Auth.Infra.csproj", "{05081836-C3C3-4B62-837A-7463DC2D1F03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTStore.Auth.App", "src\FTStore.Auth.App\FTStore.Auth.App.csproj", "{C56244C8-3897-4859-81E8-3C8F398C3251}"
 EndProject
