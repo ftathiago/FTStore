@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FTStore.App\FTStore.App.csproj" />
     <ProjectReference Include="..\FTStore.Crosscutting\FTStore.Crosscutting.csproj" />
+    <ProjectReference Include="..\FTStore.Auth.App\FTStore.Auth.App.csproj" />
   </ItemGroup>
 
   <ItemGroup>
