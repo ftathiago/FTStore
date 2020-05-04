@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\FTStore.Lib.Common\FTStore.Lib.Common.csproj" />
+    <ProjectReference Include="..\FTStore.Auth.Domain\FTStore.Auth.Domain.csproj" />
+  </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <ProjectGuid>DED1C3BE-76DD-4A0C-ACD0-73690E6DCECD</ProjectGuid>
   </PropertyGroup>
 </Project>
