@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using FTStore.Lib.Common.Services;
-using FTStore.UserDomain.Models;
-using FTStore.UserDomain.ValueObjects;
+using FTStore.Auth.Domain.Models;
+using FTStore.Auth.Domain.ValueObjects;
 
-namespace FTStore.UserDomain.Services
+namespace FTStore.Auth.Domain.Services
 {
     public interface IAuthenticationService : IServiceBase
     {

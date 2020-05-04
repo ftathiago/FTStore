@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using FTStore.Lib.Common.Entities;
-using FTStore.UserDomain.ValueObjects;
+using FTStore.Auth.Domain.ValueObjects;
 
-namespace FTStore.UserDomain.Entities
+namespace FTStore.Auth.Domain.Entities
 {
     public class User : Entity
     {

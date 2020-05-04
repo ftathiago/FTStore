@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using FluentAssertions;
 
-using FTStore.UserDomain.Entities;
-using FTStore.UserDomain.Models;
-using FTStore.UserDomain.Repositories;
-using FTStore.UserDomain.Services;
-using FTStore.UserDomain.Services.Impl;
-using FTStore.UserDomain.ValueObjects;
+using FTStore.Auth.Domain.Entities;
+using FTStore.Auth.Domain.Models;
+using FTStore.Auth.Domain.Repositories;
+using FTStore.Auth.Domain.Services;
+using FTStore.Auth.Domain.Services.Impl;
+using FTStore.Auth.Domain.ValueObjects;
 
 using Moq;
 
 using Xunit;
 
-namespace FTStore.UserDomain.Tests.Services
+namespace FTStore.Auth.Domain.Tests.Services
 {
     public class AuthenticationServiceTest
     {

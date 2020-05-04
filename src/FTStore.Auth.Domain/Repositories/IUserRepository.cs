@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using FTStore.UserDomain.Entities;
-using FTStore.UserDomain.ValueObjects;
+using FTStore.Auth.Domain.Entities;
+using FTStore.Auth.Domain.ValueObjects;
 
-namespace FTStore.UserDomain.Repositories
+namespace FTStore.Auth.Domain.Repositories
 {
     public interface IUserRepository
     {

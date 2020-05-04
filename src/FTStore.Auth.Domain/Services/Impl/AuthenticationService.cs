@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using FTStore.Lib.Common.Services;
-using FTStore.UserDomain.Models;
-using FTStore.UserDomain.Repositories;
-using FTStore.UserDomain.ValueObjects;
+using FTStore.Auth.Domain.Models;
+using FTStore.Auth.Domain.Repositories;
+using FTStore.Auth.Domain.ValueObjects;
 
-namespace FTStore.UserDomain.Services.Impl
+namespace FTStore.Auth.Domain.Services.Impl
 {
     public class AuthenticationService : ServiceBase, IAuthenticationService
     {

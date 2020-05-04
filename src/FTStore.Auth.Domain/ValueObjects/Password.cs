@@ -1,8 +1,8 @@
 using FTStore.Lib.Common.ValueObjects;
-using FTStore.UserDomain.Libs;
+using FTStore.Auth.Domain.Libs;
 using System.Linq;
 
-namespace FTStore.UserDomain.ValueObjects
+namespace FTStore.Auth.Domain.ValueObjects
 {
     public class Password : ValueObject<Password>
     {
