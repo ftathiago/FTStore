@@ -22,6 +22,13 @@ namespace FTStore.Auth.Domain.ValueObjects
             Salt = hashSenha.PasswordSalt;
         }
 
+        public Password(string password, byte[] salt)
+        {
+            var hashSenha = new PasswordHashCalculator(password, salt);
+            Hash = hashSenha.PasswordHash;
+            Salt = hashSenha.PasswordSalt;
+        }
+
         protected override bool EqualsCore(Password other)
         {
             if (!Hash.SequenceEqual(other.Hash))

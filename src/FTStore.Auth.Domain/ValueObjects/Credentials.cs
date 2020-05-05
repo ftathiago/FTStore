@@ -7,10 +7,10 @@ namespace FTStore.Auth.Domain.ValueObjects
         public string Email { get; private set; }
         public Password Password { get; private set; }
 
-        public Credentials(string email, string password)
+        public Credentials(string email, string password, byte[] salt = null)
         {
             Email = email;
-            Password = new Password(password);
+            Password = new Password(password, salt);
         }
 
         public Credentials(string email, Password password)
