@@ -5,6 +5,7 @@
     <ProjectGuid>FDEEC56C-80AD-43C2-B435-326096C5DAA3</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Faker.Net" Version="1.3.77" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
