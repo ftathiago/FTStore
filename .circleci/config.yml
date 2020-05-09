@@ -14,7 +14,7 @@ jobs:
           command: dotnet.exe restore
       - run:
           name: "Run application tests"
-          command: dotnet.exe test -v n --results-directory: teste_coverage --collect:"Code Coverage"
+          command: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - run:
           name: "Print working direcotry"
           command: pwd
@@ -34,4 +34,4 @@ workflows:
       - test
       - build:
           requires:
-           - test
+            - test
