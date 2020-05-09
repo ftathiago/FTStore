@@ -15,5 +15,5 @@ jobs:
 
     steps:
       - run:
-        name: "Test running"
-        command: "dotnet test"
+          name: "Test running"
+          command: "dotnet test"
