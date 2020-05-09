@@ -1,0 +1,37 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@2.2.0
+
+jobs:
+  test:
+    description: Setup and run application tests
+    executor: windows/default
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Run application tests"
+          command: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      - run:
+          name: "Print working direcotry"
+          command: pwd
+      - store_artifacts:
+          path: c:\Users\circleci\project\test_coverage
+  build:
+    description: Build application with release configuration
+    executor: windows/default
+    steps:
+      - checkout
+      - run:
+          name: "Build application according to some given configuration"
+          command: dotnet.exe build --configuration Release
+workflows:
+  test-and-build:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
