@@ -1,30 +1,37 @@
 version: 2.1
 
-executors:
-  ftstore-executor:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/ftstore
+orbs:
+  windows: circleci/windows@2.2.0
 
 jobs:
-  restore-dependencies:
-    executor: ftstore-executor
+  test:
+    description: Setup and run application tests
+    executor: windows/default
     steps:
       - checkout
-      - run: dotnet restore
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - null
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Run application tests"
+          command: dotnet.exe test -v n --results-directory: teste_coverage --collect:"Code Coverage"
+      - run:
+          name: "Print working direcotry"
+          command: pwd
+      - store_artifacts:
+          path: c:\Users\circleci\project\test_coverage
   build:
-    executor: ftstore-executor
+    description: Build application with release configuration
+    executor: windows/default
     steps:
+      - checkout
       - run:
-          name: "Building"
-          command: "dotnet build"
-  app-test:
-    executor: ftstore-executor
-    steps:
-      - run:
-          name: "Testing"
-          command: "dotnet test"
+          name: "Build application according to some given configuration"
+          command: dotnet.exe build --configuration Release
+workflows:
+  test-and-build:
+    jobs:
+      - test
+      - build:
+          requires:
+           - test
