@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/FTStore.Web/FTStore.Web.csproj",
+        "${workspaceFolder}/src/FTStore.Web/FTStore.Web.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/FTStore.Web/FTStore.Web.csproj",
+        "${workspaceFolder}/src/FTStore.Web/FTStore.Web.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -32,7 +32,7 @@
       "args": [
         "watch",
         "run",
-        "${workspaceFolder}/FTStore.Web/FTStore.Web.csproj",
+        "${workspaceFolder}/src/FTStore.Web/FTStore.Web.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
