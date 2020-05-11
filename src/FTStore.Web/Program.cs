@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using FTStore.Crosscutting.Helpers;
 
 namespace FTStore.Web
 {
@@ -7,7 +8,10 @@ namespace FTStore.Web
     {
         public static void Main(string[] args)//NOSONAR
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args)
+                .Build()
+                .InitializeDataBase()
+                .Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
