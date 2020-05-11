@@ -1,5 +1,14 @@
 {
   "ConnectionStrings": {
-    "FTStoreDB": "server=127.0.0.1;uid=root;pwd=1701;database=FTStore"
+    "FTStoreDB": "server=255.255.255.255;uid=root;pwd=1701;database=FTStore"
+  },
+  "DatabaseConfig": {
+    "DatabaseHost": "255.255.255.255",
+    "UserID": "root",
+    "UserPass": "1701",
+    "DatabaseName": "FTStore"
+  },
+  "JWT": {
+    "Secret": "MySecretPhrase"
   }
 }
