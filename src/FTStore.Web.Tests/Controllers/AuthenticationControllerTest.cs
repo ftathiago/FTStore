@@ -40,7 +40,7 @@ namespace FTStore.Web.Tests.Controllers
 
             var response = authController.Authenticate(userLogin);
 
-            response.As<OkObjectResult>().StatusCode.Should().Be(200);
+            response.As<OkObjectResult>().StatusCode.Should().Be(expectedStatusCode);
         }
     }
 }
