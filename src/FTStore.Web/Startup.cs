@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +20,7 @@ namespace FTStore.Web
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             var builder = new ConfigurationBuilder();
+            builder.AddEnvironmentVariables(prefix: "FTSTORE_");
             builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();
@@ -30,11 +31,10 @@ namespace FTStore.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("FTStoreDB");
-
             services.AddControllersWithViews();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            var connectionString = Configuration.BuildConnectionString();
             services
                 .AddMySQLDB(connectionString)
                 .AddRepositories()
