@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using FTStore.Infra.Context;
 using FTStore.Infra.Tests.Fixtures.Repositories;
@@ -19,8 +19,7 @@ namespace FTStore.Infra.Tests.Fixtures
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .EnableSensitiveDataLogging()
                 .Options;
-
-            return new FTStoreDbContext(options, new HostEnvironmentFixture());
+            return new FTStoreDbContext(options);
         }
 
         public void InitializeWithOneProduct(FTStoreDbContext context)
