@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 
 LABEL version="1.0.1" description="FTStore"
 

@@ -1,0 +1,22 @@
+#estágio 1 - base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+RUN mkdir /app
+WORKDIR /app
+EXPOSE 80/tcp
+
+#estágio 2 - publish
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS publish
+WORKDIR /app
+RUN apt-get update -y
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash --debug
+RUN apt-get install nodejs -yq
+COPY . .
+RUN dotnet restore
+RUN dotnet publish -c Release -o dist
+
+FROM base AS final
+WORKDIR /dist
+COPY --from=publish /app/dist .
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:80
+ENTRYPOINT ["dotnet", "FTStore.Web.dll"]
