@@ -24,8 +24,8 @@ namespace FTStore.Web.Controllers
             var user = _authenticationService.AuthenticateBy(userLogin.Email, userLogin.Password);
             if (user == null)
             {
-                var errorMessage = _authenticationService.GetErrorMessages();
-                return BadRequest(new { errorMessage = errorMessage });
+                var errorMessage = "User or password is invalid";
+                return BadRequest(new { errorMessage });
             }
 
             var token = _tokenService.GenerateToken(user);
