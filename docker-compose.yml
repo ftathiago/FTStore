@@ -2,10 +2,16 @@ version: "3.3"
 
 volumes:
   produtosdata:
+  sonar_logs:
+  sonar_data:
+  sonar_ext:
+  pg_pg:
+  pg_pgdata:
 
 networks:
   frontend:
   backend:
+  sonarnet:
 
 services:
   mysql:
@@ -16,14 +22,16 @@ services:
     networks:
       - backend
     environment:
-      bind-address: "0.0.0.0"
+      # bind-address: "0.0.0.0"
       MYSQL_DATABASE: "FTStore"
       MYSQL_USER: "root"
       MYSQL_ROOT_PASSWORD: "1701"
+    ports:
+      - 3306:3306
   ftstore:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./.Docker/Dockerfile
     networks:
       - backend
       - frontend
@@ -34,3 +42,36 @@ services:
       ENV ASPNETCORE_ENVIRONMENT: Production
     depends_on:
       - mysql
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    hostname: sonarqube
+    expose:
+      - 9000
+    user: "999"
+    ports:
+      - 9000:9000
+    networks:
+      - sonarnet
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=admin
+      - sonar.jdbc.url=jdbc:postgresql://db/sonar
+      - sonar.search.javaAdditionalOpts=-Dbootstrap.system_call_filter=false
+    volumes:
+      - sonar_logs:/opt/sonarqube/logs
+      - sonar_data:/opt/sonarqube/data
+      - sonar_ext:/opt/sonarqube/extensions
+
+  db:
+    image: postgres:12.0
+    container_name: sonarqube-pg
+    hostname: sonarqube-pg
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - pg_pg:/var/lib/postgresql
+      - pg_pgdata:/var/lib/postgresql/data

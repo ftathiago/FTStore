@@ -5,13 +5,22 @@ WORKDIR /app
 EXPOSE 80/tcp
 
 #estágio 2 - publish
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS publish
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS dotnet_restore
+WORKDIR /app
 WORKDIR /app
 RUN apt-get update -y
 RUN curl -sL https://deb.nodesource.com/setup_13.x | bash --debug
 RUN apt-get install nodejs -yq
 COPY . .
 RUN dotnet restore
+
+
+FROM dotnet_restore AS test
+WORKDIR /app
+RUN dotnet test
+
+FROM dotnet_restore as publish
+WORKDIR /app
 RUN dotnet publish -c Release -o dist
 
 FROM base AS final

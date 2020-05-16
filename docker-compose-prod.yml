@@ -23,7 +23,7 @@ services:
   ftstore:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: ./.Docker/Dockerfile.prod
     networks:
       - backend
       - frontend
