@@ -13,7 +13,6 @@ namespace FTStore.Infra.Context
         public DbSet<OrderTable> Orders { get; set; }
         public DbSet<PaymentMethodTable> PaymentMethod { get; set; }
         public DbSet<CustomerTable> Customers { get; set; }
-        public DbSet<UserTable> Users { get; set; }
 
         private readonly IHostEnvironment _env;
 
@@ -25,7 +24,6 @@ namespace FTStore.Infra.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new OrderItemMap());
             modelBuilder.ApplyConfiguration(new OrderMap());
             modelBuilder.ApplyConfiguration(new ProductMap());

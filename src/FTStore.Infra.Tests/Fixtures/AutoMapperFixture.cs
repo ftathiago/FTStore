@@ -11,7 +11,6 @@ namespace FTStore.Infra.Tests.Fixtures
         {
             var _mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<UserMapProfile>();
                 cfg.AddProfile<ProductMapProfile>();
                 cfg.AddProfile<OrderMapProfile>();
                 cfg.AddProfile<CustomerMapProfile>();
