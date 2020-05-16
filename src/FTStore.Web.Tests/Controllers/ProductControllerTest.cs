@@ -1,15 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+
+using Microsoft.AspNetCore.Mvc;
+
+using FluentAssertions;
+
 using FTStore.App.Models;
 using FTStore.App.Services;
 using FTStore.Web.Controllers;
+using FTStore.Web.Tests.Fixtures;
+
 using Moq;
+
 using Xunit;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.IO;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 
 namespace FTStore.Web.Tests.Controllers
 {

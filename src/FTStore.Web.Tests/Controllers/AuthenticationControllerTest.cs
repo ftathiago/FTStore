@@ -1,14 +1,20 @@
 using System.Net;
-using Xunit;
-using Moq;
-using FTStore.Auth.App.Services;
-using FTStore.Auth.App.Models;
-using Faker;
-using FTStore.Web.Controllers;
-using FTStore.Web.Services;
-using FTStore.Web.Models;
+
 using Microsoft.AspNetCore.Mvc;
+
+using Faker;
+
 using FluentAssertions;
+
+using FTStore.Auth.App.Models;
+using FTStore.Auth.App.Services;
+using FTStore.Web.Controllers;
+using FTStore.Web.Models;
+using FTStore.Web.Services;
+
+using Moq;
+
+using Xunit;
 
 namespace FTStore.Web.Tests.Controllers
 {

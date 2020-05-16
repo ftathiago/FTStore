@@ -72,7 +72,5 @@ namespace FTStore.Crosscutting.Helpers
 
             return host;
         }
-
-
     }
 }
