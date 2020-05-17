@@ -38,7 +38,7 @@ namespace FTStore.Auth.App.Services.Impl
                 return false;
             }
 
-            var credentials = new Credentials(user.EMail,
+            var credentials = new Credentials(user.Email,
                 password, user.Password.Salt);
 
             if (!user.IsValidCredentials(credentials))
@@ -55,7 +55,7 @@ namespace FTStore.Auth.App.Services.Impl
             {
                 Id = user.Id,
                 Name = user.Name,
-                EMail = user.EMail
+                EMail = user.Email
             };
             userAuthenticateResponse.Claims.AddRange(user.Claims);
 

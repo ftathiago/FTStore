@@ -8,7 +8,7 @@ namespace FTStore.Auth.Domain.Entities
     {
         public string Name { get; protected set; }
         public string Surname { get; protected set; }
-        public string EMail { get; protected set; }
+        public string Email { get; protected set; }
         public Password Password { get; protected set; }
 
         public ICollection<string> Claims { get; protected set; }
@@ -21,7 +21,7 @@ namespace FTStore.Auth.Domain.Entities
         {
             Name = name;
             Surname = surname;
-            EMail = email;
+            Email = email;
             Password = new Password(password.Hash, password.Salt);
         }
 
@@ -32,7 +32,7 @@ namespace FTStore.Auth.Domain.Entities
 
         public bool IsValidCredentials(Credentials credentials)
         {
-            var userCredentials = new Credentials(this.EMail, this.Password);
+            var userCredentials = new Credentials(this.Email, this.Password);
             return userCredentials.Equals(credentials);
         }
     }

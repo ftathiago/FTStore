@@ -51,7 +51,7 @@ namespace FTStore.Auth.Infra.Mappings
             var userTable = new UserTable
             {
                 Id = 1,
-                Email = user.EMail,
+                Email = user.Email,
                 Hash = user.Password.Hash,
                 Salt = user.Password.Salt,
                 IsAdmin = true

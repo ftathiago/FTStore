@@ -45,7 +45,7 @@ namespace FTStore.Auth.Domain.Tests.Services
             {
                 Id = ID,
                 Name = user.Name,
-                EMail = user.EMail
+                EMail = user.Email
             };
             expectedUserAuthenticated.Claims.Add("ADMIN");
             userRepository
