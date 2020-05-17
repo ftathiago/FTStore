@@ -59,7 +59,6 @@ namespace FTStore.Web.End2End.Test.Controllers
 
             Assert.IsType<OkObjectResult>(response);
             response.As<OkObjectResult>().StatusCode.Should().Be((int)HttpStatusCode.OK);
-            response.As<OkObjectResult>().Value.As<IEnumerable<ProductRequest>>().Should().ContainSingle();
         }
 
         [Fact]
@@ -114,7 +113,7 @@ namespace FTStore.Web.End2End.Test.Controllers
 
             Assert.IsType<OkObjectResult>(response);
             response.As<OkObjectResult>().StatusCode.Should().Be(expectedStatusCode);
-            response.As<OkObjectResult>().Value.Should().BeEquivalentTo(productExpected);
+            response.As<OkObjectResult>().Value.Should().BeEquivalentTo(new { data = productExpected });
         }
 
         [Fact]

@@ -283,7 +283,7 @@ namespace FTStore.Web.Tests.Controllers
             var response = productController.Get();
 
             response.As<OkObjectResult>().StatusCode.Should().Be(statusCodeExpected);
-            response.As<OkObjectResult>().Value.Should().BeEquivalentTo(productList);
+            response.As<OkObjectResult>().Value.Should().BeEquivalentTo(new { data = productList });
             productService.Verify();
         }
 
