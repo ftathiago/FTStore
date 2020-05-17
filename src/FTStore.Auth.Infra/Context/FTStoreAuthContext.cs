@@ -11,7 +11,8 @@ namespace FTStore.Infra.Context
         public FTStoreAuthContext() : base()
         { }
 
-        public FTStoreAuthContext(DbContextOptions<FTStoreAuthContext> options) : base(options)
+        public FTStoreAuthContext(DbContextOptions<FTStoreAuthContext> options)
+            : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

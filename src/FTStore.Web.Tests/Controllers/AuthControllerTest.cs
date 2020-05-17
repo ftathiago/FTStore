@@ -16,11 +16,11 @@ using Xunit;
 
 namespace FTStore.Web.Tests.Controllers
 {
-    public class AuthenticationControllerTest : IClassFixture<AuthenticationControllerFixture>
+    public class AuthControllerTest : IClassFixture<AuthControllerFixture>
     {
-        private readonly AuthenticationControllerFixture _authFixture;
+        private readonly AuthControllerFixture _authFixture;
 
-        public AuthenticationControllerTest(AuthenticationControllerFixture authFixture)
+        public AuthControllerTest(AuthControllerFixture authFixture)
         {
             _authFixture = authFixture;
         }
