@@ -1,7 +1,8 @@
-using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+
 using FTStore.Infra.Context;
 using FTStore.Infra.Tests.Fixtures;
-using Microsoft.EntityFrameworkCore;
+
 using Xunit;
 
 namespace FTStore.Infra.Tests.Repositories
