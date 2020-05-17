@@ -1,14 +1,19 @@
 using System;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using FTStore.App.Models;
-using FTStore.App.Services;
 using System.Linq;
 using System.Net;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+using FTStore.App.Models;
+using FTStore.App.Services;
+
 
 namespace FTStore.Web.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -18,26 +23,28 @@ namespace FTStore.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             var products = _productService.ListAll();
             if (!products.Any())
                 return NoContent();
 
-            return Ok(products);
+            return Ok(new { data = products });
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult Get(int id)
         {
             var product = _productService.GetById(id);
             if (product == null)
                 return NoContent();
-            return Ok(product);
+            return Ok(new { data = product });
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]ProductRequest product)
+        public IActionResult Post([FromBody] ProductRequest product)
         {
             if (product == null)
                 return BadRequest("There is no product information to handle");
