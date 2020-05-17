@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using FTStore.Auth.App.Services;
 using FTStore.Web.Models;
 using FTStore.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FTStore.Web.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize]
     public class AuthController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
@@ -18,8 +20,10 @@ namespace FTStore.Web.Controllers
             _authenticationService = authenticationService;
             _tokenService = tokenService;
         }
+
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public IActionResult Authenticate([FromBody] UserLogin userLogin)
         {
             var user = _authenticationService.AuthenticateBy(userLogin.Email, userLogin.Password);
