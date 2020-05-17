@@ -9,11 +9,17 @@ namespace FTStore.Auth.Infra.Tests.Fixtures
 
         public AutoMapperFixture()
         {
-            var _mapperConfig = new MapperConfiguration(cfg =>
+            var _mapperConfig = GetConfiguration();
+            Mapper = _mapperConfig.CreateMapper();
+        }
+
+        public MapperConfiguration GetConfiguration()
+        {
+            var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UserMapProfile>();
             });
-            Mapper = _mapperConfig.CreateMapper();
+            return mapperConfig;
         }
     }
 }
