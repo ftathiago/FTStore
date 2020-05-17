@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
+
 using FTStore.Crosscutting.Helpers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+
+using FTStore.Web.Extensions;
 
 namespace FTStore.Web
 {
@@ -42,25 +42,9 @@ namespace FTStore.Web
                 .AddAppDependencies()
                 .AddMapper(typeof(Startup));
 
-            var secret = Configuration["JWT:Secret"];
-            var key = Encoding.ASCII.GetBytes(secret);
-            services.AddAuthentication(config =>
-            {
-                config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(config =>
-            {
-                config.RequireHttpsMetadata = false;
-                config.SaveToken = true;
-                config.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            services.AddJWTConfig(Configuration);
+
+            services.ConfigureWebApiServices();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

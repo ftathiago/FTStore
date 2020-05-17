@@ -13,12 +13,13 @@ namespace FTStore.Crosscutting.Helpers
     {
         public static IServiceCollection AddMemoryDataBase(this IServiceCollection services)
         {
-            return services.AddDbContext<FTStoreDbContext>(options =>
+            services.AddDbContext<FTStoreDbContext>(options =>
                 options
                     .UseLazyLoadingProxies()
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
                     .EnableSensitiveDataLogging()
             );
+            return services;
         }
 
         public static IServiceCollection AddMySQLDB(this IServiceCollection services, string connectionString)
@@ -27,9 +28,17 @@ namespace FTStore.Crosscutting.Helpers
                 options
                     .UseLazyLoadingProxies()
                     .UseMySql(connectionString, m =>
-                        m.MigrationsAssembly("FTStore.Infra")
+                        m.MigrationsAssembly("FTStore.Web")
                 )
             );
+            services.AddDbContext<FTStoreAuthContext>(options =>
+                options
+                    .UseLazyLoadingProxies()
+                    .UseMySql(connectionString, m =>
+                        m.MigrationsAssembly("FTStore.Web")
+                    )
+            );
+
             return services;
         }
 
@@ -65,11 +74,12 @@ namespace FTStore.Crosscutting.Helpers
             {
                 var services = scope.ServiceProvider;
 
+                FTStoreDbContext ftStoreDbContext = services.GetRequiredService<FTStoreDbContext>();
+                ftStoreDbContext.Database.Migrate();
 
-                FTStoreDbContext dbContext = services.GetRequiredService<FTStoreDbContext>();
-                dbContext.Database.Migrate();
+                FTStoreAuthContext ftStoreAuthContext = services.GetRequiredService<FTStoreAuthContext>();
+                ftStoreAuthContext.Database.Migrate();
             }
-
             return host;
         }
     }

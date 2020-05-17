@@ -9,6 +9,11 @@ using FTStore.App.Factories.Impl;
 using FTStore.App.Repositories;
 using FTStore.App.Services;
 using FTStore.App.Services.Impl;
+using FTStore.Auth.App.Services;
+using FTStore.Auth.App.Services.Impl;
+using FTStore.Auth.Domain.Repositories;
+using FTStore.Auth.Infra.Mappings.Profiles;
+using FTStore.Auth.Infra.Repositories;
 using FTStore.Domain.Repositories;
 using FTStore.Infra.Mappings.Profiles;
 using FTStore.Infra.Repositories;
@@ -36,7 +41,7 @@ namespace FTStore.Crosscutting.Helpers
         {
             services.AddScoped<IProductService, ProductService>();
             services.AddTransient<IProductFactory, ProductFactory>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserFactory, UserFactory>();
             return services;
         }

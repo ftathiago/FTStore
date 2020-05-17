@@ -36,7 +36,7 @@ namespace FTStore.Web.Tests.Controllers
                 .Returns(authenticatedUser);
             var tokenService = new Mock<ITokenService>();
             var expectedStatusCode = (int)HttpStatusCode.OK;
-            var authController = new AuthenticateController(authService.Object, tokenService.Object);
+            var authController = new AuthController(authService.Object, tokenService.Object);
 
             var response = authController.Authenticate(userLogin);
 
@@ -54,7 +54,7 @@ namespace FTStore.Web.Tests.Controllers
                     .Returns((AuthenticatedUser)null);
             var tokenService = new Mock<ITokenService>();
             var expectedStatusCode = (int)HttpStatusCode.BadRequest;
-            var authController = new AuthenticateController(authService.Object, tokenService.Object);
+            var authController = new AuthController(authService.Object, tokenService.Object);
 
             var response = authController.Authenticate(invalidLogin);
 
