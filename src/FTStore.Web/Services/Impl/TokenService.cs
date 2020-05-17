@@ -22,12 +22,12 @@ namespace FTStore.Web.Services.Impl
         public string GenerateToken(AuthenticatedUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = GetTokenDescriptor(user);
+            var tokenDescriptor = GetTokenDescriptor(user, time: 2);
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
 
-        private SecurityTokenDescriptor GetTokenDescriptor(AuthenticatedUser user)
+        private SecurityTokenDescriptor GetTokenDescriptor(AuthenticatedUser user, int time)
         {
             var secret = _configuration["JWT:Secret"];
             Console.WriteLine(secret);
@@ -39,7 +39,7 @@ namespace FTStore.Web.Services.Impl
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identityClaims,
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddHours(time),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
