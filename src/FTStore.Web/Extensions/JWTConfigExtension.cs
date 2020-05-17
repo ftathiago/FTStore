@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace FTStore.Web.Extensions
 {
-    public static class JWTConfigExtension
+    public static class JWTConfigExtension //NOSONAR
     {
         public static IServiceCollection AddJWTConfig(this IServiceCollection services,
             IConfiguration configuration)

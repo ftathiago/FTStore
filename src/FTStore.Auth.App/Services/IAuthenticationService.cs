@@ -1,6 +1,5 @@
 using FTStore.Lib.Common.Services;
 using FTStore.Auth.App.Models;
-using FTStore.Auth.Domain.ValueObjects;
 
 namespace FTStore.Auth.App.Services
 {

@@ -12,7 +12,7 @@ namespace FTStore.Web.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
-        private ITokenService _tokenService;
+        private readonly ITokenService _tokenService;
 
         public AuthController(IAuthenticationService authenticationService,
             ITokenService tokenService)

@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FTStore.Auth.Infra.Tables;
-using System.Text;
+
 using FTStore.Auth.Domain.Entities;
+
 using FTStore.Auth.Domain.ValueObjects;
+
+using FTStore.Auth.Infra.Tables;
+
 
 namespace FTStore.Auth.Infra.Mappings
 {
