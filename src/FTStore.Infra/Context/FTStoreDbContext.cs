@@ -19,7 +19,7 @@ namespace FTStore.Infra.Context
         public FTStoreDbContext() : base()
         { }
 
-        public FTStoreDbContext(DbContextOptions options) : base(options)
+        public FTStoreDbContext(DbContextOptions<FTStoreDbContext> options) : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
