@@ -13,17 +13,13 @@ namespace FTStore.Web
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; private set; }
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
-            var builder = new ConfigurationBuilder();
-            builder.AddEnvironmentVariables(prefix: "FTSTORE_");
-            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
-
-            Configuration = builder.Build();
+            Configuration = configuration;
 
             _webHostEnvironment = webHostEnvironment;
         }
